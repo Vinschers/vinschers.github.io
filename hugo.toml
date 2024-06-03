@@ -1,6 +1,6 @@
-baseURL = 'https://vicentin.xyz/'
-languageCode = 'en-us'
-title = 'Bom dia'
+baseURL = "https://vicentin.xyz/"
+languageCode = "en-us"
+title = "Bom dia"
 theme = "nightfall"
 
 
@@ -18,9 +18,9 @@ email = "hello@vicentin.xyz"
 key = 0
 name = "GitHub"
 url = "https://github.com/Vinschers"
-icon = "fa-brands fa-github"        # Add link to your icon font to `layouts/partials/custom-head.html`
-target = "_blank"                   # Defines your target option in a-href. _blank for a new Tab for example.
-aria = "GitHub Profile"             # Define the aria label for accessibility like page reader - this is better for your SEO
+icon = "fa-brands fa-github"         # Add link to your icon font to `layouts/partials/custom-head.html`
+target = "_blank"                    # Defines your target option in a-href. _blank for a new Tab for example.
+aria = "GitHub Profile"              # Define the aria label for accessibility like page reader - this is better for your SEO
 
 [[params.social]]
 key = 1
