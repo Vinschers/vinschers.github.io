@@ -1,0 +1,46 @@
+baseURL = 'https://vicentin.xyz/'
+languageCode = 'en-us'
+title = 'Bom dia'
+theme = "nightfall"
+
+
+[params]
+user = "Vinschers"
+hostname = "vicentin.xyz"
+sitedescription = 'Your website description'
+
+[params.author]
+name = "Felipe S Vicentin"
+email = "hello@vicentin.xyz"
+
+
+[[params.social]]
+key = 0
+name = "github"
+url = "https://github.com/gohugoio"
+icon = "fa-brands fa-github"        # Add link to your icon font to `layouts/partials/custom-head.html`
+target = "_blank"                   # Defines your target option in a-href. _blank for a new Tab for example.
+aria = "GitHub Profile"             # Define the aria label for accessibility like page reader - this is better for your SEO
+
+[[params.social]]
+key = 1
+name = "twitter"
+url = "https://www.example.com"
+
+[[params.social]]
+key = 2
+name = "mastodon"
+url = "https://www.example.com"
+rel = "me"                      # You can also add rel to social link
+
+[[params.social]]
+key = 3
+name = "email"
+url = "mailto:email@example.com"
+
+
+[menu]
+[[menu.header]]
+name = "posts"
+weight = 0
+url = "/posts"
