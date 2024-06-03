@@ -8,6 +8,7 @@ theme = "nightfall"
 user = "felipe"
 hostname = "vicentin.xyz"
 sitedescription = 'Your website description'
+math = true
 
 [params.author]
 name = "Felipe Scherer Vicentin"
