@@ -16,7 +16,7 @@ email = "hello@vicentin.xyz"
 
 [[params.social]]
 key = 0
-name = "github"
+name = "GitHub"
 url = "https://github.com/Vinschers"
 icon = "fa-brands fa-github"        # Add link to your icon font to `layouts/partials/custom-head.html`
 target = "_blank"                   # Defines your target option in a-href. _blank for a new Tab for example.
@@ -24,7 +24,9 @@ aria = "GitHub Profile"             # Define the aria label for accessibility li
 
 [[params.social]]
 key = 1
-name = "email"
+name = "Email"
+icon = "fa-solid fa-envelope"
+target = "_blank"
 url = "mailto:hello@vicentin.xyz"
 
 
