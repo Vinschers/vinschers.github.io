@@ -35,3 +35,14 @@ url = "mailto:hello@vicentin.xyz"
 name = "posts"
 weight = 0
 url = "/posts"
+
+
+[markup]
+[markup.goldmark]
+[markup.goldmark.extensions]
+[markup.goldmark.extensions.passthrough]
+enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [['\[', '\]'], ['$$', '$$']]
+inline = [['\(', '\)']]
