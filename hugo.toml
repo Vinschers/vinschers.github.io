@@ -6,26 +6,14 @@ enableEmoji = true
 pygmentsUseClasses = true
 paginate = 5
 
-mainsections = ["posts"]
-
 [params]
 displayFullLangName = true
-ShowPostNavLinks = true
 showToc = true
+showBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowPostNavLinks = false
+ShowReadingTime = true
 math = true
-
-[menu]
-[[menu.main]]
-name = "Posts"
-url = "/posts"
-
-[[menu.main]]
-name = "CV"
-url = "/cv"
-
-[[menu.main]]
-name = "Search"
-url = "/search"
 
 
 [outputs]
@@ -42,6 +30,18 @@ Name: Felipe Scherer Vicentin
 
 [More](/cv)
 """
+[[languages.en.menu.main]]
+name = "CV"
+url = "/cv"
+weight = 1
+[[languages.en.menu.main]]
+name = "notes"
+url = "/notes"
+weight = 2
+[[languages.en.menu.main]]
+name = "search"
+url = "/search"
+weight = 3
 
 [languages.pt]
 languageName = "Português"
@@ -53,10 +53,18 @@ Nome: Felipe Scherer Vicentin
 
 [Mais](/cv)
 """
-
-[languages.fr]
-languageName = "Français"
-languageCode = "fr"
+[[languages.pt.menu.main]]
+name = "CV"
+url = "/cv"
+weight = 1
+[[languages.pt.menu.main]]
+name = "anotações"
+url = "notes"
+weight = 2
+[[languages.pt.menu.main]]
+name = "pesquisar"
+url = "/search"
+weight = 3
 
 
 [markup]
@@ -64,6 +72,13 @@ languageCode = "fr"
 [markup.goldmark.extensions]
 [markup.goldmark.extensions.passthrough]
 enable = true
+
+[markup.highlight]
+codeFences = true
+guessSyntax = true
+lineNos = true
+lineNumbersInTable = true
+noClasses = true
 
 [markup.goldmark.extensions.passthrough.delimiters]
 block = [['\[', '\]'], ['$$', '$$']]

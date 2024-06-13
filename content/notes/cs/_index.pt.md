@@ -1,0 +1,4 @@
++++
+title = "Computação"
+ShowReadingTime = false
++++
