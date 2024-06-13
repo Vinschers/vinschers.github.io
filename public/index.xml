@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Bom dia</title>
+    <title>Scherer&#39;s blog</title>
     <link>http://localhost:1313/</link>
-    <description>Recent content on Bom dia</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <managingEditor>hello@vicentin.xyz (Felipe S Vicentin)</managingEditor>
-    <webMaster>hello@vicentin.xyz (Felipe S Vicentin)</webMaster>
-    <lastBuildDate>Mon, 03 Jun 2024 12:05:42 -0300</lastBuildDate>
+    <description>Recent content on Scherer&#39;s blog</description>
+    <generator>Hugo -- 0.127.0</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 13 Jun 2024 02:22:49 -0300</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test2</title>
+      <link>http://localhost:1313/posts/test2/</link>
+      <pubDate>Thu, 13 Jun 2024 02:22:49 -0300</pubDate>
+      <guid>http://localhost:1313/posts/test2/</guid>
+      <description>OI asdfjasdjf</description>
+    </item>
+    <item>
+      <title>Curriculum Vitae</title>
+      <link>http://localhost:1313/cv/cv/</link>
+      <pubDate>Thu, 13 Jun 2024 01:50:27 -0300</pubDate>
+      <guid>http://localhost:1313/cv/cv/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Test</title>
       <link>http://localhost:1313/posts/test/</link>
-      <pubDate>Mon, 03 Jun 2024 12:05:42 -0300</pubDate><author>hello@vicentin.xyz (Felipe S Vicentin)</author>
+      <pubDate>Thu, 13 Jun 2024 01:35:13 -0300</pubDate>
       <guid>http://localhost:1313/posts/test/</guid>
-      <description>Introduction Oi, bom dia!</description>
+      <description>Testing mathematics $$ x = 4 $$ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus aenean vel elit scelerisque. Ac ut consequat semper viverra nam libero justo laoreet. Velit egestas dui id ornare arcu odio. Tristique et egestas quis ipsum suspendisse ultrices. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Platea dictumst quisque sagittis purus sit amet volutpat consequat.</description>
     </item>
   </channel>
 </rss>

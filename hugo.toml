@@ -1,41 +1,62 @@
-baseURL = "https://vicentin.xyz/"
-languageCode = "en-us"
-title = "Bom dia"
-theme = "nightfall"
+baseURL = 'https://vicentin.xyz/'
+languageCode = 'en-us'
+title = "Scherer's blog"
+theme = "PaperMod"
+enableEmoji = true
+pygmentsUseClasses = true
+paginate = 5
 
+mainsections = ["posts"]
 
 [params]
-user = "felipe"
-hostname = "vicentin.xyz"
-sitedescription = 'Your website description'
+displayFullLangName = true
+ShowPostNavLinks = true
+showToc = true
 math = true
 
-[params.author]
-name = "Felipe Scherer Vicentin"
-email = "hello@vicentin.xyz"
-
-
-[[params.social]]
-key = 0
-name = "GitHub"
-url = "https://github.com/Vinschers"
-icon = "fa-brands fa-github"         # Add link to your icon font to `layouts/partials/custom-head.html`
-target = "_blank"                    # Defines your target option in a-href. _blank for a new Tab for example.
-aria = "GitHub Profile"              # Define the aria label for accessibility like page reader - this is better for your SEO
-
-[[params.social]]
-key = 1
-name = "Email"
-icon = "fa-solid fa-envelope"
-target = "_blank"
-url = "mailto:hello@vicentin.xyz"
-
-
 [menu]
-[[menu.header]]
-name = "posts"
-weight = 0
+[[menu.main]]
+name = "Posts"
 url = "/posts"
+
+[[menu.main]]
+name = "CV"
+url = "/cv"
+
+[[menu.main]]
+name = "Search"
+url = "/search"
+
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[languages]
+[languages.en]
+languageName = "English"
+languageCode = "en"
+[languages.en.params.homeInfoParams]
+Title = "Bio"
+Content = """
+Name: Felipe Scherer Vicentin
+
+[More](/cv)
+"""
+
+[languages.pt]
+languageName = "Português"
+languageCode = "pt-BR"
+[languages.pt.params.homeInfoParams]
+Title = "Bio"
+Content = """
+Nome: Felipe Scherer Vicentin
+
+[Mais](/cv)
+"""
+
+[languages.fr]
+languageName = "Français"
+languageCode = "fr"
 
 
 [markup]
