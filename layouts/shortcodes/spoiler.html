@@ -1,0 +1,4 @@
+<div class="spoiler"><details {{ if (eq (.Get 1) true) }} open=true {{ end }}>
+        <summary markdown="span">{{ .Get 0 }}</summary>
+  {{ .Inner }}
+</details></div>

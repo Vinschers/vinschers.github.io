@@ -1,0 +1,48 @@
+.spoiler {
+    margin: 0 5px 40px 5px;
+    border: 1px solid var(--primary);
+    background: var(--entry);
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: inset 0px 0px 6px 1px var(--secondary);
+}
+
+.dark .spoiler {
+    background: var(--theme);
+}
+
+.spoiler details summary {
+    cursor: zoom-in;
+    margin-inline-start: 20px;
+    font-size: 20pt;
+}
+
+.spoiler details[open] summary {
+    cursor: zoom-out;
+}
+
+.spoiler details[open] summary ~ * {
+    animation: sweep .5s ease-in-out;
+}
+@keyframes sweep {
+  0%    {opacity: 0; margin-top: -10px}
+  100%  {opacity: 1; margin-top: 0px}
+}
+
+.spoiler .details {
+    display: inline;
+    font-weight: 500;
+}
+
+.spoiler .inner {
+    margin: 0 20px;
+    padding: 10px 20px;
+}
+
+.spoiler li ul {
+    margin-inline-start: var(--gap);
+}
+
+.spoiler summary:focus {
+    outline: 0;
+}

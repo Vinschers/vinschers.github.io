@@ -1,3 +1,18 @@
 :root {
     --main-width: 840px;
 }
+
+.fade {
+    transition: opacity 0.1s linear;
+}
+
+.highlight {
+    font-size: 16pt;
+}
+code {
+    background: transparent !important;
+}
+
+a:hover {
+    color: inherit;
+}
