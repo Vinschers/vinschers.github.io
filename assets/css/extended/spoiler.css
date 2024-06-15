@@ -1,14 +1,10 @@
 .spoiler {
     margin: 0 5px 40px 5px;
     border: 1px solid var(--primary);
-    background: var(--entry);
+    background: var(--theme);
     border-radius: var(--radius);
     padding: 1rem;
     box-shadow: 0px 0px 6px var(--secondary);
-}
-
-.dark .spoiler {
-    background: var(--theme);
 }
 
 .spoiler details summary {
