@@ -45,10 +45,6 @@ Em seguida, duas operações são realizadas:
 
 {{< /spoiler >}}
 
-{{< notice question >}}
-Is this a question?
-{{< /notice >}}
-
 ## Algoritmo de Edmonds-Karp
 
 ## Algoritmo de Dinic

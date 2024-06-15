@@ -1,0 +1,46 @@
+.toc {
+    padding: 0;
+}
+
+@media screen and (min-width: 1350px) {
+    .toc {
+        position: fixed;
+        margin: 0;
+        z-index: 1;
+        left: 6rem;
+        width: calc(((100% - var(--main-width) - var(--gap)) / 2) - 2 * 6rem);
+    }
+    .toc::-webkit-scrollbar-thumb {
+        border: 5px solid var(--code-bg);
+    }
+}
+
+.toc details {
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+    max-height: 36rem;
+    overflow: auto;
+}
+
+.toc details summary {
+    cursor: pointer !important;
+}
+
+.toc .inner {
+    padding: 10px 15px 5px 35px;
+    font-size: 12pt;
+}
+
+.toc .inner a {
+    padding: 3px 5px;
+    display: block;
+    border-radius: var(--radius);
+}
+.toc li a:hover {
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.toc li a.active {
+    background-color: color-mix(in srgb, var(--bs-blue) 18%, transparent);
+}

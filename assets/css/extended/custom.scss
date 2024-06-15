@@ -6,13 +6,13 @@
     transition: opacity 0.1s linear;
 }
 
-.highlight {
-    font-size: 16pt;
-}
-code {
-    background: transparent !important;
-}
-
 a:hover {
     color: inherit;
+}
+
+body:not(.dark) {
+    @import "syntax-light";
+}
+body.dark {
+    @import "syntax-dark";
 }

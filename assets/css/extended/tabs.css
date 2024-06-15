@@ -15,6 +15,7 @@
     color: var(--primary) !important;
     border: 1px solid var(--primary);
     border-bottom: 0;
+    font-weight: bold;
 }
 
 .nav-tabs .nav-link:hover {
@@ -26,6 +27,7 @@ nav:has(.nav-link.active:first-child) ~ .tab-content {
 }
 
 .tab-content {
+    background-color: var(--entry) !important;
     margin-bottom: 1rem;
     border-radius: var(--radius) !important;
     border: 1px solid var(--primary) !important;

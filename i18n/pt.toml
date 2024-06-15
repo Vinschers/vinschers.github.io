@@ -1,0 +1,20 @@
+[note]
+other = "nota"
+
+[tip]
+other = "dica"
+
+[example]
+other = "exemplo"
+
+[question]
+other = "pergunta"
+
+[info]
+other = "info"
+
+[warning]
+other = "aviso"
+
+[error]
+other = "erro"

@@ -1,0 +1,15 @@
+.highlight {
+    font-size: 16pt;
+}
+
+.highlight table {
+    border-radius: 0 !important;
+}
+
+.post-content .highlight:not(table) {
+    background: inherit;
+}
+
+.post-content pre code {
+    background: transparent !important;
+}
