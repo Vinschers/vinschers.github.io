@@ -16,8 +16,11 @@ O código da cadeia é um esquema que foi feito para representar as *bordas* de 
 Dado um ponto inicial pertencente à borda, o código é definido por uma sequência formada pelas direções entre cada pixel e seu vizinho, até que a borda seja fechada.
 
 {{< notice info >}}
+
 A direção de cada segmento pode ser codificada em vizinhança-4 ou vizinhança-8.
-![<imagem>](neighboring.png)
+
+![image](/mc920/neighboring.png "400")
+
 {{< /notice >}}
 
 ## Morfologia Matemática

@@ -16,3 +16,8 @@ body:not(.dark) {
 body.dark {
     @import "syntax-dark";
 }
+
+img {
+    margin: 0 !important;
+    display: inline-block;
+}
