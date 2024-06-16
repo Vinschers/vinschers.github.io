@@ -35,8 +35,8 @@ O exemplo abaixo mostra como podemos representar a imagem da esquerda usando uma
 
 ![Imagem mostrando exemplo de código da cadeia](/mc920/representation/ex_chain.png "600")
 
-Se a posição inicial é $(3, 6)$ e o código da cadeia é dado pela sequência 1170012344443556670.
-Para minimizar o número da sequência, usamos como posição inicial o ponto $(6, 5)$ e obtemos a sequência 0012344443556670117.
+Se a posição inicial é $(3, 6)$ e o código da cadeia é dado pela sequência $1170012344443556670$.
+Para minimizar o número da sequência, usamos como posição inicial o ponto $(6, 5)$ e obtemos a sequência $0012344443556670117$.
 
 {{< /notice >}}
 
@@ -44,7 +44,7 @@ A invariância de escala pode ser obtida simplesmente variando a escala da grade
 
 Podemos tornar o código da cadeia invariante quanto à rotação utilizando a *primeira diferença* do código da cadeia.
 Suponha que $A = a_0, a_1, \dots, a_{n - 1}$ é o código da cadeia que representa a borda de um objeto.
-A primeira diferença será dada por $B = b_0, b_1, \dots, b_{n - 1}$ onde $b_k = a_k - a_{k - 1} \pmod n$, sendo $n \in \{4, 8\}$.
+A primeira diferença será dada por $B = b_1, b_1, \dots, b_{n - 1}$ onde $b_k = a_k - a_{k - 1} \pmod n$, sendo $n \in \{4, 8\}$.
 
 {{< notice example >}}
 Seja a borda $B_1$ de um objeto mostrado na esquerda da figura abaixo.
@@ -110,7 +110,6 @@ Alguns exemplos de esqueletos de objetos.
 
 {{< /notice >}}
 
-
 ### Diagrama de Voronoi
 
 Seja $S$ um conjunto de $n$ pontos no plano.
@@ -128,4 +127,53 @@ Um exemplo da obtenção do esqueleto de um objeto usando diagrama de Voronoi é
 
 ## Descritores de bordas
 
+### Perímetro
+
+O *perímetro* representa o comprimento da borda de um objeto.
+Ele é **invariante** quanto às operações de **translação** e **rotação**.
+Podemos calcular o perímetro de um objeto usando o código da cadeia em vizinhança-8 da seguinte maneira:
+$$
+P = N_p + \sqrt{2} N_i
+$$
+onde $P$ é o perímetro e $N_p$ e $N_i$ representam o número de códigos direcionais pares (componentes horizontal e vertical) e ímpares (componentes diagonais), respectivamente.
+
+### Curvatura
+
+A *curvatura* mede a taxa de variação ao longo do contorno ou da borda do objeto.
+A curvatura $\kappa$ em um ponto $(x_i, y_i)$ de um contorno planar fechado pode ser determinada por uma mudança na orientação entre os segmentos $\overline{(x_{i - j}, y_{i - j})(x_i, y_i)}$ e $\overline{(x_i, y_i)(x_{i + j}, y_{i + j})}$, ou seja, os segmentos unindo o ponto $(x_i, y_i)$ a dois outros pontos localizados em uma vizinhança $j \geq 1$, conforme mostrado a seguir.
+
+![Exemplo de curvatura](/mc920/representation/ex_curvature.png "400")
+
+Então, a curvatura é calculada como
+$$
+\kappa(x_i, y_i) = \arctan{\left(\frac{y_{i + j} - y_i}{x_{i + j} - x_i}\right)} - \arctan{\left(\frac{y_i - y_{i - j}}{x_i - x_{i - j}}\right)}
+$$
+
+### Energia de deformação
+
+A *energia de deformação* pode ser entendida como a energia necessária para ajustar um elástico ou arame à forma desejada da borda.
+A energia de deformação pode ser calculada como a soma dos quadrados da curvatura $\kappa(\rho)$ da borda sobre o perímetro $L$ da borda, ou seja
+$$
+E = \frac{1}{L} \sum_{\rho = 1}^L [\kappa(\rho)]^2
+$$
+em que $E \geq \frac{2 \pi}{r}$.
+O valor mínimo $\frac{2 \pi}{r}$ é obtido para um círculo de raio $r$.
+
 ## Descritores de região
+
+Nos descritores baseados em região, os pixels localizados no interior da região ou objeto são considerados no cálculo do descritor, em vez de utilizar apenas os pixels que formam a borda da região.
+
+Descritores de região incluem:
+
+- Área
+- Compacidade ou Circularidade
+- Projeções horizontal e vertical
+- Número de Euler
+- Momentos
+- Eixos maior e menor
+- Excentricidade
+- Retângulo envolvente
+- Convexidade
+- Retangularidade
+- Solidez
+- Descritores sintáticos ou relacionais
