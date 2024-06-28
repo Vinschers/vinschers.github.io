@@ -1,11 +1,16 @@
 {{- $type := .Get 0 -}}
 {{- $title := .Get 1 | default $type -}}
-{{- $inner := .Inner | .Page.RenderString | chomp -}}
-{{- $icon := dict "note" "fa-sticky-note" "tip" "fa-lightbulb" "example" "fa-file-signature" "question" "fa-question" "info" "fa-exclamation-circle" "warning" "fa-exclamation-triangle" "error" "fa-times-circle" -}}
+
+{{ if ne $title $type }}
+    {{ $title = printf "%s: %s" $type $title }}
+{{ end }}
+
+{{- $inner := .Inner -}}
+{{- $icon := dict "definition" "fa-scroll" "theorem" "fa-pen-square" "note" "fa-sticky-note" "tip" "fa-lightbulb" "example" "fa-file-signature" "question" "fa-question" "info" "fa-exclamation-circle" "warning" "fa-exclamation-triangle" "error" "fa-times-circle" -}}
 
 <div class="notice {{ $type }}">
     <div class="notice-title">
-        <i class="fa fa-solid {{ index $icon $type }}" aria-hidden="true"></i>{{ i18n $title | default $title | humanize }}
+        <i class="fa fa-solid {{ index $icon $type }}" aria-hidden="true"></i>{{ i18n $title | default $title | strings.FirstUpper }}
     </div>
 
     <div class="notice-content">

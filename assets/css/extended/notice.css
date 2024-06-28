@@ -22,6 +22,7 @@
     display: block;
     margin: 1.5rem 1rem;
 }
+
 .notice.tip {
     background-color: #7e57c21a;
     box-shadow: 0px 0px 6px #5e35b1;
@@ -32,6 +33,7 @@
 .notice.tip .notice-title i {
     color: #5e35b1;
 }
+
 .notice.question {
     background-color: #26a69a1a;
     box-shadow: 0px 0px 6px #00897b;
@@ -42,6 +44,7 @@
 .notice.question .notice-title i {
     color: #00897b;
 }
+
 .notice.example {
     background-color: #8d6e631a;
     box-shadow: 0px 0px 6px #6d4c41;
@@ -52,6 +55,7 @@
 .notice.example .notice-title i {
     color: #6d4c41;
 }
+
 .notice.note {
     background-color: #9ccc651a;
     box-shadow: 0px 0px 6px #7cb342;
@@ -62,6 +66,7 @@
 .notice.note .notice-title i {
     color: #7cb342;
 }
+
 .notice.info {
     background-color: #42a5f51a;
     box-shadow: 0px 0px 6px #1e88e5;
@@ -72,6 +77,18 @@
 .notice.info .notice-title i {
     color: #1e88e5;
 }
+
+.notice.theorem {
+    background-color: #42a5f51a;
+    box-shadow: 0px 0px 6px #1e88e5;
+}
+.notice.theorem .notice-title {
+    background-color: #2196f31a;
+}
+.notice.theorem .notice-title i {
+    color: #1e88e5;
+}
+
 .notice.warning {
     background-color: #ffca281a;
     box-shadow: 0px 0px 6px #ffb300;
@@ -82,6 +99,7 @@
 .notice.warning .notice-title i {
     color: #ffb300;
 }
+
 .notice.error {
     background-color: #ef53501a;
     box-shadow: 0px 0px 6px #e53935;
@@ -90,5 +108,16 @@
     background-color: #f443361a;
 }
 .notice.error .notice-title i {
+    color: #e53935;
+}
+
+.notice.definition {
+    background-color: #ef53501a;
+    box-shadow: 0px 0px 6px #e53935;
+}
+.notice.definition .notice-title {
+    background-color: #f443361a;
+}
+.notice.definition .notice-title i {
     color: #e53935;
 }

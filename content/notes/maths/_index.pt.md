@@ -1,4 +1,0 @@
-+++
-title = "Matemática"
-ShowReadingTime = false
-+++
