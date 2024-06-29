@@ -222,7 +222,7 @@ $$
 \begin{align*}
     \text{EK}_F = (\quad &\{g_v^{v_k(s)}\}_{k \in I_\text{mid}}, &&\{g_w^{w_k(s)}\}_{k \in I_\text{mid}}, &\{g_y^{y_k(s)}\}_{k \in I_\text{mid}}, \\
     &\{g_v^{\alpha_v v_k(s)}\}_{k \in I_\text{mid}}, &&\{g_w^{\alpha_w w_k(s)}\}_{k \in I_\text{mid}}, &\{g_y^{\alpha_y y_k(s)}\}_{k \in I_\text{mid}}, \\
-    &\{g^{s^i}\}_{i \in [d]}, && &\{g_v^{\beta v_k(s)} g_w^{\beta w_k(s)} g_y^{\beta y_k(s)}\}_{k \in I_\text{mid}} \quad)
+    &\{g^{s^i}\}_{i \in [d]}, && \{g_v^{\beta v_k(s)} g_w^{\beta w_k(s)} g_y^{\beta y_k(s)}\}_{k \in I_\text{mid}} \quad)
 \end{align*}
 $$
 $$
@@ -230,6 +230,42 @@ $$
 $$
 
 ### Computation
+
+The Compute function takes as input the evaluation key, $\text{EK}_F$, and the input of $F$, $u$, and outputs $(y, \pi_y)$ where $y = F(u)$ and $\pi_y$ is a proof that the computation was indeed executed.
+
+To do so, the worker simply evaluates $F(u)$ using the circuit $C$ and stores the output in $y$.
+By doing it, the worker is also able to compute all $c_i$, $i \in [m]$, inside the circuit.
+Since it knows the QAP $Q$ as well, the worker can calculate $h(x)$ by doing the polynomial division below.
+$$
+\frac{p(x)}{t(x)} = h(x) = h_0 + h_1 x + h_2 x^2 + \dots + h_d x^d
+$$
+
+Now, it is easy for the worker to compute $v_\text{mid}(s)$, $w_\text{mid}(s)$, and $y_\text{mid}(s)$ using the properties of exponentiation.
+
+$$
+\prod_{k \in I_\text{mid}} \left( g_v^{v_k(s)} \right)^{c_k} = g_v^{\sum_{k \in I_\text{mid}} c_k v_k(s)} = g_v^{v_\text{mid}(s)}
+$$
+$$
+\prod_{k \in I_\text{mid}} \left( g_w^{w_k(s)} \right)^{c_k} = g_w^{\sum_{k \in I_\text{mid}} c_k w_k(s)} = g_w^{w_\text{mid}(s)}
+$$
+$$
+\prod_{k \in I_\text{mid}} \left( g_y^{y_k(s)} \right)^{c_k} = g_y^{\sum_{k \in I_\text{mid}} c_k y_k(s)} = g_y^{y_\text{mid}(s)}
+$$
+
+The same idea can be extended to $\alpha_v v_\text{mid}(s)$, $\alpha_w w_\text{mid}(s)$, $\alpha_y y_\text{mid}(s)$ and $g_v^{\beta v_\text{mid}(s)} g_w^{\beta w_\text{mid}(s)} g_y^{\beta y_\text{mid}(s)}$.
+Finally, we determine $h(s)$:
+$$
+\prod_{i \in \{0\} \cup [d]} \left( g^{s^i} \right)^{h_i} = g^{\sum_{i \in \{0\} \cup [d]} h_i s^i} = g^{h(s)}
+$$
+
+Thus, our proof $\pi_y$ is as follows.
+$$
+\begin{align*}
+    \pi_y = (\quad &g_v^{v_\text{mid}(s)}, &&g_w^{w_\text{mid}(s)}, &g_y^{y_\text{mid}(s)}, \\
+    &g_v^{\alpha_v v_\text{mid}(s)}, &&g_w^{\alpha_w w_\text{mid}(s)}, &g_y^{\alpha_y y_\text{mid}(s)}, \\
+    &g^{h(s)}, &&g_v^{\beta v_\text{mid}(s)} g_w^{\beta w_\text{mid}(s)} g_y^{\beta y_\text{mid}(s)} \quad)
+\end{align*}
+$$
 
 ### Verification
 
