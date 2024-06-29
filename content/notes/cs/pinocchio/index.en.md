@@ -269,9 +269,55 @@ $$
 
 ### Verification
 
-### Security
+Once the worker computes our function, we need to verify that $F(u)$ is actually $y$.
+The function Verify takes as input $\text{VK}_F$, $u$, $y$ and $\pi_y$ and outputs $0$ or $1$.
+To do so, we perform three checks using $\pi_y$.
 
-### Zero-knowledge proofs
+***Divisibility check***: First, with the values from $\text{VK}_F$, the client computes the following three values:
+$$
+g_v^{v_\text{io}(s)} = \prod_{k \in [N]} \left( g_v^{v_k(s)} \right)^{c_k}
+$$
+$$
+g_w^{w_\text{io}(s)} = \prod_{k \in [N]} \left( g_w^{w_k(s)} \right)^{c_k}
+$$
+$$
+g_y^{y_\text{io}(s)} = \prod_{k \in [N]} \left( g_y^{y_k(s)} \right)^{c_k}
+$$
+
+Now, using $g_v^{v_0(s)}$, $g_v^{v_\text{io}(s)}$ and $g_v^{v_\text{mid}(s)}$, one can compute $g_v^{v(s)}$.
+The same goes to $g_w^{w(s)}$ and $g_y^{y(s)}$.
+
+Finally, the client checks the following equality:
+$$
+e(g_v^{v(s)}, g_w^{w(s)}) \stackrel{?}{=} e(g_y^{t(s)}, g^{h(s)}) e(g_y^{y(s)}, g)
+$$
+What the above equation tells us is whether $r_v v(s) r_w w(s) = r_y t(s) h(s) + r_y y(s)$, which implies that $p(s) = v(s) w(s) - y(s) = t(s) h(s)$.
+If this is true, we know that $\frac{p(x)}{t(x)} = h(x)$ by the Schwartz-Zippel lemma.
+Hence, the *divisibility* check.
+
+***Coefficients check***: We check if the same coefficients $c_i$, $i \in [m]$ were used across all computations.
+To this end, the client checks the following:
+$$
+e(g^Z, g^\gamma) \stackrel{?}{=} e(g_v^{v_\text{mid}(s)} g_w^{w_\text{mid}(s)} g_y^{y_\text{mid}(s)}, g^{\beta \gamma})
+$$
+where $g^Z = g_v^{\beta v_\text{mid}(s)} g_w^{\beta w_\text{mid}(s)} g_y^{\beta y_\text{mid}(s)}$.
+It is easy to see that by choosing a good $\beta$, the above equality holds only if all $c_i$ are consistent.
+
+***Span check***: We check if the multiplication of the functions $v$, $w$ and $y$ by their respective alphas ($\alpha_v$, $\alpha_w$ and $\alpha_y$) does not overwhelm the spans of $\mathcal{V}$, $\mathcal{W}$ and $\mathcal{Y}$.
+This can be done by checking the three equalities that follow.
+$$
+e(g_v^{\alpha_v v_\text{mid}(s)}, g) \stackrel{?}{=} e(g_v^{v_\text{mid}(s)}, g^{\alpha_v})
+$$
+$$
+e(g_w^{\alpha_w w_\text{mid}(s)}, g) \stackrel{?}{=} e(g_w^{w_\text{mid}(s)}, g^{\alpha_w})
+$$
+$$
+e(g_y^{\alpha_y y_\text{mid}(s)}, g) \stackrel{?}{=} e(g_y^{y_\text{mid}(s)}, g^{\alpha_y})
+$$
+
+With these three checks (divisibility, coefficients and span) we can conclude that $F(u) = y$.
+
+### Security
 
 ## Results
 
