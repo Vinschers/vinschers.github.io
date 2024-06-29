@@ -18,6 +18,7 @@ Among the concrete applications we can list cloud computing, grid computing and 
 In particular, the scheme proposed by Pinocchio provides interesting characteristics.
 It is not only efficient when compared to previous literature, but also has room to implement a zero-knowledge verification and requires no designated verifier.
 It makes heavy use of Quadratic Arithmetic Programs (QAP) and cryptographic primitives that will be detailed in the following sections.
+The particular use for QAPs stems from the fact that Turing Machines can be expressed as these circuits, making them a good way to represent the computation to be performed.
 
 ## Background
 
