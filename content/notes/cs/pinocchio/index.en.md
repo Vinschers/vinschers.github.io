@@ -151,13 +151,83 @@ Thus, we have $p(r_g) = 0$ for every multiplicative gate.
 This means that we can check whether $t(x)$ divides $p(x)$ simply by checking the evaluation of $p(x)$ at the roots of the multiplication gates.
 Note that in order for $p(x)$ to have roots at the points $r_g$, all $c_i$, $i \in [m]$, must be computed, which in turn include the outputs of $F$
 
-### Bilinear Maps
+### Bilinear Groups
+
+The last idea we need before getting into Pinocchio's implementation is the concept of *bilinear groups*.
+
+{{< notice definition "Bilinear groups" >}}
+{{< markdown >}}
+Bilinear groups are a set of three abstract algebraic groups, $\mathbb{G}_1$, $\mathbb{G}_2$ and $\mathbb{G}_T$, together with a deterministic function $e \colon \mathbb{G}_1 \times \mathbb{G}_2 \to \mathbb{G}_T$, called a bilinear map.
+{{< /markdown >}}
+{{< /notice >}}
+
+The special property we are looking for is the bilinearity of $e$.
+
+{{< notice info "Bilinearity of map" >}}
+{{< markdown >}}
+Suppose $|\mathbb{G}_1| = |\mathbb{G}_2| = |\mathbb{G}_T| = Q$, $g_1 \in \mathbb{G}_1$ generates group $\mathbb{G}_1$ and $g_2 \in \mathbb{G}_2$ generates group $\mathbb{G}_2$.
+Then, for all $a, b < Q$, we have that
+$$
+e(g_1^a, g_2^b) = e(g_1, g_2)^{ab}.
+$$
+{{< /markdown >}}
+{{< /notice >}}
+
+The main thing to keep in mind is what happens to the exponents $a$ and $b$ during the mapping: they are multiplied.
+Usually, we have $\mathbb{G}_1, \mathbb{G}_2 \neq \mathbb{G}_T$, so the output of the function cannot be used again in $e$ as input.
+
+From the property of bilinearity, we can derive several other useful properties.
+We highlight two of them that we will need later on:
+
+- $e(g_1^a, g_2^b) = e(g_1, g_2)^{ab} = e(g_1^{ab}, g_2)$.
+
+- If $c < Q$, then $\frac{e(g_1^{ab}, g_2)}{e(g_1^c, g_2)} = \frac{e(g_1, g_2)^{ab}}{e(g_1, g_2)^{c}} = e(g_1, g_2)^{ab - c} = e(g_1^{ab - c}, g_2)$.
+
+### Schwartz-Zippel lemma
+
+The Schwartz-Zippel lemma is a very useful mathematical tool to check for the equality of two polynomials efficiently.
+The lemma is given below.
+
+{{< notice tip "Schwartz-Zippel lemma" >}}
+{{< markdown >}}
+Let $f(x) \in \mathbb{F}[x]$ be a non-zero polynomial of degree $d \geq 0$.
+Then, if we sample $s$ uniformly at random from $\mathbb{F}$, it holds that
+$$
+\text{Pr}[f(s) = 0] \leq \frac{d}{|\mathbb{F}|}
+$$
+{{< /markdown >}}
+{{< /notice >}}
+
+The key consequence of the lemma is that the probability of two polynomials of degree less than or equal to $d$ evaluating to the same value at a random point if $\mathbb{F}$ is also bounded by $\frac{d}{|\mathbb{F}|}$.
+In other words, if two polynomials, $p_1$ and $p_2$, are equal at a random point $s \in \mathbb{F}$, the probability that $p_1 \neq p_2$ is at most $\frac{d}{|\mathbb{F}|}$, which is unlikely if the field $\mathbb{F}$ is big enough.
+
+All this to say that we will assume polynomials $p_1(x)$ and $p_2(x)$ are equal for all $x \in \mathbb{F}$ if they are equal at a random point.
 
 ## Pinocchio
 
+Now we have all the theoretic background we need to implement Pinocchio.
+Just a small recapitulation: our goal is to build a generic VC scheme that computes any function $F$ that can be written with sums and multiplications.
+To this end, we will describe Pinocchio's implementation for each of the functions specified in the definition of a VC scheme.
+
 ### Key generation
 
-https://en.wikipedia.org/wiki/Schwartz%E2%80%93Zippel_lemma
+The KeyGen function takes as input the function $F$ and the security parameter $\lambda$ and it outputs the evaluation key $\text{EK}_F$ and the verification key $\text{VK}_F$.
+The first step is to convert $F$ into an arithmetic circuit $C$ and, then, build the corresponding QAP $Q = (t(x), \mathcal{V}, \mathcal{W}, \mathcal{Y})$ of size $m$ and degree $d$.
+Also, let $I_\text{mid} = \{N + 1, \dots, m\}$ be the non-IO-related indices, $e \colon \mathbb{G} \times \mathbb{G} \to \mathbb{G}_T$ be a non-trivial bilinear map, and $g \in \mathbb{G}$ be a generator of $\mathbb{G}$.
+
+Now, choose $r_v, r_w, s, \alpha_v, \alpha_w, \alpha_y, \beta, \gamma \xleftarrow{R} \mathbb{F}$ and set $r_y = r_v r_w$, $g_v = g^{r_v}$, $g_w = g^{r_w}$ and $g_y = g^{r_y}$.
+Here, $s$ is a secret and random value that will be used in conjunction to the Schwartz-Zippel lemma later.
+Finally, we define the evaluation and verification keys as follows:
+$$
+\begin{align*}
+    \text{EK}_F = (\quad &\{g_v^{v_k(s)}\}_{k \in I_\text{mid}}, &&\{g_w^{w_k(s)}\}_{k \in I_\text{mid}}, &\{g_y^{y_k(s)}\}_{k \in I_\text{mid}}, \\
+    &\{g_v^{\alpha_v v_k(s)}\}_{k \in I_\text{mid}}, &&\{g_w^{\alpha_w w_k(s)}\}_{k \in I_\text{mid}}, &\{g_y^{\alpha_y y_k(s)}\}_{k \in I_\text{mid}}, \\
+    &\{g^{s^i}\}_{i \in [d]}, && &\{g_v^{\beta v_k(s)} g_w^{\beta w_k(s)} g_y^{\beta y_k(s)}\}_{k \in I_\text{mid}} \quad)
+\end{align*}
+$$
+$$
+\text{VK}_F = (g^1, g^{\alpha_v}, g^{\alpha_w}, g^{\alpha_y}, g^{\gamma}, g^{\beta \gamma}, g_y^{t(s)}, \{g_v^{v_k(s)}, g_w^{w_k(s)}, g_y^{y_k(s)}\}_{k \in \{0\} \cup [N]})
+$$
 
 ### Computation
 
