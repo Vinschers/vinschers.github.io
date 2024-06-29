@@ -6,5 +6,5 @@ mjx-container {
 }
 
 mjx-container[jax="CHTML"] {
-    line-height: 1rem;
+    line-height: 1rem !important;
 }
