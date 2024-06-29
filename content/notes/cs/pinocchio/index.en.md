@@ -6,7 +6,18 @@ draft = false
 
 ## Introduction
 
-- $F$ only with $+$ and $\times$
+Currently the exponential advance of technology is no longer a surprise, but rather an inherent characteristic of the modern world.
+Even though this evolution constantly enhances devices, it does not do so in a homogeneous way, creating a world where the distribution of computational power is asymmetric.
+In this scenario, the ability to safely delegate hard computations to a powerful third party becomes very attractive.
+Studies in Verifiable Computation address this problem seeking to provide a series of important guarantees.
+The most important and intuitive one is that the verification must be easier than the computation of the function delegated (if this was not the case, the client should just perform the computation himself).
+Depending on the scheme implemented, other interesting qualities may be provided, such as public verification (in contrast, some settings may require a designated verifier that is trusted with secret information).
+
+Some of the most common settings that make use of VC involve a weak client (such as a mobile device) that needs to compute an expensive function, making use of a powerful server to do so.
+Among the concrete applications we can list cloud computing, grid computing and distributed computing.
+In particular, the scheme proposed by Pinocchio provides interesting characteristics.
+It is not only efficient when compared to previous literature, but also has room to implement a zero-knowledge verification and requires no designated verifier.
+It makes heavy use of Quadratic Arithmetic Programs (QAP) and cryptographic primitives that will be detailed in the following sections.
 
 ## Background
 
