@@ -8,6 +8,7 @@
         margin: 0;
         z-index: 1;
         left: 6rem;
+        top: calc(50% - 18rem);
         width: calc(((100% - var(--main-width) - var(--gap)) / 2) - 2 * 6rem);
     }
     .toc::-webkit-scrollbar-thumb {

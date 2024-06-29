@@ -4,3 +4,7 @@ mjx-container {
     overflow-y: hidden;
     max-width: 100%;
 }
+
+mjx-container[jax="CHTML"] {
+    line-height: 1rem;
+}

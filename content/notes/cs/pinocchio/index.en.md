@@ -50,7 +50,7 @@ To this end, we will use the notion of Quadratic Arithmetic Programs, which will
 Since we are interested in functions $F$ that can be expressed with sums and multiplications, a great way to represent such functions is by an arithmetic circuit.
 Such circuit is made up from nodes (or gates) that represent operations (sums or multiplications) and a set of input and output wires.
 Each node is connected with wires that carry values from a field $\mathbb{F}$.
-A way to encode (represent) such circuit is by using a *quadratic arithmetic program* (QAP).
+A way to encode (represent) such circuit is by using a *Quadratic Arithmetic Program* (QAP).
 
 {{< notice definition "Quadratic Arithmetic Program" >}}
 A QAP $Q$ over field $\mathbb{F}$ contains three sets of $m + 1$ polynomials $\mathcal{V} = \{ v_k(x) \}$, $\mathcal{W} = \{ w_k(x) \}$, $\mathcal{Y} = \{ y_k(x) \}$, for $k \in \{0, \dots, m\}$, and a target polynomial $t(x)$.
@@ -69,13 +69,13 @@ p(x) = v(x) w(x) - y(x)
 $$
 and
 $$
-v(x) = \left( v_0(x) + \sum_{k = 1}^{m} c_k v_k(x) \right)
+v(x) = v_0(x) + \sum_{k = 1}^{m} c_k v_k(x)
 $$
 $$
-w(x) = \left( w_0(x) + \sum_{k = 1}^{m} c_k w_k(x) \right)
+w(x) = w_0(x) + \sum_{k = 1}^{m} c_k w_k(x)
 $$
 $$
-y(x) = \left( y_0(x) + \sum_{k = 1}^{m} c_k y_k(x) \right)
+y(x) = y_0(x) + \sum_{k = 1}^{m} c_k y_k(x)
 $$
 {{< /markdown >}}
 {{< /notice >}}
