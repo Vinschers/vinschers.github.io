@@ -149,12 +149,15 @@ $$
 when considering a particular multiplication gate $g$ and its root $r_g$.
 Thus, we have $p(r_g) = 0$ for every multiplicative gate.
 This means that we can check whether $t(x)$ divides $p(x)$ simply by checking the evaluation of $p(x)$ at the roots of the multiplication gates.
+Note that in order for $p(x)$ to have roots at the points $r_g$, all $c_i$, $i \in [m]$, must be computed, which in turn include the outputs of $F$
 
 ### Bilinear Maps
 
 ## Pinocchio
 
 ### Key generation
+
+https://en.wikipedia.org/wiki/Schwartz%E2%80%93Zippel_lemma
 
 ### Computation
 
