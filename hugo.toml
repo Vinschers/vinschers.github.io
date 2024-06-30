@@ -1,5 +1,6 @@
-baseURL = 'https://vicentin.xyz/'
-languageCode = 'en-us'
+baseURL = "https://vicentin.xyz/"
+title = "Felipe Vicentin"
+languageCode = "en-us"
 theme = "PaperMod"
 enableEmoji = true
 pygmentsCodefences = true
@@ -24,7 +25,6 @@ home = ["HTML", "RSS", "JSON"]
 [languages.en]
 languageName = "English"
 languageCode = "en"
-title = "Scherer's blog"
 # [languages.en.params.homeInfoParams]
 # Title = "Bio"
 # Content = """
@@ -52,7 +52,6 @@ weight = 4
 [languages.pt]
 languageName = "Português"
 languageCode = "pt-BR"
-title = "Blog do Scherer"
 # [languages.pt.params.homeInfoParams]
 # Title = "Bio"
 # Content = """

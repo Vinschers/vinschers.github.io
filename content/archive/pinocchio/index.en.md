@@ -433,7 +433,7 @@ The graph below shows how Pinocchio compares to previous works of VC in the prob
 Note that the y-axis is in logarithmic scale.
 ![Comparison of matrix multiplication](/pinocchio/matrix.png "400")
 
-The table below compare Pinocchio and GGPR using a problem of evaluating multivariate polynomials with more than 600000 coefficients.
+The table below compare Pinocchio and GGPR using a problem of evaluating multivariate polynomials.
 ![Comparison of functions to GGPR](/pinocchio/ggpr_table.png "400")
 
 There were also other works that actually improved Pinocchio's functionality.
@@ -448,9 +448,25 @@ While Pinocchio's approach is to evaluate expressions and then decide the final 
 
 ## Conclusion
 
+With the help of Pinocchio, we were able to construct a Public Verifiable Computation Scheme, making use of QAPs.
+This construction allows us to outsource the computation of any function $F$ made from additions and multiplications to a possibly untrusted worker and, then, verify the computations done.
+The process of key generation and verification are also very fast when compared to previous approaches.
+
+Moreover, by the usage of the Schwartz-Zippel lemma, the scheme's proof of computation has a size of 288 bytes, regardless of the size of the computation.
+The creation of the split gate also makes it possible to implement functions that are not only arithmetic, but that can be expressed in terms of boolean operations.
+
+However, there are some setbacks with the techniques used.
+Namely, the overhead of proof construction by the worker is still very high and the great size of parameters needed to make the scheme actually useful.
+Geppetto was able to solve some of these issues, but the scheme is still far from perfect.
+
+All in all, the results of this work are promising.
+They represent a great advancement when compared to previous papers and a step towards total verifiable computation.
+
 ## References
 
 Parno, B., Howell, J., Gentry, C., & Raykova, M. (2016). Pinocchio: Nearly practical verifiable computation. *Communications of the ACM*, 59(2), 103-112.
+
+Szabo, N. (2007, September 02). Bilinear Group Cryptography. *Unenumerated*. https://unenumerated.blogspot.com/2007/09/bilinear-group-cryptography.html
 
 Gennaro, R., Gentry, C., Parno, B., & Raykova, M. (2013). Quadratic span programs and succinct NIZKs without PCPs. In *Advances in Cryptology–EUROCRYPT 2013: 32nd Annual International Conference on the Theory and Applications of Cryptographic Techniques, Athens, Greece, May 26-30, 2013. Proceedings 32* (pp. 626-645). Springer Berlin Heidelberg.
 
