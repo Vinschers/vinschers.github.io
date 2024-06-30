@@ -123,26 +123,13 @@ The same goes for $w_k(x)$ and $y_k(x)$.
 This way, we just defined $\mathcal{V}$, $\mathcal{W}$ and $\mathcal{Y}$ from the definition of the QAP.
 
 {{< notice example >}}
+{{< markdown >}}
+
 Let $F(c_1, c_2, c_3, c_4) = (c_1 + c_2) \times (c_3 \times c_4)$ be a function of 4 inputs and 1 output.
 The following figure shows an arithmetic circuit that computes this function.
 
-{{< mermaid >}}
-graph TB
-1[$c_1$]
-2[$c_2$]
-3[$c_3$]
-4[$c_4$]
+![Example of an arithmetic circuit](/pinocchio/ex_circuit.png "200")
 
-1 & 2 --- op1(($+$))
-3 & 4 --- op2(($\times$))
-
-op2 --- 5[$c_5$]
-
-op1 & 5 --- op3(($\times$))
-op3 --- 6[$c_6$]
-{{< /mermaid >}}
-
-{{< markdown >}}
 Let us say that the multiplication gate between $c_1$ and $c_2$ is $r_5$, its output wire is $c_5$ and $c_6$ is the output of the last multiplication gate, which is $r_6$.
 Below are some evaluations of polynomials from $\mathcal{V}$, $\mathcal{W}$ and $\mathcal{Y}$:
 
