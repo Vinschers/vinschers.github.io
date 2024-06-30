@@ -335,4 +335,43 @@ With these three checks (divisibility, coefficients and span) we can conclude th
 
 ## Comparison to other works
 
+As previously stated, Pinocchio presents efficiency gains when compared to other alternatives in literature.
+
+In particular, when put side by side with GGPR, it uses QAPs whose degree is over three times shorter.
+This happens due to a relaxation in the assumptions made over the QAP's nature.
+
+GGPR requires the QAP to be strong, which means that all the polynomial families share the same constants $c_i$.
+While this is not true for every instance, it has been proven that a regular QAP can be "strengthened" and become strong.
+
+However, the setback of this procedure is that it more than triples the degree of the QAP and, therefore, the computation performed in the scheme.
+Pinocchio's advantage resides in the fact that it does not make such assumptions, allowing us to use weak QAPs.
+
+Another advantage over GGPR is that its proof $\pi_y$ has 9 elements, whereas Pinocchio only has 3.
+This reduction significantly increases the performance of the calculations, especially in the KeyGen function.
+
+The graph below shows how Pinocchio compares to previous works of VC in the problem of multiplying two matrices of dimensions $N \times N$.
+Note that the y-axis is in logarithmic scale.
+![Comparison of matrix multiplication](/pinocchio/matrix.png "400")
+
+The table below compare Pinocchio and GGPR using a problem of evaluating multivariate polynomials with more than 600000 coefficients.
+![Comparison of functions to GGPR](/pinocchio/ggpr_table.png "400")
+
+There were also other works that actually improved Pinocchio's functionality.
+Geppetto is one example: Costello et al. identified some problems in Pinocchio's approach to proof build in the worker.
+According to them, computing $\pi_y$ costs about 3 to 6 orders of magnitude more than the evaluation of $F(u)$.
+
+To solve this, they implied a new notion of Multi-QAPs to share states between or within computations and were able to substantially reduce the prover's computation time (up to 1169 times in some cases).
+
+On top of that, Geppetto was able to produce what they call *"energy-saving circuits"*.
+Essentially, they found a way to disable parts of the circuit in regions containing branches.
+While Pinocchio's approach is to evaluate expressions and then decide the final result based on conditional variables, Geppetto can evaluate the branch beforehand, so that the circuit is only evaluated in the right regions.
+
 ## Conclusion
+
+## References
+
+Parno, B., Howell, J., Gentry, C., & Raykova, M. (2016). Pinocchio: Nearly practical verifiable computation. *Communications of the ACM*, 59(2), 103-112.
+
+Gennaro, R., Gentry, C., Parno, B., & Raykova, M. (2013). Quadratic span programs and succinct NIZKs without PCPs. In *Advances in Cryptology–EUROCRYPT 2013: 32nd Annual International Conference on the Theory and Applications of Cryptographic Techniques, Athens, Greece, May 26-30, 2013. Proceedings 32* (pp. 626-645). Springer Berlin Heidelberg.
+
+Costello, C., Fournet, C., Howell, J., Kohlweiss, M., Kreuter, B., Naehrig, M., ... & Zahur, S. (2015, May). Geppetto: Versatile verifiable computation. In *2015 IEEE Symposium on Security and Privacy* (pp. 253-270). IEEE.
