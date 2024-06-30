@@ -7,7 +7,7 @@ draft = false
 {{< notice warning >}}
 {{< markdown >}}
 If the LaTeX below does not render correctly, please refresh the page.
-Also, do not forget to set the math renderer as CHTML in MathJax configurations, as shown in the figure below.
+Also, do not forget to set the math renderer in MathJax configurations, as shown in the figure below.
 ![mathjax_config](/mathjax_config.png "400")
 The configurations window can be accessed by right-clicking on any LaTeX element.
 {{< /markdown >}}

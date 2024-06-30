@@ -1,4 +1,0 @@
-+++
-title = "Computação"
-ShowReadingTime = false
-+++

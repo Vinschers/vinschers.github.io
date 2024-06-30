@@ -37,13 +37,17 @@ title = "Scherer's blog"
 # url = "/cv"
 # weight = 1
 [[languages.en.menu.main]]
-name = "notes"
-url = "/notes"
+name = "archive"
+url = "/archive"
 weight = 2
+[[languages.en.menu.main]]
+name = "algorithms"
+url = "/algorithms"
+weight = 3
 [[languages.en.menu.main]]
 name = "search"
 url = "/search"
-weight = 3
+weight = 4
 
 [languages.pt]
 languageName = "Português"
@@ -61,13 +65,17 @@ title = "Blog do Scherer"
 # url = "/cv"
 # weight = 1
 [[languages.pt.menu.main]]
-name = "anotações"
-url = "notes"
+name = "arquivo"
+url = "/archive"
 weight = 2
+[[languages.pt.menu.main]]
+name = "algoritmos"
+url = "/algorithms"
+weight = 3
 [[languages.pt.menu.main]]
 name = "pesquisar"
 url = "/search"
-weight = 3
+weight = 4
 
 
 [markup]

@@ -1,4 +1,0 @@
-+++
-title = "Disciplinas"
-ShowReadingTime = false
-+++
