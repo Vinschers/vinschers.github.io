@@ -7,7 +7,7 @@ draft = false
 {{< notice warning >}}
 {{< markdown >}}
 If the LaTeX below does not render correctly, please refresh the page.
-Also, do not forget to set the math renderer as SVG in MathJax configurations, as shown in the figure below.
+Also, do not forget to set the math renderer as CHTML in MathJax configurations, as shown in the figure below.
 ![mathjax_config](/mathjax_config.png "400")
 The configurations window can be accessed by right-clicking on any LaTeX element.
 {{< /markdown >}}
@@ -27,7 +27,7 @@ Among the concrete applications we can list cloud computing, grid computing and 
 In particular, the scheme proposed by Pinocchio provides interesting characteristics.
 It is not only efficient when compared to previous literature, but also has room to implement a zero-knowledge verification and requires no designated verifier.
 It makes heavy use of Quadratic Arithmetic Programs (QAP) and cryptographic primitives that will be detailed in the following sections.
-The particular use for QAPs stems from the fact that Turing Machines can be expressed as these circuits, making them a good way to represent the computation to be performed.
+The particular use for QAPs stems from the fact that Turing Machines can be expressed as these circuits (which only contain sums and multiplications), making them a good way to represent the computation to be performed.
 
 ## Background
 
@@ -327,7 +327,91 @@ With these three checks (divisibility, coefficients and span) we can conclude th
 
 ### Security
 
+As to its security, the Pinocchio scheme relies on cryptographic primitives to keep malicious servers from providing fake proofs of the computation performed.
+In particular, it makes use of the Diffie-Hellman assumptions by expressing the values of the functions in the exponent.
+
+{{< notice info "$d$-PKE" >}}
+{{< markdown >}}
+The $d$-PKE, also called $d$-Bilinear Diffie-Hellman Exponent ($d$-BDHE) assumption goes as follows:
+
+Given elements of the form $g^a, g^{a^2}, g^{a^3}, \dots$, it is hard to derive $e(g, g)^{a^{d - 1}}$
+{{< /markdown >}}
+{{< /notice >}}
+
+Moreover, it makes use of the $2q$-Strong Diffie-Hellman assumption ($2q$-SDH).
+
+{{< notice info "$2q$-SDH" >}}
+{{< markdown >}}
+The $2q$-SDH problem goes as follows:
+
+- The adversary is given elements $(g, g^a, g^{a^2}, \dots, g^{a^q})$.
+
+- The adversary must compute $(g^\frac{1}{a + x}, x)$ for some $x$ without knowing $a$.
+
+The assumption states that this is a hard problem.
+{{< /markdown >}}
+{{< /notice >}}
+
+It is also important to define the $q$-Parallel Diffie-Hellman ($q$-PDH) assumption, that states that it is hard to solve a parallel version of the DH problem, or, in other words, multiple DH problems simultaneously.
+
+By using these two assumptions simultaneously, we force an adversary to either break the $q$-PDH by not using the same linear combinations in the exponent of the terms provided or to break the $2q$-SDH by computing elements that fail the divisibility test.
+
+### Implementation of boolean gates
+
+The QAP used in Pinnochio's VC scheme is defined over $\mathbb{F}_p$, where $p$ is a large prime.
+
+Even though this scheme gives us an efficient way to compute functions that do additions and multiplications modulo $p$, it provides no obvious way to express some boolean operations, such as $a \geq b$.
+On the other hand, given $a$ and $b$ as bits, comparison is easy.
+
+To solve this problem, Pinocchio's authors designed an arithmetic *split gate* that translates any wire $a \in \mathbb{F}_p$, known to be in $[0, 2^k - 1]$, into $k$ binary output wires.
+
+With such output wires, it is possible to easily implement boolean functions.
+Below, we list some examples of functions that can be implemented using two binary values and arithmetic operations:
+
+- $\text{NAND}(a, b) = 1 - ab$.
+
+- $\text{AND}(a, b) = ab$.
+
+- $\text{OR}(a, b) = 1 - (1 - a)(1 - b)$.
+
+It is also worth mentioning that these boolean operations can be implemented using only 1 multiplication, so each of them costs only 1 to the degree and size of the QAP.
+Furthermore, the recombination of binary wires into a value $a \in \mathbb{F}_p$ is free, because it consists only of multiplications by constants and additions.
+
 ## Results
+
+Pinocchio's scheme turns out to be efficient and practical for many use cases.
+The authors of Pinocchio's paper ran a number of tests on some real-world problems in order to test the performance of the scheme.
+
+To this end, Parno et al. built a C-to-arithmetic-expression compiler called qcc.
+With this tool, they were able to write C code and then compare the execution times of Pinocchio and the native code.
+
+The authors tested a total of 7 applications using Pinocchio:
+
+- Multiplication of a matrix $M \in \mathbb{R}^{n \times n}$ and a vector $A \in \mathbb{R}^n$.
+
+- Multiplication of two matrices $n \times n$.
+
+- Evaluation of a multivariate polynomial with $k$ variables and degree $m$ (with $k = 5$ and $m = 10$, there are more than $600000$ coefficients).
+
+- An image matching algorithm that takes as input an image and a image kernel and outputs the minimum difference and the point where it occurs.
+
+- Floyd-Warshall's algorithm for shortest paths.
+
+- A Lattice-Gas Cellular Automata that converges to Navier-Stokes.
+
+- SHA-1 algorithm.
+
+The table below shows the Pinocchio's results when executing each of the 7 problems.
+Values in bold represent verification times that are cheaper than computing the circuit locally.
+The stars (*) indicate verification is cheaper than native execution.
+
+![Performance in various applications](/pinocchio/applications.png "800")
+
+The following graph shows with more details the comparison between the verification cost and the native execution cost.
+
+![Comparison of verification cost and native execution](/pinocchio/verify_native.png "400")
+
+It is clear that for sufficiently large parameters, the computations with Pinocchio may be faster than the native execution.
 
 ## Comparison to other works
 
