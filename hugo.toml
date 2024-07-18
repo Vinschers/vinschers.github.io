@@ -25,17 +25,17 @@ home = ["HTML", "RSS", "JSON"]
 [languages.en]
 languageName = "English"
 languageCode = "en"
-# [languages.en.params.homeInfoParams]
-# Title = "Bio"
-# Content = """
-# Name: Felipe Scherer Vicentin
-#
-# [More](/cv)
-# """
-# [[languages.en.menu.main]]
-# name = "CV"
-# url = "/cv"
-# weight = 1
+[languages.en.params.homeInfoParams]
+Title = "Bio"
+Content = """
+Name: Felipe Scherer Vicentin
+
+[More](/cv)
+"""
+[[languages.en.menu.main]]
+name = "cv"
+url = "/cv"
+weight = 1
 [[languages.en.menu.main]]
 name = "archive"
 url = "/archive"
@@ -52,17 +52,17 @@ weight = 4
 [languages.pt]
 languageName = "Português"
 languageCode = "pt-BR"
-# [languages.pt.params.homeInfoParams]
-# Title = "Bio"
-# Content = """
-# Nome: Felipe Scherer Vicentin
-#
-# [Mais](/cv)
-# """
-# [[languages.pt.menu.main]]
-# name = "CV"
-# url = "/cv"
-# weight = 1
+[languages.pt.params.homeInfoParams]
+Title = "Bio"
+Content = """
+Nome: Felipe Scherer Vicentin
+
+[Mais](/cv)
+"""
+[[languages.pt.menu.main]]
+name = "cv"
+url = "/cv"
+weight = 1
 [[languages.pt.menu.main]]
 name = "arquivo"
 url = "/archive"
