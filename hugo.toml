@@ -36,7 +36,7 @@ home = ["HTML", "RSS", "JSON"]
 languageName = "English"
 languageCode = "en"
 [languages.en.params.homeInfoParams]
-Title = "![](/me.jpg '240') :wave: Hello there!"
+Title = "![](/me.png '240') :wave: Hello there!"
 Content = """
 My name is Felipe and I am a Computer Science student at
 [Unicamp](https://en.wikipedia.org/wiki/State_University_of_Campinas).
