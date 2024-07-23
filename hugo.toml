@@ -17,6 +17,16 @@ ShowPostNavLinks = false
 ShowReadingTime = true
 math = true
 
+[[params.socialIcons]]
+name = "email"
+url = "mailto:hello@a.vicentin.xyz"
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/vinschers"
+[[params.socialIcons]]
+name = "instagram"
+url = "https://www.instagram.com/fschererv"
+
 
 [outputs]
 home = ["HTML", "RSS", "JSON"]
@@ -26,14 +36,22 @@ home = ["HTML", "RSS", "JSON"]
 languageName = "English"
 languageCode = "en"
 [languages.en.params.homeInfoParams]
-Title = "Bio"
+Title = "![](/me.jpg '240') :wave: Hello there!"
 Content = """
-Name: Felipe Scherer Vicentin
-
-[More](/cv)
+My name is Felipe and I am a Computer Science student at
+[Unicamp](https://en.wikipedia.org/wiki/State_University_of_Campinas).
+I am currently also pursuing an
+[Engeneering degree in France](https://en.wikipedia.org/wiki/Dipl%C3%B4me_d%27Ing%C3%A9nieur)
+at [Télécom Paris](https://en.wikipedia.org/wiki/T%C3%A9l%C3%A9com_Paris)
+with a focus in Data Science and Image Processing.
+My main interests include
+[Linux customization](https://github.com/vinschers/dotfiles),
+[FLOSS](https://en.wikipedia.org/wiki/Free_and_open-source_software),
+mathematics and physics.
+[More](/cv).
 """
 [[languages.en.menu.main]]
-name = "cv"
+name = "about"
 url = "/cv"
 weight = 1
 [[languages.en.menu.main]]
@@ -53,14 +71,21 @@ weight = 4
 languageName = "Português"
 languageCode = "pt-BR"
 [languages.pt.params.homeInfoParams]
-Title = "Bio"
+Title = "![](/me.jpg '240') :wave: Bom dia!"
 Content = """
-Nome: Felipe Scherer Vicentin
-
-[Mais](/cv)
+Meu nome é Felipe e eu sou estudante de Ciência da Computação na [Unicamp](https://pt.wikipedia.org/wiki/Universidade_Estadual_de_Campinas).
+Atualmente, estou cursando
+[Engenharia na França](https://pt.wikipedia.org/wiki/%C3%89coles_d%27ing%C3%A9nieurs_na_Fran%C3%A7a)
+na [Télécom Paris](https://pt.wikipedia.org/wiki/T%C3%A9l%C3%A9com_ParisTech)
+com um foco em Ciência de Dados e Processamento de Imagens.
+Meus interesses principais incluem 
+[customização de Linux](https://github.com/vinschers/dotfiles),
+[FLOSS](https://pt.wikipedia.org/wiki/Software_livre_e_de_c%C3%B3digo_aberto),
+matemática and física.
+[Mais](/cv).
 """
 [[languages.pt.menu.main]]
-name = "cv"
+name = "sobre"
 url = "/cv"
 weight = 1
 [[languages.pt.menu.main]]
