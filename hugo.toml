@@ -75,7 +75,7 @@ weight = 5
 languageName = "Português"
 languageCode = "pt-BR"
 [languages.pt.params.homeInfoParams]
-Title = "![](/me.jpg '240') :wave: Bom dia!"
+Title = "![](/me.png '240') :wave: Bom dia!"
 Content = """
 Meu nome é Felipe e eu sou estudante de Ciência da Computação na [Unicamp](https://pt.wikipedia.org/wiki/Universidade_Estadual_de_Campinas).
 Atualmente, estou cursando
