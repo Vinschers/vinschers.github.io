@@ -33,6 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.126.0
+      HUGO_CALENDAR_URL: ${{ vars.HUGO_CALENDAR_URL }}
     steps:
       - name: Install Hugo CLI
         run: |

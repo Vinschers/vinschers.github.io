@@ -51,21 +51,25 @@ mathematics and physics.
 [More](/cv).
 """
 [[languages.en.menu.main]]
+name = "schedule"
+url = "/schedule"
+weight = 1
+[[languages.en.menu.main]]
 name = "about"
 url = "/cv"
-weight = 1
+weight = 2
 [[languages.en.menu.main]]
 name = "archive"
 url = "/archive"
-weight = 2
+weight = 3
 [[languages.en.menu.main]]
 name = "algorithms"
 url = "/algorithms"
-weight = 3
+weight = 4
 [[languages.en.menu.main]]
 name = "search"
 url = "/search"
-weight = 4
+weight = 5
 
 [languages.pt]
 languageName = "Português"
@@ -85,21 +89,25 @@ matemática and física.
 [Mais](/cv).
 """
 [[languages.pt.menu.main]]
+name = "agenda"
+url = "/schedule"
+weight = 1
+[[languages.pt.menu.main]]
 name = "sobre"
 url = "/cv"
-weight = 1
+weight = 2
 [[languages.pt.menu.main]]
 name = "arquivo"
 url = "/archive"
-weight = 2
+weight = 3
 [[languages.pt.menu.main]]
 name = "algoritmos"
 url = "/algorithms"
-weight = 3
+weight = 4
 [[languages.pt.menu.main]]
 name = "pesquisar"
 url = "/search"
-weight = 4
+weight = 5
 
 
 [markup]
