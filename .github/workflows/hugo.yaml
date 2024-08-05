@@ -58,7 +58,7 @@ jobs:
           TZ: America/Los_Angeles
           HUGO_CALENDAR_URL: ${{ vars.HUGO_CALENDAR_URL }}
         run: |
-          hugo \
+          echo ${HUGO_CALENDAR_URL} && hugo \
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
