@@ -1,33 +1,33 @@
-<link
-    href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css"
-    rel="stylesheet"
-/>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/locales-all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ical.js@1.5.0/build/ical.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.11.5/main.global.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.11.5/main.min.css"
-/>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@5.11.5/main.global.min.js"></script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: "dayGridMonth",
-            headerToolbar: {
-                left: "prev,next,today",
-                center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
-            },
-
-            events: {
-                url: {{ getenv "HUGO_CALENDAR_URL" }},
-                format: "ics",
-            },
-        });
-        calendar.render();
-    });
-</script>
+<!-- <link -->
+<!--     href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" -->
+<!--     rel="stylesheet" -->
+<!-- /> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/locales-all.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/ical.js@1.5.0/build/ical.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.11.5/main.global.min.js"></script> -->
+<!-- <link -->
+<!--     rel="stylesheet" -->
+<!--     href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.11.5/main.min.css" -->
+<!-- /> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@5.11.5/main.global.min.js"></script> -->
+<!---->
+<!-- <script> -->
+<!--     document.addEventListener("DOMContentLoaded", function () { -->
+<!--         var calendarEl = document.getElementById("calendar"); -->
+<!--         var calendar = new FullCalendar.Calendar(calendarEl, { -->
+<!--             initialView: "dayGridMonth", -->
+<!--             headerToolbar: { -->
+<!--                 left: "prev,next,today", -->
+<!--                 center: "title", -->
+<!--                 right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth", -->
+<!--             }, -->
+<!---->
+<!--             events: { -->
+<!--                 url: {{ getenv "HUGO_CALENDAR_URL" }}, -->
+<!--                 format: "ics", -->
+<!--             }, -->
+<!--         }); -->
+<!--         calendar.render(); -->
+<!--     }); -->
+<!-- </script> -->
