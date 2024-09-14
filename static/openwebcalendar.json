@@ -1,0 +1,12 @@
+{
+    "css": ".CALENDAR-INDEX-0, .CALENDAR-INDEX-0 .dhx_body, .CALENDAR-INDEX-0 .dhx_title  { background-color: #1a5fb4; } \n.CALENDAR-INDEX-1, .CALENDAR-INDEX-1 .dhx_body, .CALENDAR-INDEX-1 .dhx_title  { background-color: #e01b24; } \n",
+    "hour_division": "2",
+    "starting_hour": "7",
+    "ending_hour": "19",
+    "loader": "",
+    "prefer_browser_language": true,
+    "skin": "dark",
+    "start_of_week": "su",
+    "tab": "week",
+    "title": "Schedule"
+}
