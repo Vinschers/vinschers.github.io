@@ -1,10 +1,6 @@
 <iframe
     id="open-web-calendar"
-    style="
-        background: url(&quot;https://raw.githubusercontent.com/niccokunzmann/open-web-calendar/master/static/img/loaders/circular-loader.gif&quot;)
-            center center no-repeat;
-    "
-    src={{ getenv "HUGO_CALENDAR_URL" }}
+    src='https://open-web-calendar.hosted.quelltext.eu/calendar.html?specification_url=https://vicentin.xyz/openwebcalendar.json&url={{ getenv HUGO_CALENDAR_URL }}'
     sandbox="allow-scripts allow-same-origin allow-top-navigation"
     allowTransparency="true"
     scrolling="no"

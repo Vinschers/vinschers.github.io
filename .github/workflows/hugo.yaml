@@ -57,7 +57,7 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
           TZ: America/Los_Angeles
-          HUGO_CALENDAR_URL: https://open-web-calendar.hosted.quelltext.eu/calendar.html?url=${{ vars.HUGO_CALENDAR_URL }}
+          HUGO_CALENDAR_URL: ${{ vars.HUGO_CALENDAR_URL }}
         run: |
           hugo \
             --gc \
