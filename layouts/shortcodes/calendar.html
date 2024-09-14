@@ -1,6 +1,5 @@
 <iframe
     id="open-web-calendar"
-    src='https://open-web-calendar.hosted.quelltext.eu/calendar.html?specification_url=https://vicentin.xyz/openwebcalendar.json&url={{ getenv "HUGO_CALENDAR_URL" }}'
     sandbox="allow-scripts allow-same-origin allow-top-navigation"
     allowTransparency="true"
     scrolling="no"
@@ -8,3 +7,18 @@
     height="600px"
     width="100%"
 ></iframe>
+
+<script>
+    let theme = document.body.className;
+    const url =
+        'https://open-web-calendar.hosted.quelltext.eu/calendar.html?specification_url=https://vicentin.xyz/openwebcalendar.json&url={{ getenv "HUGO_CALENDAR_URL" }}';
+    document.getElementById("open-web-calendar").src = url + "&skin=" + theme;
+
+    setInterval(() => {
+        if (document.body.className !== theme) {
+            theme = document.body.className;
+            document.getElementById("open-web-calendar").src =
+                url + "&skin=" + theme;
+        }
+    }, 12);
+</script>
