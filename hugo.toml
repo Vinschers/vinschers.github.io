@@ -109,6 +109,44 @@ name = "pesquisar"
 url = "/search"
 weight = 5
 
+[languages.fr]
+languageName = "Français"
+languageCode = "fr"
+[languages.fr.params.homeInfoParams]
+Title = "![](/me.png '240') :wave: Bonjour!"
+Content = """
+Je m'appelle Felipe et je suis étudiant en informatique à [Unicamp](https://fr.wikipedia.org/wiki/Universit%C3%A9_d%27%C3%89tat_de_Campinas).
+Je suis actuellement étudiant en
+[Ingénierie en France](https://fr.wikipedia.org/wiki/Dipl%C3%B4me_d%27ing%C3%A9nieur_en_France)
+à [Télécom Paris](https://fr.wikipedia.org/wiki/T%C3%A9l%C3%A9com_Paris)
+avec un focus sur la science des données et le traitement des images.
+Mes principaux centres d'intérêt sont 
+La [personnalisation de Linux](https://github.com/vinschers/dotfiles),
+[FLOSS](https://fr.wikipedia.org/wiki/Free/Libre_Open_Source_Software),
+les mathématiques et la physique.
+[En savoir plus](/cv).
+"""
+[[languages.fr.menu.main]]
+name = "emploi du temps"
+url = "/schedule"
+weight = 1
+[[languages.fr.menu.main]]
+name = "cv"
+url = "/cv"
+weight = 2
+[[languages.fr.menu.main]]
+name = "archives"
+url = "/archive"
+weight = 3
+[[languages.fr.menu.main]]
+name = "algorithmes"
+url = "/algorithms"
+weight = 4
+[[languages.fr.menu.main]]
+name = "chercher"
+url = "/search"
+weight = 5
+
 
 [markup]
 [markup.goldmark]
