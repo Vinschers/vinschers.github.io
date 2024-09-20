@@ -1,6 +1,6 @@
 +++
-title = 'Morfologia matemática'
-date = 2024-06-13
+title = 'Mathematical Morphology'
+date = 2024-09-20
 draft = false
 +++
 

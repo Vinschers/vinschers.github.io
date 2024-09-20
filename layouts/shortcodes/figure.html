@@ -1,0 +1,7 @@
+{{- $path := (printf "%s%s" ($.Page.Permalink) (.Get 0)) -}}
+{{- $width := .Get 1 -}}
+{{- $alt := .Get 2 | default "Image" -}}
+
+<div style="display: flex; justify-content: center;">
+    <img src=/{{ strings.TrimPrefix (absLangURL "") $path }} alt="{{ $alt }}" width="{{ $width }}" />
+</div>
