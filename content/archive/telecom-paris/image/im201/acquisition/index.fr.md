@@ -110,19 +110,11 @@ Nous pouvons aussi places les détecteurs en un réseau hexagonal.
 
 {{< figure src="images/reseau_hex.png" width="350" >}}
 
-## Le repliement
+## Modèle d'acquisition
 
-Si la fréquence d'échantillonnage est plus petit que le limite de Nyquist, le signal sera sous-échantillonné.
-Ainsi, nous aurons une perte d'informations.
+## Modèle de bruit
 
-{{< figure src="images/sous_echantillonnage.png" width="500" >}}
-
-Si une image a un repliement, on peut réduire les défauts avec un filtre passe-bas, mais le spectre est fondamentalement détérioré de manière irréversible.
-Le repliement apparait généralement comme une "pixellisation" de l'image.
-
-{{< figure src="images/aliasing.png" width="600" >}}
-
-## Transformation de Fourier
+## Transformée de Fourier
 
 Pour $f \in L^1(\mathbb{R}^2)$,
 $$
@@ -144,8 +136,31 @@ Quelques propriétés importantes:
 3. $\mathcal{F}(f(\mathbf{x} - \mathbf{a})) = e^{- i \omega \mathbf{a}} \mathcal{F}(f(\mathbf{x}))$;
 4. $\mathcal{F}(e^{i \mathbf{a} \mathbf{x}} f(\mathbf{x}))(\omega) = \mathcal{F}(f(\mathbf{x}))(\omega - \mathbf{a})$;
 
+Néanmoins, puisque les images sont des objets discrets, nous allons utiliser la transformée de Fourier discrète.
+Généralement, la transformée de Fourier est montrée par un graphe du logarithme du module de chaque fréquence.
+Les points au centre du spectre sont des fréquences basses.
+
+{{< figure src="images/ex_dft_img.png" width="600" >}}
+
+Des intuitions relevantes du spectre de Fourier:
+
+1. Les basse fréquences contient la plus grande part de l'information de l'image. Ça, c'est la raison pour laquelle le centre est plus blanc;
+2. Les lignes à un angle $\theta$ à l'image sont des rayons blanches à un angle $\theta + 90^\circ$ au spectre de Fourier.
+3. Par des propriétés des transformées de Fourier, lorsque il y a une translation à l'image, il n'y a que une difference de phase au spectre de Fourier (le module reste le même); De plus, s'il y a une rotation, le spectre se fait translater (la phase reste la même).
+4. Les convolutions à l'image original peut être effectuées par une simple multiplication du spectre de Fourier (fonction indicatrice d'un disque centrée à l'origine est un filtre passe-bas).
+
+## Le repliement
+
+Si la fréquence d'échantillonnage est plus petit que le limite de Nyquist, le signal sera sous-échantillonné.
+Ainsi, nous aurons une perte d'informations.
+
+{{< figure src="images/sous_echantillonnage.png" width="500" >}}
+
+Si une image a un repliement, on peut réduire les défauts avec un filtre passe-bas, mais le spectre est fondamentalement détérioré de manière irréversible.
+Le repliement apparait généralement comme une "pixellisation" de l'image.
+
+{{< figure src="images/aliasing.png" width="600" >}}
+
 ## Le ringing
 
-## Modèle d'acquisition
-
-## Modèle de bruit
+## Exercises
