@@ -1,3 +1,9 @@
+{{ if .Param "math" }}
+    {{ partialCached "math.html" . }}
+{{ end }}
+
+{{ partial "mermaid.html" }}
+
 {{ $opts := dict "transpiler" "libsass" "targetPath" "css/custom.css" }}
 {{ with resources.Get "css/extended/custom.scss" | toCSS $opts | minify | fingerprint }}
     <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
