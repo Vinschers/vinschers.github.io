@@ -167,7 +167,7 @@ Unfortunantely, it is not always obvious
 
     (a) Compute the entropy $H(X)$.
 
-    (b) Compute the Fisher information $I_X(\theta)$
+    (b) Compute the Fisher information $I_X(\theta)$.
 
     (c) Interpret the results.
 
@@ -194,6 +194,40 @@ Unfortunantely, it is not always obvious
     (b) Check the data processing inequality.
 
     (c) Is $T$ a sufficient statistic for $X$?
+
+    {{< spoiler "Show answer" >}}
+    ...
+    {{< /spoiler >}}
+
+7. (Fisher information and Kullback-Leibler divergence) Let $X \sim \mathcal{N}(\theta, \sigma^2)$ where the variance $\sigma^2$ is known. Denote by $P_\theta$ the corresponding probability distribution.
+
+    (a) Compute the Kullback-Leibler divergence $D(P_\theta \Vert P_{\theta + h})$ for any $h \in \mathbb{R}$.
+
+    (b) Compute the Fisher information $I_X(\theta)$.
+
+    (c) Check the behaviour of $D(P_\theta \Vert P_{\theta + h})$ when $h \to 0$.
+
+    {{< spoiler "Show answer" >}}
+    ...
+    {{< /spoiler >}}
+
+8. (Independent random variables) Let $X = (X_1, \ldots, X_n)$ where $X_k \sim \mathcal{N}(\cos{(k \theta)}, 1)$, $k = 1, \ldots, n$, are independent variables.
+
+    (a) Compute the Fisher informations $I_X(\theta)$ and $I_Y(\theta)$.
+
+    (b) Deduce the Fisher information $I_{X, Y}(\theta)$.
+
+    {{< spoiler "Show answer" >}}
+    ...
+    {{< /spoiler >}}
+
+9. (Fisher information matrix) For any $\theta = (\theta_1, \theta_2) \in \mathbb{R}^2$, let $Y_1 \sim \mathcal{N}(\theta_1, 1)$, $Y_2 \sim \mathcal{N}(\theta_2, 1)$ be independent random variables. Let $X = (X_1, X_2) \sim P_\theta$ with $X_1 = 2Y_1 + Y_2$, $X_2 = Y_1 + Y_2$.
+
+    (a) Show that the model is identifiable.
+
+    (b) Compute the Fisher information matrix $I_X(\theta)$.
+
+    (c) Deduce the behaviour of $D(P_\theta \Vert P_{\theta + h})$ when $h \to 0$.
 
     {{< spoiler "Show answer" >}}
     ...

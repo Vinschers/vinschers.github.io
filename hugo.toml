@@ -5,7 +5,9 @@ theme = "PaperMod"
 enableEmoji = true
 pygmentsCodefences = true
 pygmentsCodefencesGuessSyntax = true
-paginate = 5
+
+[pagination]
+pagerSize = 5
 
 [params]
 displayFullLangName = true

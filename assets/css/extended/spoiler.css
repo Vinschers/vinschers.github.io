@@ -1,5 +1,5 @@
 .spoiler {
-    margin: 0 5px 40px 5px;
+    margin: 12px 5px 40px 5px;
     border: 1px solid var(--primary);
     background: var(--theme);
     border-radius: var(--radius);
