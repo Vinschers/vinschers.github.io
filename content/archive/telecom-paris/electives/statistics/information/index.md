@@ -103,20 +103,24 @@ A statistic is any function $T$ of the observations $x$ only. It does not depend
 Some statistics are better than other.
 There may be statistics that do not provide any information at all (free statistics) or statistics that provide all the information possible (sufficient statistic).
 
-{{< notice "info" "Free statistic" >}}
+{{< notice "definition" "Free statistic" >}}
 A statistic $T$ is free if the distribution of $T(X)$ is independent of $\theta$.
 {{< /notice >}}
 
 {{< notice "example" "Free statistic" >}}
+Let $X_1, X_2 \sim \mathcal{N}(0, 1)$ and $T(x) = x_1 - x_2$.
+Then, $T(X) = X_1 - X_2 \implies T(X) \sim \mathcal{N}(0, 2)$.
+Since $T(X)$ does not depend on $\theta$ at all, $T$ does not give any information about $\theta$.
+Hence, it is free.
 {{< /notice >}}
 
-{{< notice "info" "Sufficient statistic" >}}
+{{< notice "definition" "Sufficient statistic" >}}
 {{< markdown >}}
 A statistic $T$ is sufficient if the distribution of $X$ given $T(X)$ is independent of $\theta$.
-
-In other words, this means that the information that $T(X)$ gives is all the information that $X$ provides.
 {{< /markdown >}}
 {{< /notice >}}
+
+In other words, this means that the information that $T(X)$ gives is all the information that $X$ provides.
 
 {{< notice "example" "Sufficient statistic #1" >}}
 {{< markdown >}}
@@ -129,7 +133,36 @@ On the other hand, the sample median, $T_2(X)$, is not a sufficient statistic, s
 {{< /markdown >}}
 {{< /notice >}}
 
-Unfortunantely, it is not always obvious
+Unfortunately, it is not always obvious whether a statistic is sufficient.
+The following theorem shows a criterion that helps us identify sufficient statistics.
+
+{{< notice "theorem" "Fisher Factorization Theorem" >}}
+A statistic $T$ is sufficient if and only if there exist some functions $g_\theta$ and $h$ (independent of $\theta$) such that
+$$
+\forall x, \qquad p_\theta(x) = g_\theta(T(x)) h(x)
+$$
+{{< /notice >}}
+
+{{< notice "example" >}}
+{{< markdown >}}
+
+In the Bernoulli model $\mathcal{P} = \{ P_\theta \sim \mathcal{B}(\theta), \theta \in [0, 1] \}$ the statistic $T(x) = \sum_{i = 1}^n x_i$ is sufficient.
+
+For a single experiment, $p_\theta(x) = \theta^x (1 - \theta)^{1 - x}$.
+Since $X_1, \ldots, X_n$ are independent, then their joined density function is
+$$
+\begin{align*}
+p_\theta(x) &= p_\theta(x_1) p_\theta(x_2) \ldots p_\theta(x_n) \\
+&= \prod_{i = 1}^n \theta^{x_i} (1 - \theta)^{1 - x_i} \\
+&= \left( \prod_{i = 1}^n \theta^{x_i} \right) \left( \prod_{i = 1}^n (1 - \theta)^{1 - x_i} \right) \\
+&= \theta^{\sum_{i = 1}^n x_i} (1 - \theta)^{n - \sum_{i = 1}^n x_i}
+\end{align*}
+$$
+
+So, if we have $g_\theta(t) = \theta^t (1 - \theta)^{n - t}$ and $h(x) = 1$, $p_\theta(x) = g_\theta(T(x)) h(x)$.
+Thus, $T(X)$ is sufficient.
+{{< /markdown >}}
+{{< /notice >}}
 
 ## Exercises
 

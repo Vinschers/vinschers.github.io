@@ -68,14 +68,14 @@
 }
 
 .notice.info {
-    background-color: #42a5f51a;
-    box-shadow: 0px 0px 6px #1e88e5;
+    background-color: #74dd741a;
+    box-shadow: 0px 0px 6px #74dd74;
 }
 .notice.info .notice-title {
-    background-color: #2196f31a;
+    background-color: #2ebd2e1a;
 }
 .notice.info .notice-title i {
-    color: #1e88e5;
+    color: #74dd74;
 }
 
 .notice.theorem {
