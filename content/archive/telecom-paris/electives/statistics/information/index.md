@@ -164,6 +164,95 @@ Thus, $T(X)$ is sufficient.
 {{< /markdown >}}
 {{< /notice >}}
 
+## Entropy
+
+We can use entropy to measure the amount of information in $X$.
+
+{{< notice "definition" "Entropy" >}}
+{{< markdown >}}
+
+The entropy of the random variable $X$ is
+$$
+H(X) = - \int_{-\infty}^{\infty} p(x) \log{p(x)} \; \mathrm{d}x = - \mathbb{E}(\log{p(x)}).
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+{{< notice "example" >}}
+{{< markdown >}}
+
+The entropy of a Bernoulli random variable $X \sim \mathcal{B}(\theta)$ is:
+
+$$
+\begin{align*}
+H(X) &= - \sum_{x = 0}^1 p_\theta(x) \log{p_\theta(x)} \\
+&= - \theta^0 (1 - \theta)^{1 - 0} \log{(\theta^0 (1 - \theta)^{1 - 0})} - \theta^1 (1 - \theta)^{1 - 1} \log{(\theta^1 (1 - \theta)^{1 - 1})} \\
+&= - (1 - \theta) \log{(1 - \theta)} - \theta \log{\theta}
+\end{align*}
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+In general, for two random variables $X$, $Y$ with joint probability density function $p(x, y)$, the entropy of the distribution $Y$ given $X = x$, denoted by $p(y \vert x)$, expected over the distribution of $X$ is:
+
+$$
+\begin{align*}
+H(Y \vert X) &= \int p(x) H(Y \vert X = x) \; \mathrm{d} x \\
+&= - \int p(x) \left( \int p(y \vert x) \log{p(y \vert x)} \; \mathrm{d} y \right) \; \mathrm{d} x
+\end{align*}
+$$
+
+Note, here, that $p(x) p(y \vert x)$ is equal to $p(x, y)$.
+Then,
+
+$$
+\begin{align*}
+H(Y \vert X) &= - \int p(x, y) \log{p(y \vert x)} \; \mathrm{d} x \, \mathrm{d} y \\
+&= - \mathbb{E}(\log{p(Y \vert X)})
+\end{align*}
+$$
+
+{{< notice "info" "Chain rule" >}}
+{{< markdown >}}
+
+For any random variables $X_1, \ldots, X_n$ (not necessarily independent),
+
+$$
+H(X_1, \ldots, X_n) = H(X_1) + H(X_2 \vert X_1) + \ldots + H(X_n \vert X_1, \ldots, X_{n - 1})
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+{{< notice "tip" >}}
+{{< markdown >}}
+
+If $X$ and $Y$ are independent, then $H(Y \vert X) = H(Y)$.
+This means that
+
+$$
+H(X, Y) = H(X) + H(Y)
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+An important consequence of the chain rule is that a statistic cannot contain more information than the original data.
+
+{{< notice "theorem" "Data processing inequality" >}}
+{{< markdown >}}
+
+For any statistic $T$,
+
+$$
+H(T(X)) \leq H(X).
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
 ## Exercises
 
 1. (Identifiability) For any $\theta = (\theta_1, \theta_2) \in \mathbb{R}^2$, let $X \sim \mathcal{N}(\theta_1 \lor \theta_2, 1)$ and $Y \sim \mathcal{N}(\theta_1 \land \theta_2, 1)$ be independent random variables. We denote by $P_\theta$ the probability distribution of $(X, Y)$.
