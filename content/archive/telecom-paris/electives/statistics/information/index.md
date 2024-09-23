@@ -253,6 +253,48 @@ $$
 {{< /markdown >}}
 {{< /notice >}}
 
+We now introduce a notion of information gap between two probability distributions $P$, $Q$ related to entropy.
+
+{{< notice "theorem" "Kullback-Leibler divergence" >}}
+{{< markdown >}}
+
+The Kullback-Leibler divergence between $P$ and $Q$ is defined by:
+
+$$
+D(P \Vert Q) = \int p(x) \log{\left( \frac{p(x)}{q(x)} \right)} \; \mathrm{d} x = \mathbb{E}\left( \log{\frac{p(X)}{q(X)}} \right)
+$$
+
+with $X \sim P$.
+In this case, $\log{\frac{p(X)}{q(X)}}$ plays the role of $X$.
+
+{{< /markdown >}}
+{{< /notice >}}
+
+{{< notice "example" >}}
+{{< markdown >}}
+
+The Kullback-Leibler divergence between two Bernoulli distributions, $P \sim \mathcal{B}(p)$ and $Q \sim \mathcal{B}(q)$, is:
+
+$$
+\begin{align*}
+D(P \Vert Q) &= \mathbb{E}\left( \log{\frac{p^x (1 - p)^{1 - x}}{q^x (1 - q)^{1 - x}}} \right) \\
+&= \log{\frac{p^0 (1 - p)^{1 - 0}}{q^0 (1 - q)^{1 - 0}}} p^0 (1 - p)^{1 - 0} + \log{\frac{p^1 (1 - p)^{1 - 1}}{q^1 (1 - q)^{1 - 1}}} p^1 (1 - p)^{1 - 1} \\
+&= (1 - p) \log{\frac{1 - p}{1 - q}} + p \log{\frac{p}{q}} \\
+\end{align*}
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+{{< notice "info" >}}
+{{< markdown >}}
+
+$D(P \Vert Q) \geq 0$ for every $P$ and $Q$.
+Particularly, $D(P \Vert Q) = 0$ if and only if $P = Q$.
+
+{{< /markdown >}}
+{{< /notice >}}
+
 ## Exercises
 
 1. (Identifiability) For any $\theta = (\theta_1, \theta_2) \in \mathbb{R}^2$, let $X \sim \mathcal{N}(\theta_1 \lor \theta_2, 1)$ and $Y \sim \mathcal{N}(\theta_1 \land \theta_2, 1)$ be independent random variables. We denote by $P_\theta$ the probability distribution of $(X, Y)$.
