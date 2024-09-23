@@ -295,6 +295,81 @@ Particularly, $D(P \Vert Q) = 0$ if and only if $P = Q$.
 {{< /markdown >}}
 {{< /notice >}}
 
+## Fisher information
+
+The Fisher information quantifies the information on $\theta$ contained in $X$ when $X \sim P_\theta$.
+Its standard notation is $I(\theta)$ or $I_X(\theta)$.
+
+There are some conditions for the existence of $I(\theta)$:
+
+1. $\frac{\partial \log{p_\theta}}{\partial \theta}$ exists,
+2. The support of $p_\theta$ is independent of $\theta$,
+3. $\mathbb{E}(X)$ and $\frac{\partial p_\theta}{\partial \theta}$ are inversible.
+
+### Scalar case
+
+We first consider the scalar case $\Theta \subset \mathbb{R}$.
+
+{{< notice "definition" "Score" >}}
+The score of $X$ is defined by
+$$
+S(X) = \frac{\partial \log{p_\theta}}{\partial \theta}.
+$$
+{{< /notice >}}
+
+{{< notice "definition" "Fisher information" >}}
+The Fisher information of $\theta$ is the variance of the score of $X$.
+
+$$
+I(\theta) = \mathrm{Var} \left( \frac{\partial \log{p_\theta}}{\partial \theta} \right).
+$$
+{{< /notice >}}
+
+{{< notice "tip" "Variance" >}}
+{{< markdown >}}
+$$
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}(X))^2] = \mathbb{E}(X^2) - \mathbb{E}^2(X)
+$$
+
+Since $\mathbb{E}(S(X)) = 0$, we can simplify $I(\theta)$ to
+$$
+I(\theta) = \mathbb{E}(S^2(X))
+$$
+
+We can also say that the Fisher information is the opposite of the curvature of the log-likelihood:
+$$
+I(\theta) = - \mathbb{E}\left( \frac{\partial^2 \log{p_\theta(X)}}{\partial \theta^2} \right).
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+{{< notice "example" >}}
+{{< markdown >}}
+
+For a Bernoulli random variable $X \sim \mathcal{B}(\theta)$ with $\theta \in (0, 1)$, we have:
+
+$$
+\begin{align*}
+S(X) &= \frac{\partial}{\partial \theta} \log{(\theta^X (1 - \theta)^{1 - X})} \\
+&= \frac{\partial}{\partial \theta} X \log{\theta} + (1 - X) \log{(1 - \theta)} \\
+&= \frac{X}{\theta} - \frac{1 - X}{1 - \theta} = \frac{X - \theta}{\theta(1 - \theta)}
+\end{align*}
+$$
+
+Then,
+$$
+\begin{align*}
+I(\theta) &= \mathbb{E}(S^2(X)) \\
+&= (1 - \theta) S^2(0) + \theta S^2(1) \\
+&= (1 - \theta) \left(- \frac{1}{1 - \theta} \right)^2 + \theta \left( \frac{1}{\theta} \right)^2 \\
+&= \frac{1}{1 - \theta} + \frac{1}{\theta} = \frac{1}{\theta (1 - \theta)}
+\end{align*}
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
 ## Exercises
 
 1. (Identifiability) For any $\theta = (\theta_1, \theta_2) \in \mathbb{R}^2$, let $X \sim \mathcal{N}(\theta_1 \lor \theta_2, 1)$ and $Y \sim \mathcal{N}(\theta_1 \land \theta_2, 1)$ be independent random variables. We denote by $P_\theta$ the probability distribution of $(X, Y)$.
