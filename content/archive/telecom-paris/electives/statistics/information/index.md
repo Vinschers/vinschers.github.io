@@ -241,18 +241,6 @@ $$
 
 An important consequence of the chain rule is that a statistic cannot contain more information than the original data.
 
-{{< notice "theorem" "Data processing inequality" >}}
-{{< markdown >}}
-
-For any statistic $T$,
-
-$$
-H(T(X)) \leq H(X).
-$$
-
-{{< /markdown >}}
-{{< /notice >}}
-
 We now introduce a notion of information gap between two probability distributions $P$, $Q$ related to entropy.
 
 {{< notice "theorem" "Kullback-Leibler divergence" >}}
@@ -369,6 +357,92 @@ $$
 
 {{< /markdown >}}
 {{< /notice >}}
+
+Now, let for two random variables $X$, $Y$ with joint probability density function $p_\theta(x, y)$.
+We define the notion of Fisher information of $Y$ given $X$ on $\theta$ by:
+
+$$
+\begin{align*}
+I_{Y \vert X}(\theta) &= \int p_\theta(x) \mathrm{Var}\left( \frac{\partial \log{p_\theta(Y \vert X = x)}}{\partial \theta} \right) \; \mathrm{d} x \\
+&= \mathbb{E}\left[ \left( \frac{\partial \log{p_\theta(Y \vert X)}}{\partial \theta} \right)^2 \right]
+\end{align*}
+$$
+
+Observe that $I_{Y \vert X}(\theta) = I_Y(\theta)$ if $X$ and $Y$ are independent.
+
+{{< notice "info" "Chain rule" >}}
+{{< markdown >}}
+
+For any random variables $X_1, \ldots, X_n$ (not necessarily independent),
+
+$$
+I_{X_1, \ldots, X_n}(\theta) = I_{X_1}(\theta) + I_{X_2 \vert X_1}(\theta) + \ldots + I_{X_n \vert X_1, \ldots, X_{n - 1}}(\theta).
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+{{< notice "theorem" "Data processing inequality" >}}
+{{< markdown >}}
+
+For any statistic $T$,
+
+$$
+\begin{align*}
+H(T(X)) &\leq H(X) \\
+I_{T(X)}(\theta) &\leq I_X(\theta) \quad \forall \theta \in \Theta
+\end{align*}
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+Observe that $0 \leq I_{T(X)}(\theta) \leq I_X(\theta)$ with:
+
+- $I_{T(X)}(\theta) = 0$ if $T$ is free,
+- $I_{T(X)}(\theta) = I_X(\theta)$ if $T$ is sufficient (by the chain rule).
+
+{{< notice "note" "Entropy and Fisher information" >}}
+{{< markdown >}}
+
+The link between both notions of information is provided by the following result:
+
+$$
+\forall h, \quad D(P_\theta \Vert P_{\theta + h}) = \frac{1}{2} I(\theta) h^2 + o(h^2).
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+### Vectorial case
+
+When $\theta$ is a vector, that is $\Theta \subset \mathbb{R}^d$, the score is the gradient and the Fisher information becomes a matrix.
+
+{{< notice "definition" "Score" >}}
+The score of $X$ is defined by
+$$
+S(X) = \nabla_\theta \log{p_\theta(X)}
+$$
+{{< /notice >}}
+
+{{< notice "definition" "Fisher information" >}}
+The Fisher information of $\theta$ is the covariance matrix of the score.
+
+$$
+I(\theta) = \mathrm{Cov} (\nabla_\theta \log{p_\theta(X)})
+$$
+{{< /notice >}}
+
+The score is a centered, $\mathbb{E}(S(X)) = 0$, so that the Fisher information matrix can be written:
+$$
+I(\theta) = \mathrm{Cov}(S(X)) = \mathbb{E}(S(X) S(X)^T).
+$$
+
+The chain rule and the data processing inequality hold.
+The link with entropy is given by:
+$$
+\forall h, \quad D(P_\theta \Vert P_{\theta + h}) = \frac{1}{2} h^T I(\theta) h + o(\Vert h \Vert^2).
+$$
 
 ## Exercises
 
