@@ -379,7 +379,14 @@ $$
     (b) Is this model identifiable?
 
     {{< spoiler "Show answer" >}}
-    ...
+
+    (a) ... <br>
+
+    (b) Suppose $X \sim \mathcal{N}(\theta_1 \lor \theta_2, 1)$ and $Y \sim \mathcal{N}(\theta_1 \land \theta_2, 1)$.
+    Then, $\mathbb{E}(X) = \theta_1 \lor \theta_2$ and $\mathbb{E}(Y) = \theta_1 \land \theta_2$.
+    However, we will never be able to distinguish between $\theta_1$ and $\theta_2$.
+    We can have both $\theta = (\theta_1, \theta_2) \in \mathbb{R}^2$ or $\theta = (\theta_2, \theta_1) \in \mathbb{R}^2$.
+
     {{< /spoiler >}}
 
 2. (Statistics) Let $X = (X_1, X_2)$ where $X_1, X_2 \sim \mathcal{N}(\theta, 1)$ are independent random variables, with $\theta \in \mathbb{R}$ some unknown parameter.
@@ -435,7 +442,24 @@ $$
     (c) Is $T$ a sufficient statistic for $X$?
 
     {{< spoiler "Show answer" >}}
-    ...
+    (a) Since $X_1, \ldots, X_n$ are independent, then
+    $$
+        I_X(\theta) = n I_{X_1}(\theta) = \frac{n}{\theta (1 - \theta)}.
+    $$
+        $T(x) = x_1 + \ldots + x_n \implies T(X) \sim \mathcal{B}(n, \theta) \implies p_\theta(t) = \binom{n}{t} \theta^t (1 - \theta)^{n - t}$
+    $$
+        S(T) = \frac{T}{\theta} - \frac{n - T}{1 - \theta} = \frac{T}{\theta (1 - \theta)} - \frac{n}{1 - \theta}
+    $$
+    $$
+        \implies I_{T(X)}(\theta) = \frac{n}{\theta (1 - \theta)}
+    $$
+
+    (b) Indeed,
+    $$
+        \frac{n}{\theta (1 - \theta)} \leq \frac{n}{\theta (1 - \theta)}.
+    $$
+
+    (c) Yes, because $I_X(\theta) = I_{T(X)}(\theta)$.
     {{< /spoiler >}}
 
 7. (Fisher information and Kullback-Leibler divergence) Let $X \sim \mathcal{N}(\theta, \sigma^2)$ where the variance $\sigma^2$ is known. Denote by $P_\theta$ the corresponding probability distribution.
@@ -450,7 +474,7 @@ $$
     ...
     {{< /spoiler >}}
 
-8. (Independent random variables) Let $X = (X_1, \ldots, X_n)$ where $X_k \sim \mathcal{N}(\cos{(k \theta)}, 1)$, $k = 1, \ldots, n$, are independent variables.
+8. (Independent random variables) Let $X = (X_1, \ldots, X_n)$ and $Y = (Y_1, \ldots, Y_n)$ where $X_k \sim \mathcal{N}(\cos{(k \theta)}, 1)$ and $Y_k \sim \mathcal{N}(\sin{(k \theta)}, 1)$, $k = 1, \ldots, n$, are independent variables.
 
     (a) Compute the Fisher informations $I_X(\theta)$ and $I_Y(\theta)$.
 
