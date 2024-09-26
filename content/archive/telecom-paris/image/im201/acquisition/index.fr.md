@@ -112,7 +112,44 @@ Nous pouvons aussi places les détecteurs en un réseau hexagonal.
 
 ## Modèle d'acquisition
 
+Le modèle complet d'acquisition peut être résumé par l'équation suivante:
+$$
+u = Q[h((g \ast s) \Pi_\Gamma F + b)]
+$$
+où:
+
+- $s$ est la scène, c'est-à-dire l'image continue et "réelle";
+- $g$ est la réponse impulsionnelle du système optique et de l'intégration des capteurs $(g_\text{ouv} \ast g_\text{flou} \ast g_\text{fil} \ast g_\text{capt})$;
+  - $g_\text{ouv}$ est l'ouverture;
+  - $g_\text{flou}$ est le flou;
+  - $g_\text{fil}$ est le filtre;
+  - $g_\text{capt}$ est le capteur;
+- $\Pi_\Gamma$ est le peigne de Dirac;
+- $F = \mathbb{1}_\Omega$, $\Omega \subset \mathbb{R}^2$, support de l'acquisition;
+- $b$ est un bruit additif;
+- $h$ est une fonction croissant qui mesure le changement de contrate;
+- $Q$ est un opérateur de quantification;
+- $u$ est l'image acquise;
+
 ## Modèle de bruit
+
+Nous allons noter $v$ l'image discrète après échantillonnage et $u$ l'image bruitée.
+Il y a 3 principaux types de bruit:
+
+1. **Bruit additif**: $u(i, j) = v(i, j) + b(i, j)$ où les $b(i, j)$ sont i.i.d.;
+2. **Bruit impulsionnel**: $u(i, j) = v(i, j) A(i, j) + (1 - A(i, j))B(i, j) où $A(i, j)$ sont des variables de Bernoulli i.i.d. et $B(i, j)$ des variables i.i.d. (e.g. sel et poivre);
+3. **Bruit multiplicatif**: $u(i, j) = v(i, j) b(i, j)$ où les $b(i, j)$ sont i.i.d.
+
+Le modèle de bruit peut être simplifié et résumé par la distribution suivante:
+$$
+I_\text{bruit} = \mathcal{N}(g C \tau + \mu_R, g^2 C \tau + \sigma_R^2)
+$$
+où
+
+- $g$ est le gain (ISO);
+- $\tau$ est le temps d'acquisition;
+- $C$ est la radiance (photons / temps);
+- $\mu_R$ et $\sigma_R^2$ sont les moyenne et variance du bruit de lecture.
 
 ## Transformée de Fourier
 
@@ -162,5 +199,15 @@ Le repliement apparait généralement comme une "pixellisation" de l'image.
 {{< figure src="images/aliasing.png" width="600" >}}
 
 ## Le ringing
+
+Le phénomène de ringing apparait lorsque une image sous-échantiollionné est soumise à un filtre passe-bas qui est une fonction indicatrice carrée dans le domaine de Fourier.
+$$
+\mathcal{F}^{-1}[\mathcal{F}(f \times \mathbb{1}_K)] = \mathcal{F}^{-1}[\mathcal{F}(f)] \ast \mathcal{F}^{-1}(\mathbb{1}_K) = f(x, y) \ast \mathrm{sinc}(x, y)
+$$
+
+L'application d'un filtre passe-bas est donc equivalent à une convolution de l'image par une fonction sinc.
+Ainsi, l'image résultant montre le ringing: une genre d'ondulation près des bordures d'une image.
+
+{{< figure src="images/ringing.png" width="600" >}}
 
 ## Exercises
