@@ -744,7 +744,7 @@ $$
     &= (\nabla_\theta \mu)^\top \Gamma^{-1} \mathbb{E}[(\mathbf{x} - \mu) (\mathbf{x} - \mu)^\top] \Gamma^{-1} (\nabla_\theta \mu) \\
     &= (\nabla_\theta \mu)^\top \Gamma^{-1} \Gamma \Gamma^{-1} (\nabla_\theta \mu) \\
     &= (\nabla_\theta \mu)^\top \Gamma^{-1} (\nabla_\theta \mu) \\
-    &= Id.
+    &= I_2.
     \end{align*}
     $$
     {{< /spoiler >}}
