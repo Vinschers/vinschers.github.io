@@ -736,11 +736,15 @@ $$
     \end{align*}
     $$
 
-    Now, we are able to find $I_X(\theta)$.
+    Now, we are able to find $I_X(\theta)$. Since $S(X)$ is a square matrix, we have $S(X) S(X)^\top = S(X)^\top S(X)$.
     $$
     \begin{align*}
-    I_X(\theta) &= \mathbb{E}[S(X) S(X)^\top] \\
-    &= \mathbb{E}[ (\mathbf{x} - \mu)^\top \Gamma^{-1} (\nabla_\theta \mu) (\nabla_\theta \mu)^\top \Gamma^{-1} (\mathbf{x} - \mu) ] \\
+    I_X(\theta) &= \mathbb{E}[S(X)^\top S(X)] \\
+    &= \mathbb{E}[ (\nabla_\theta \mu)^\top \Gamma^{-1} (\mathbf{x} - \mu) (\mathbf{x} - \mu)^\top \Gamma^{-1} (\nabla_\theta \mu) ] \\
+    &= (\nabla_\theta \mu)^\top \Gamma^{-1} \mathbb{E}[(\mathbf{x} - \mu) (\mathbf{x} - \mu)^\top] \Gamma^{-1} (\nabla_\theta \mu) \\
+    &= (\nabla_\theta \mu)^\top \Gamma^{-1} \Gamma \Gamma^{-1} (\nabla_\theta \mu) \\
+    &= (\nabla_\theta \mu)^\top \Gamma^{-1} (\nabla_\theta \mu) \\
+    &= Id.
     \end{align*}
     $$
     {{< /spoiler >}}
