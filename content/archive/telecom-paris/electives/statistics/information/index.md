@@ -454,7 +454,7 @@ $$
 
     {{< spoiler "Show answer" >}}
 
-    (a) ... <br>
+    (a) The model is parametric because it is defined by the parameter $\theta$. <br>
 
     (b) Suppose $X \sim \mathcal{N}(\theta_1 \lor \theta_2, 1)$ and $Y \sim \mathcal{N}(\theta_1 \land \theta_2, 1)$.
     Then, $\mathbb{E}(X) = \theta_1 \lor \theta_2$ and $\mathbb{E}(Y) = \theta_1 \land \theta_2$.
@@ -470,7 +470,26 @@ $$
     (b) Show that $T(X) = X_1 + X_2$ is a sufficient statistic.
 
     {{< spoiler "Show answer" >}}
-    ...
+    (a) Let $T(X) = X_1 - X_2$.
+    $$
+    \mathbb{E}(T(X)) = \mathbb{E}(X_1 - X_2) = \mathbb{E}(X_1) - \mathbb{E}(X_2) = \theta - \theta = 0
+    $$
+    $$
+    \mathrm{Var}(T(X)) = \mathrm{Var}(X_1 - X_2) = \mathrm{Var}(X_1) + \mathrm{Var}(X_2) = 1 + 1 = 2
+    $$
+    So, we can say that $T(X) \sim \mathcal{N}(0, 2)$. Hence, it is a free statistic. <br>
+
+    (b) Let $T(X) = X_1 + X_2$.
+    $$
+    \begin{align*}
+    p_\theta(x) &= \frac{1}{2 \pi} e^{- \frac{(x_1 - \theta)^2}{2} - \frac{((x_2 - \theta))^2}{2}} \\
+    &= \frac{1}{2 \pi} e^{- \frac{1}{2} (x_1^2 - 2 x_1 \theta + \theta^2 + x_2^2 - 2 x_2 \theta + \theta^2)} \\
+    &= \frac{1}{2 \pi} e^{x_1 \theta + x_2 \theta - \theta^2 - \frac{1}{2} (x_1^2 + x_2^2)} \\
+    &= \frac{1}{2 \pi} e^{\theta (x_1 + x_2 - \theta) - \frac{x_1^2 + x_2^2}{2}} \\
+    \end{align*}
+    $$
+    Then, let $g_\theta(t) = \frac{1}{2 \pi} e^{\theta (t - \theta)}$ and $h(x) = e^{- \frac{1}{2} (x_1^2 + x_2^2)}$.
+    This means that $p_\theta(x) = g_\theta(T(x)) h(x)$. By the Fisher factorization theorem, $T$ is sufficient.
     {{< /spoiler >}}
 
 3. (Statistics) Let $X = (X_1, X_2)$ where $X_1, X_2$ are independent random variables, uniformly distributed over $(0, \theta)$ some unknown parameter $\theta > 0$.
@@ -480,10 +499,13 @@ $$
     (b) Is $T(X) = X_1 + X_2$ a free statistic? A sufficient statistic?
 
     {{< spoiler "Show answer" >}}
-    ...
+    (a) Note that the distribution of $\min{(X_1, X_2)}$ given $T(X) = t$ is uniform in the interval $(0, t)$. Then, $\mathbb{P}[X = (\min{(X_1, X_2}), t)] = \mathbb{P}[X = (t, \min{(X_1, X_2)})] = \frac{1}{2}$. Since the probability of $X$ given $T(X)$ does not depend of $\theta$, $T$ is a sufficient statistic. <br>
+
+    (b) Clearly, the distribution of $T(X) = X_1 + X_2$ is uniform in the interval $(0, 2 \theta)$. Since the distribution of $T$ depends on $\theta$, $T$ is not free.
+    Also, the probability distribution of $X$ given $T(X) = t$ is uniform in the interval $(t - \theta, \theta)$, which still depends of $\theta$. Thus, $T$ is not sufficient.
     {{< /spoiler >}}
 
-4. (Entropy, Fisher information) Let $X \sim \mathcal{N}(\mu, \sigma^2)$ where $\theta \in \mathbb{R}$ is some unknown parameter.
+4. (Entropy, Fisher information) Let $X \sim \mathcal{N}(\theta, \sigma^2)$ where $\theta \in \mathbb{R}$ is some unknown parameter.
 
     (a) Compute the entropy $H(X)$.
 
@@ -492,7 +514,26 @@ $$
     (c) Interpret the results.
 
     {{< spoiler "Show answer" >}}
-    ...
+    (a) Since $H(X) = - \mathbb{E}[\log{p}]$, we have
+    $$
+    \begin{align*}
+    H(X) &= - \mathbb{E}\left[ \log{\left( \frac{1}{\sigma \sqrt{2 \pi}} \right)} - \frac{(x - \theta)^2}{2 \sigma^2} \right] \\
+    &= \log{(\sigma \sqrt{2 \pi})} + \frac{1}{2 \sigma^2} \underbrace{\mathbb{E}[(x - \theta)^2]}_{\mathrm{Var}(X)} \\
+    &= \log{(\sigma \sqrt{2 \pi})} + \frac{1}{2 \sigma^2} \sigma^2 \\
+    &= \frac{1}{2} + \log{(\sigma \sqrt{2 \pi})}
+    \end{align*}
+    $$
+
+    (b) First, let us compute the score $S(X)$.
+    $$
+    \frac{\partial \log{p}}{\partial \theta} = \frac{\partial}{\partial \theta}\left[ - \log{(\sigma \sqrt{2 \pi})} - \frac{(x - \theta)^2}{2 \sigma^2} \right] = \frac{x - \theta}{\sigma^2}
+    $$
+    Now, we can find $I_X(\theta)$ as:
+    $$
+    I_X(\theta) = \mathbb{E}[S^2(X)] = \frac{1}{\sigma^4} \mathbb{E}[(x - \theta)^2] = \sigma^{-2}.
+    $$
+
+    (c) Both the entropy and the Fisher information do not depend on $\theta$. While the entropy increases with $\sigma$, the Fisher information decreases with $\sigma$ (more randomness = less information about $\theta$).
     {{< /spoiler >}}
 
 5. (Entropy, data processing inequality) Let $X = (X_1, X_2)$ where $X_1$, $X_2$ are independent Bernoulli random variables with parameter $\frac{1}{2}$.
@@ -504,7 +545,31 @@ $$
     (c) Check the data processing inequality.
 
     {{< spoiler "Show answer" >}}
-    ...
+    (a) We consider the log base 2.
+    $$
+    \begin{align*}
+    H(X_i) &= - \mathbb{E}[\log{p}] \\
+    &= - \mathbb{E}[X \log{2^{-1}} + (1 - X) \log{1 - 2^{-1}}] \\
+    &= \mathbb{E}[X + (1 - X)] = 1 \\
+    \implies H(X) &= H(X_1) + H(X_2) = 1 + 1 = 2
+    \end{align*}
+    $$
+
+    (b) We can calculate the entropy with the discrete formula.
+    $$
+    \begin{align*}
+    H(T(X)) &= - \mathbb{E}[\log{p_T(X)}] \\
+    &= - \sum_{i = 0}^2 \mathbb{P}[T(X) = i] \log{(\mathbb{P}[T(X) = i])} \\
+    &= - [ 2^{-2} \log{2^{-2}} + 2^{-1} \log{2^{-1}} + 2^{-2} \log{2^{-2}} ] \\
+    &= 2^{-1} + 2^{-1} + 2^{-1} \\
+    &= \frac{3}{2}
+    \end{align*}
+    $$
+
+    (c) Indeed,
+    $$
+    H(T(X)) \leq H(X) \quad \text{since} \quad \frac{3}{2} \leq 2.
+    $$
     {{< /spoiler >}}
 
 6. (Data processing inequality, sufficiency) Let $X = (X_1, \ldots, X_n)$ where $X_1, \ldots, X_n$ are i.i.d. Bernoulli random variables with parameter $\theta$. Let $T(x) = x_1 + \ldots + x_n$ for any $x \in \mathbb{R}^n$.
@@ -545,7 +610,43 @@ $$
     (c) Check the behaviour of $D(P_\theta \Vert P_{\theta + h})$ when $h \to 0$.
 
     {{< spoiler "Show answer" >}}
-    ...
+    (a)
+    $$
+    D(P_\theta \Vert P_{\theta + h}) = \mathbb{E}\left[ \log{\frac{p_\theta(X)}{p_{\theta + h}(X)}} \right]
+    $$
+    Let us calculate $\log{\frac{p_\theta(X)}{p_{\theta + h}(X)}}$.
+    $$
+    \begin{align*}
+        \log{\frac{p_\theta(X)}{p_{\theta + h}(X)}} &= - \frac{(x - \theta)^2}{2 \sigma^2} - \left( - \frac{(x - (\theta + h))^2}{2 \sigma^2} \right) \\
+        &= \frac{1}{2 \sigma^2} \left[ - (x^2 - 2 x \theta + \theta^2) + x^2 - 2 x (\theta + h) + (\theta + h)^2 \right] \\
+        &= \frac{1}{2 \sigma^2} \left[ 2 x \theta - \theta^2 - 2 x \theta - 2 x h + (\theta^2 + 2 \theta h + h^2) \right] \\
+        &= \frac{1}{2 \sigma^2} \left[ h^2 - 2 x h + 2 \theta h \right] \\
+        &= \frac{h}{2 \sigma^2} \left( h + 2 \theta - 2 x \right)
+    \end{align*}
+    $$
+    Now, we can compute $D(P_\theta \Vert P_{\theta + h})$.
+    $$
+    \begin{align*}
+    D(P_\theta \Vert P_{\theta + h}) &= \mathbb{E}\left[ \frac{h}{2 \sigma^2} \left( h + 2 \theta - 2 x \right) \right] \\
+    &= \frac{h}{2 \sigma^2} \left( h + 2 \theta - 2 \mathbb{E}[X] \right) \\
+    &= \frac{h}{2 \sigma^2} \left( h + 2 \theta - 2 \theta \right) \\
+    &= \frac{h^2}{2 \sigma^2}.
+    \end{align*}
+    $$
+
+    (b) First, let us compute the score $S(X)$.
+    $$
+    S(X) = \frac{\partial}{\partial \theta}\left[ - \log{(\sigma \sqrt{2 \pi})} - \frac{(x - \theta)^2}{2 \sigma^2} \right] = \frac{x - \theta}{\sigma^2}
+    $$
+    Then,
+    $$
+    I_X(\theta) = \mathbb{E}[S^2(X)] = \sigma^{-2}.
+    $$
+
+    (c)
+    $$
+    \lim_{h \to 0} D(P_\theta \Vert P_{\theta + h}) = \lim_{h \to 0} \frac{h^2}{2 \sigma^2} = 0.
+    $$
     {{< /spoiler >}}
 
 8. (Independent random variables) Let $X = (X_1, \ldots, X_n)$ and $Y = (Y_1, \ldots, Y_n)$ where $X_k \sim \mathcal{N}(\cos{(k \theta)}, 1)$ and $Y_k \sim \mathcal{N}(\sin{(k \theta)}, 1)$, $k = 1, \ldots, n$, are independent variables.
@@ -555,7 +656,32 @@ $$
     (b) Deduce the Fisher information $I_{X, Y}(\theta)$.
 
     {{< spoiler "Show answer" >}}
-    ...
+    (a) Since all $X$ and $Y$ independent variables, we have
+    $$
+    \begin{align*}
+    I_X(\theta) &= \sum_{k = 1}^n I_{X_k}(\theta) \\
+    I_Y(\theta) &= \sum_{k = 1}^n I_{Y_k}(\theta)
+    \end{align*}
+    $$
+    Let us calculate $I_{X_k}(\theta)$.
+    $$
+    \begin{align*}
+    S(X_k) &= \frac{\partial}{\partial \theta}\left[ - \log{(\sigma \sqrt{2 \pi})} - \frac{(x - \cos{(k \theta)})^2}{2} \right] = - k \sin{(k \theta)} (x - \cos{(k \theta)}) \\
+    \implies I_{X_k}(\theta) &= \mathbb{E}[S(X_k)^2] = k^2 \sin^2{(k \theta)} \mathbb{E}[(x - \cos{(k \theta)})^2] = k^2 \sin^2{(k \theta)}.
+    \end{align*}
+    $$
+    Similarly, $I_{Y_k}(\theta) = k^2 \cos^2{(k \theta)}$.
+    Thus,
+    $$
+    \begin{align*}
+    I_X(\theta) &= \sum_{k = 1}^n k^2 \sin^2{(k \theta)} \\
+    I_Y(\theta) &= \sum_{k = 1}^n k^2 \cos^2{(k \theta)}
+    \end{align*}
+    $$
+    (b) Since $X$ and $Y$ are independent, we have
+    $$
+    I_{X, Y}(\theta) = I_X(\theta) + I_Y(\theta) = \sum_{k = 1}^n k^2 = \frac{n (n + 1) (2n + 1)}{6}
+    $$
     {{< /spoiler >}}
 
 9. (Fisher information matrix) For any $\theta = (\theta_1, \theta_2) \in \mathbb{R}^2$, let $Y_1 \sim \mathcal{N}(\theta_1, 1)$, $Y_2 \sim \mathcal{N}(\theta_2, 1)$ be independent random variables. Let $X = (X_1, X_2) \sim P_\theta$ with $X_1 = 2Y_1 + Y_2$, $X_2 = Y_1 + Y_2$.
@@ -564,8 +690,57 @@ $$
 
     (b) Compute the Fisher information matrix $I_X(\theta)$.
 
-    (c) Deduce the behaviour of $D(P_\theta \Vert P_{\theta + h})$ when $h \to 0$.
+    (c) Deduce the behavior of $D(P_\theta \Vert P_{\theta + h})$ when $h \to 0$.
 
     {{< spoiler "Show answer" >}}
-    ...
+    (a) Since $X_1$ and $X_2$ are linearly independent, we can say that the model $X$ is identifiable. <br>
+
+    (b) We can say that $X \sim \mathcal{N}(\mu, \Gamma)$ where $\mu$ is the mean vector and $\Gamma$ is the covariance matrix.
+    $$
+    \begin{align*}
+    \mu &= \begin{pmatrix}
+        2 \theta_1 + \theta_2 \\
+        \theta_1 + \theta_2
+    \end{pmatrix} \\
+    \Gamma &= \begin{pmatrix}
+    \mathrm{Cov}(X_1, X_1) & \mathrm{Cov}(X_1, X_2) \\
+    \mathrm{Cov}(X_2, X_1) & \mathrm{Cov}(X_2, X_2)
+    \end{pmatrix}
+    \end{align*}
+    $$
+    where
+    $$
+    \begin{align*}
+    \mathrm{Cov}(X_1, X_1) &= \mathrm{Cov}(2 Y_1 + Y_2, 2 Y_1 + Y_2) = 5 \\
+    \mathrm{Cov}(X_1, X_2) &= \mathrm{Cov}(X_2, X_1) = \mathrm{Cov}(Y_1 + Y_2, 2 Y_1 + Y_2) = 3 \\
+    \mathrm{Cov}(X_2, X_2) &= \mathrm{Cov}(Y_1 + Y_2, Y_1 + Y_2) = 2 \\
+    \implies \Gamma &= \begin{pmatrix}
+    5 & 3 \\
+    3 & 2
+    \end{pmatrix}
+    \end{align*}
+    $$
+    We can, now, write the probability distribution of $X$:
+    $$
+    p_\theta(\mathbf{x}) = \frac{1}{\sqrt{(2 \pi)^2 \det{\Gamma}}} e^{-\frac{1}{2} (\mathbf{x} - \mu)^\top \Gamma^{-1} (\mathbf{x} - \mu)}
+    $$
+    Then, we compute the score $S(X)$:
+    $$
+    \begin{align*}
+    S(X) &= \nabla_\theta \log{p_\theta(X)} \\
+    &= \nabla_\theta \left( - \log{2 \pi} - \frac{1}{2} (\mathbf{x} - \mu)^\top \Gamma^{-1} (\mathbf{x} - \mu) \right) \\
+    &= - \frac{1}{2} \nabla_\theta ((\mathbf{x} - \mu)^\top \Gamma^{-1} (\mathbf{x} - \mu) ) \\
+    &= - \frac{1}{2} \nabla_\theta (\mathbf{x} - \mu)^\top \Gamma^{-1} (\mathbf{x} - \mu) + (\mathbf{x} - \mu)^\top \Gamma^{-1} \nabla_\theta (\mathbf{x} - \mu) \\
+    &= - \frac{1}{2} (- \nabla_\theta \mu)^\top \Gamma^{-1} (\mathbf{x} - \mu) + (\mathbf{x} - \mu)^\top \Gamma^{-1} ( - \nabla_\theta \mu ) \\
+    &= (\mathbf{x} - \mu)^\top \Gamma^{-1} ( \nabla_\theta \mu )
+    \end{align*}
+    $$
+
+    Now, we are able to find $I_X(\theta)$.
+    $$
+    \begin{align*}
+    I_X(\theta) &= \mathbb{E}[S(X) S(X)^\top] \\
+    &= \mathbb{E}[ (\mathbf{x} - \mu)^\top \Gamma^{-1} (\nabla_\theta \mu) (\nabla_\theta \mu)^\top \Gamma^{-1} (\mathbf{x} - \mu) ] \\
+    \end{align*}
+    $$
     {{< /spoiler >}}
