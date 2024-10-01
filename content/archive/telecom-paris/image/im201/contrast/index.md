@@ -158,4 +158,31 @@ In simpler terms, this means that $H_v^{-1}$ will be constant by parts and for e
 
 ## Quantification
 
+Usually, the cameras are able to capture images with more than $8$ bits.
+So, the idea is to "fit" the captured image into 8 bits.
+To do so, we have a quantification operator.
+
+We do so by slicing the values captured by the camera in intervals $[t_i, t_{i + 1}]$.
+Then, we assign $q_i$ (8 bits) to every value in $[t_i, t_{i + 1}]$.
+
+There are many ways to choose $t_i$.
+
+1. **Uniform**: $t_i = \frac{256 i}{p}$ and $q_i = \frac{t_i + t_{i + 1}}{2}$.
+
+2. **Following histogram**: $t_i = \min{\{ \lambda \mid H_u(\lambda) \geq \frac{i}{p} \}}$ and $q_i$ are the means (or barycentre) of the intervals.
+This makes the histogram equalized before uniform quantification.
+
+3. **Lloyd-Max**: Minimizes de squared error.
+
 ## Dithering
+
+We want to binarize de image in a clever way.
+To do so, we can add a noise to the image and, then, binarize it.
+The noise makes it more likely to get black in the regions with more blackish pixels.
+This results in a better binarization.
+
+$$
+P(x + N > 128) = P(N > 128 - x) = \int_{128 - x}^{\infty} f(t) dt
+$$
+
+{{< figure src="images/dithering.png" width="600" >}}

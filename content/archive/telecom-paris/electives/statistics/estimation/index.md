@@ -314,7 +314,7 @@ $$
     (b) First, let us compute the Fisher information.
     $$
     \begin{align*}
-    S(X) &= \frac{\partial}{\partial \theta} [ x \log{\theta} + (1 - x) \log{1 - \theta} ] \\
+    S(X) &= \frac{\partial}{\partial \theta} \left[ x \log{\theta} + (1 - x) \log{1 - \theta} \right] \\
     &= \frac{x}{\theta} - \frac{1 - x}{1 - \theta} \\
     &= \frac{x - \theta}{\theta (1 - \theta)} \\
     \implies I(X) &= \theta S^2(1) + (1 - \theta) S^2(0) \\
@@ -362,10 +362,10 @@ $$
     \begin{align*}
     S(X_k) &= \frac{\partial}{\partial \theta} \left[ - \log{(\sigma \sqrt{2 \pi})} - \frac{(x_k - \theta)^2}{2 \sigma^2} \right] \\
     &= \frac{x_k - \theta}{\sigma^2} \\
-    \implies I(X_k) &= - \mathbb{E} \left[ \frac{\partial}{\partial \theta} \left( \frac{x_k - \theta}{\sigma^2} \right) \right] \\
+    \implies I_{X_k}(\theta) &= - \mathbb{E} \left[ \frac{\partial}{\partial \theta} \left( \frac{x_k - \theta}{\sigma^2} \right) \right] \\
     &= - \mathbb{E} \left[ - \frac{1}{\sigma^2} \right] \\
     &= \frac{1}{\sigma^2} \\
-    \implies I(X) &= n I(X_1) \\
+    \implies I_X(\theta) &= n I(X_1) \\
     &= \frac{n}{\sigma^2}
     \end{align*}
     $$
@@ -385,33 +385,34 @@ $$
     (a) Since $R(\theta) \geq \frac{1}{I(\theta)}$, we just have to find $I(\theta)$.
     $$
     \begin{align*}
-    S(X_k) &= \frac{\partial}{\partial \theta} \left[ - \log{(\sigma \sqrt{2 \pi})} - \frac{(x_k - 0)^2}{2 \theta} \right] \\
-    &= \frac{X_k^2}{2 \theta^2} \\
-    \implies I(X_k) &= - \mathbb{E} \left[ \frac{\partial}{\partial \theta} \left( \frac{X_k^2}{2 \theta^2} \right) \right] \\
-    &= - \mathbb{E} \left[ - \frac{X_k^2}{\theta^3} \right] \\
-    &= \frac{1}{\theta^2} \\
-    \implies I(X) &= n I(X_1) \\
-    &= \frac{n}{\theta^2}
+    S(X_k) &= \frac{\partial}{\partial \theta} \left[ - \log{(\sqrt{2 \pi \theta})} - \frac{(x_k - 0)^2}{2 \theta} \right] \\
+    &= \frac{X_k^2}{2 \theta^2} - \frac{1}{2 \theta} \\
+    \implies I_{X_k}(\theta) &= - \mathbb{E} \left[ \frac{\partial}{\partial \theta} \left( \frac{X_k^2}{2 \theta^2} - \frac{1}{2 \theta} \right) \right] \\
+    &= - \mathbb{E} \left[ - \frac{\theta - 2 X_k^2}{2 \theta^3} \right] \\
+    &= \frac{1}{2 \theta^2} - \frac{1}{\theta^2} \\
+    &= \frac{1}{2 \theta^2} \\
+    \implies I_X(\theta) &= n I(X_1) \\
+    &= \frac{n}{2 \theta^2}
     \end{align*}
     $$
 
-    So, $R(\theta) \geq \frac{\theta^2}{n}$. <br>
+    So, $R(\theta) \geq \frac{2 \theta^2}{n}$. <br>
 
     (b) Let $g(\theta) = \sqrt{\theta}$. We want to find the minimal square error of an unbiased estimator of $g(\theta)$, $\hat{g}(\theta)$.
     By the Cramer-Rao lower bound, we have
     $$
     R(\theta) \geq \frac{[g^\prime(\theta)]^2}{I(\theta)}
     $$
-    We already know $I(\theta) = \frac{n}{\theta^2}$, so:
+    We already know $I(\theta) = \frac{n}{2 \theta^2}$, so:
     $$
     \begin{align*}
-    R(\theta) &\geq \frac{\theta^2 [g^\prime(\theta)]^2}{n} \\
-    &= \frac{\theta^2}{4 \theta n} \\
-    &= \frac{\theta}{4 n}
+    R(\theta) &\geq \frac{2 \theta^2 [g^\prime(\theta)]^2}{n} \\
+    &= \frac{\theta^2}{2 \theta n} \\
+    &= \frac{\theta}{2 n}
     \end{align*}
     $$
 
-    So, $R(\theta) \geq \frac{\theta}{4 n}$ to estimate the standard deviation.
+    So, $R(\theta) \geq \frac{\theta}{2 n}$ to estimate the standard deviation.
 
     {{< /spoiler >}}
 
@@ -536,6 +537,10 @@ with $\bar{X} = \frac{1}{n} \sum_{i = 1}^n X_i$ and $\bar{Y} = \frac{1}{n} \sum_
     &= \mathrm{Var}(\bar{X} \bar{Y}) \\
     &= \mathbb{E}[(\bar{X} \bar{Y})^2] - \mathbb{E}^2[\bar{X} \bar{Y}] \\
     &= \mathbb{E}[\bar{X}^2] \mathbb{E}[\bar{Y}^2] - \mathbb{E}^2[\bar{X}] \mathbb{E}^2[\bar{Y}] \\
+    &= (\mathrm{Var}(\bar{X}) + \mathbb{E}^2[\bar{X}]) (\mathrm{Var}(\bar{Y}) + \mathbb{E}^2[\bar{Y}]) - \mathbb{E}^2[\bar{X}] \mathbb{E}^2[\bar{Y}] \\
+    &= \left(\frac{1}{n} + (\theta_1 + \theta_2)^2\right) \left(\frac{1}{n} + (\theta_1 - \theta_2)^2\right) - (\theta_1 + \theta_2)^2 (\theta_1 - \theta_2)^2 \\
+    &= \frac{1}{n^2} + \frac{1}{n} [(\theta_1 + \theta_2)^2 + (\theta_1 - \theta_2)^2] \\
+    &= \frac{1}{n^2} + \frac{2}{n} (\theta_1^2 + \theta_2^2) \\
     \end{align*}
     $$
 
