@@ -117,6 +117,9 @@ $$
 a_{pq} = \max_{1 \leq i < j \leq n} \vert a_{ij} \vert
 $$
 2. Replace $a_{pq}$ with $0$ using the Givens-Jacobi transform.
+$$
+A^{(k + 1)} = [\Omega^{(k)}]^\top A^{(k)} \Omega^{(k)}
+$$
 
 The transform matrix in the $k$-th iteration is the following:
 $$
@@ -149,6 +152,23 @@ We can therefore repeat these steps while $\mathrm{off}(A) > \epsilon$.
 Let $A \in \mathbb{R}^{n \times n}$ be a symmetric matrix. The iterates $A^{(k)}$ of the Jacobi method converge to a diagonal matrix at a rate of
 $$
 \mathrm{off}(A^{(k)}) \leq \left( 1 - \frac{2}{n (n - 1)} \right)^k \mathrm{off}(A).
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+{{< notice "tip" >}}
+{{< markdown >}}
+
+There are some fast ways to compute $B = [\Omega^{(k)}]^\top A^{(k)} \Omega^{(k)}$:
+$$
+\begin{cases}
+b_{ij} = b_{ji} = a_{ij} & i \not\in \{p, q\} \; \text{and} \; j \not\in \{p, q\} \\
+b_{pi} = b_{ip} = \cos{\theta} a_{pi} - \sin{\theta} a_{qi} & i \not\in \{p, q\} \\
+b_{qi} = b_{iq} = \sin{\theta} a_{pi} + \cos{\theta} a_{qi} & i \not\in \{p, q\} \\
+b_{pp} = a_{pp} - \tan{\theta} a_{pq} \\
+b_{qq} = a_{qq} + \tan{\theta} a_{pq}
+\end{cases}
 $$
 
 {{< /markdown >}}
