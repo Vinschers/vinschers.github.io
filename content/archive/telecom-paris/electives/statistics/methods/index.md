@@ -3,13 +3,8 @@ title = "Estimation methods"
 date = 2024-10-01
 +++
 
-$$
-\DeclareMathOperator*{\argmax}{arg \,max \,}
-\DeclareMathOperator*{\argmin}{arg \,min \,}
-$$
-
 Consider a statistical model with unknown parameter $\theta$.
-We want to develop some methods to find $\theta$.
+We want to develop some methods to find $\theta$. $\DeclareMathOperator*{\argmax}{arg \,max \,} \DeclareMathOperator*{\argmin}{arg \,min \,}$
 
 ## Rao-Blackwell theorem
 
