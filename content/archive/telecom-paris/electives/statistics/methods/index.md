@@ -221,3 +221,132 @@ $$
 
 {{< /markdown >}}
 {{< /notice >}}
+
+{{< notice "tip" "Poisson distribution" >}}
+{{< markdown >}}
+
+$$
+\begin{align*}
+p_\theta(x) &= \frac{e^{- \theta} \theta^x}{x!} \\
+\mathbb{E}[X] &= \theta \\
+\mathrm{Var}(X) &= \theta
+\end{align*}
+$$
+
+{{< /markdown >}}
+{{< /notice >}}
+
+## Exercises
+
+1. (Rao-Blackwell – Bernoulli). Consider the Bernoulli model with parameter $\theta \in [0, 1]$.
+You want to estimate $\theta$ using $n$ i.i.d. samples $X_1, \dots, X_n$.
+
+    (a) Check that the estimator $\delta = X_1$ is unbiased and compute its quadratic risk.
+
+    (b) Show that the statistic $T = X_1 + \dots + X_n$ is sufficient.
+
+    (c) Propose a new estimator $\hat{\theta}$ using Rao-Blackwell theorem.
+
+    (d) Is $\hat{\theta}$ efficient?
+
+    {{< spoiler "Show answer" >}}
+    (a)
+    $$
+    b(\theta) = \mathbb{E}[X_1] - \theta = \theta - \theta = 0
+    $$
+    $$
+    R(\theta) = \mathrm{Var}(\delta) = \mathrm{Var}(X_1) = \theta (1 - \theta)
+    $$
+
+    (b)
+    $$
+    \begin{align*}
+    p_\theta(x) &= \prod_{i = 1}^n \theta^{x_i} (1 - \theta)^{1 - x_i} \\
+    &= \theta^{\sum_{i = 1}^n x_i} (1 - \theta)^{n - \sum_{i = 1}^n x_i} \\
+    &= \theta^t (1 - \theta)^{n - t}
+    \end{align*}
+    $$
+    By the Fisher factorization theorem, $T$ is sufficient. <br>
+
+    (c)
+    $$
+    \begin{align*}
+    \hat{\theta} &= \mathbb{E}[\delta \mid T] \\
+    &= \mathbb{E}[X_1 \mid T] \\
+    &= \frac{T}{n}
+    \end{align*}
+    $$
+
+    (d)
+    $$
+    R(\theta) = \frac{\theta (1 - \theta)}{n}
+    $$
+    $$
+    I_{X_1}(\theta) = \mathbb{E}[S^2(X_1)] = \mathbb{E}\left[\left(\frac{x}{\theta} - \frac{1 - x}{1 - \theta}\right)^2\right] = \frac{1}{\theta (1 - \theta)} \implies I_X(\theta) = \frac{n}{\theta (1 - \theta)}
+    $$
+    {{< /spoiler >}}
+
+2. (Rao-Blackwell – Poisson). Consider the Poisson model with parameter $\theta > 0$. You want to estimate $g(\theta) = e^{- \theta}$ using $n$ i.i.d. samples $X_1, \dots, X_n$.
+
+    (a) Check that the estimator $\delta = \mathbb{1}_{X_1 = 0}$ is unbiased and compute its quadratic risk.
+
+    (b) Show that the statistic $T = X_1 + \dots + X_n$ is sufficient.
+
+    (c) Propose a new estimator $\hat{\theta}$ using Rao-Blackwell theorem.
+
+    (d) Is $\hat{\theta}$ efficient?
+
+    {{< spoiler "Show answer" >}}
+    (a)
+    $$
+    b(\theta) = \mathbb{E}[\delta] - g(\theta) = \mathbb{P}(X_1 = 0) - e^{- \theta} = e^{- \theta} - e^{- \theta} = 0
+    $$
+    $$
+    R(\theta) = \mathrm{Var}(\delta) = e^{- \theta} (1 - e^{- \theta})
+    $$
+
+    (b)
+    $$
+    \begin{align*}
+    p_\theta(x) &= \prod_{i = 1}^n \frac{e^{- \theta} \theta^{x_i}}{x_i!} \\
+    &= e^{- n \theta} \theta^T \frac{1}{x_1! \dots x_n!}
+    \end{align*}
+    $$
+    By the Fisher factorization theorem, $T$ is sufficient. <br>
+
+    (c)
+    $$
+    \begin{align*}
+    \hat{\theta} = \mathbb{E}[\delta \mid T] = \mathbb{P}(T = t \mid X_1 = 0) &= \frac{\mathbb{P}(X_1 = 0, T = t)}{\mathbb{P}(T = t)} \\
+    &= \theta^t e^{- n \theta} \sum_{x_2 + \dots + x_n = t}^n \frac{1}{x_1! \dots x_n!} \left[ \frac{\theta^t}{t!} e^{-n \theta} n^t \right]^{-1} \\
+    &= \frac{\theta^t}{t!} e^{-n \theta} (n - 1)^t \theta^t e^{- n \theta} \sum_{x_2 + \dots + x_n = t} \frac{1}{x_1! \dots x_n!} \left[ \frac{\theta^t}{t!} e^{-n \theta} n^t \right]^{-1} \\
+    &= \left( \frac{n - 1}{n} \right)^T
+    \end{align*}
+    $$
+    {{< /spoiler >}}
+
+3. (Gaussian model). Consider the Gaussian model with unknown mean $\theta$ and known variance $\sigma^2$. You want to estimate $\theta$ using $n$ i.i.d. samples $X_1, \dots, X_n$.
+
+    (a) Give the maximum likelihood estimator.
+
+    (b) Retrieve this estimator by the method of moments.
+
+    {{< spoiler "Show answer" >}}
+    (a)
+    $$
+    \begin{align*}
+    \log{p_\theta(x)} &\propto - \frac{1}{2 \sigma^2} \sum_{i = 1}^n (x_i - \theta)^2 \\
+    \implies \frac{\partial \log{p_\theta(x)}}{\partial \theta} &= \frac{1}{\sigma^2} \sum_{i = 1}^n (x_i - \theta) \\
+    \end{align*}
+    $$
+    Now, we equal the derivative to $0$ and solve for $\theta$ to find the maximum.
+    $$
+    \frac{1}{\sigma^2} \sum_{i = 1}^n (x_i - \theta) = 0 \implies \theta = \frac{1}{n} \sum_{i = 1}^n x_i
+    $$
+    That is our estimator. <br>
+
+    (b) Since $\mathbb{E}[X_i] = \theta$, we can simply write
+    $$
+    \hat{\theta} = \frac{1}{n} \sum_{i = 1}^n X_i
+    $$
+    {{< /spoiler >}}
