@@ -412,37 +412,19 @@ We consider the linear system $S_\varepsilon$ defined in $\mathbf{R}^2$ by $A_\v
 
 1. Thanks to the Gauss method, determine the $LU$ factorization of $A_\varepsilon$.
 
-    {{< spoiler "Show answer" >}}
-    {{< /spoiler >}}
-
 2. Thanks to the $LU$ factorization of $A_\varepsilon$, solve $S_\varepsilon$.
 
-    {{< spoiler "Show answer" >}}
-    {{< /spoiler >}}
-
 3. Deduce the inverse of $A_\varepsilon$ from the above.
-
-    {{< spoiler "Show answer" >}}
-    {{< /spoiler >}}
 
 4. Thanks to the Jacobi method, determine the eigenvalues of $A_\varepsilon$ (it is not asked to compute the eigenvectors of $A_\varepsilon$); detail the computations.
 
 5. What are the values of $\varepsilon$ for which the Cholesky method can be applied to $A_\varepsilon$?
 For these values of $\varepsilon$, apply the Cholesky method to $A_\varepsilon$.
 
-    {{< spoiler "Show answer" >}}
-    {{< /spoiler >}}
-
 6. Determine the conditioning of $A_\varepsilon$ for matrix norms 1, 2 and $\infty$.
-
-    {{< spoiler "Show answer" >}}
-    {{< /spoiler >}}
 
 7. What can be said about the conditioning of $A_\varepsilon$ for each one of these three norms when $\varepsilon$ tends towards $0$?
 Is the system $S_\varepsilon$ well-conditioned when $\varepsilon$ is small?
-
-    {{< spoiler "Show answer" >}}
-    {{< /spoiler >}}
 
 ### Exercise 2
 
@@ -456,9 +438,6 @@ $$
 $$
 Thanks to the classical Jacobi method (in which, at each iteration, we consider the non-diagonal term of greatest absolute value), determine the eigenvalues and an orthonormal basis of eigenvectors of $A$; detail the calculations.
 
-    {{< spoiler "Show answer" >}}
-    {{< /spoiler >}}
-
 2. Let $A = (a_{jk})_{1 \leq j \leq 3, 1 \leq k \leq 3}$ be a $3 \times 3$ matrix which is symmetric and non-diagonal.
 Let $B = (b_{jk})_{1 \leq j \leq 3, 1 \leq k \leq 3}$ be the matrix obtained by applying one iteration of the Jacobi method to $A$.
 _Indication for the next questions_: by calling $p$ and $q$ the indices of the entry of $A$ that we want to transform into $0$ with the Jacobi method, $i$ will denote the "third index" (so as to have $\{i, p, q\} = \{1, 2, 3\}$); then consider the formulas giving $b_{ip}$ and $b_{iq}$.
@@ -469,11 +448,33 @@ _Indication for the next questions_: by calling $p$ and $q$ the indices of the e
 
     (c) Assume that two of the three entries $a_{12}$, $a_{13}$ and $a_{23}$ are equal to $0$. What can be said about $B$?
 
-    {{< spoiler "Show answer" >}}
-    {{< /spoiler >}}
-
 3. We are interested in the convergence of the Jacobi method for $3 \times 3$ matrices $A = (a_{jk})_{1 \leq j \leq 3, 1 \leq k \leq 3}$ which are symmetric and non-diagonal.
 What can be said, according to the number of non-zero entries $a_{12}$, $a_{13}$ and $a_{23}$, about the number of iterations performed by the Jacobi method when applied to $A$?
 
-    {{< spoiler "Show answer" >}}
-    {{< /spoiler >}}
+### Exercise 3
+
+We consider the following matrix:
+$$
+A = \begin{pmatrix}
+1 & 0 & -1 & 0 \\
+0 & 1 & 2 & 1 \\
+-1 & 2 & 6 & 2 \\
+0 & 1 & 2 & 2
+\end{pmatrix}
+$$
+and set $X = (x, y, z, t)^\top$.
+
+1. Show that $A$ is positive definite.
+
+2. Determine the classic $LU$ factorization of $A$; detail the steps.
+
+3. What can be said about the classic Cholesky factorization of $A$? Specify this factorization if it exists.
+
+4. Let $\beta = (a, b, c, d)^\top$ be a vector in $\mathbb{R}^4$. Solve the linear system $A X = \beta$ thanks to the $LU$ factorization of $A$. State $X$ in function of $a$, $b$, $c$ and $d$.
+
+5. Deduce $A^{-1}$ from the previous question.
+
+6.
+    (a) Specify the conditionings $\mathrm{cond}_1$ and $\mathrm{cond}_\infty$ of the linear system $A X = \beta$.
+
+    (b) We consider the system $A X_0 = \beta$ with $\beta = (1, 1, 1, 0)^\top$ and we admit the solution of the system is $X_0 = (1, 2, 0, -1)^\top$. From the system $A X_0 = \beta$, small variations of $\beta$ are envisaged. More precisely, let $\delta$ be a vector in $\mathbb{R}^4$. We consider the linear system $A (X_0 + \delta X_0) = \beta + \delta$ where $\delta X_0$ is the vector corresponding to the variations of $X_0$ when $\beta$ varies from $\delta$. Thanks to the conditionings $\mathrm{cond}_1$ and $\mathrm{cond}_\infty$, specify an upper bound of $\Vert \delta X_0 \Vert_1$ and of $\Vert \delta X_0 \Vert_\infty$ with respect to $\Vert \delta \Vert_1$ and $\Vert \delta \Vert_\infty$.
