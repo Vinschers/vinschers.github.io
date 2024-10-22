@@ -97,7 +97,7 @@ p(\theta \mid X = 1) &= 2 \theta \mathbb{1}_{[0, 1]}(\theta).
 \end{align*}
 $$
 
-These are $Beta(2, 1)$ and $Beta(1, 2)$ distributions, respectively.
+These are $\mathrm{Beta}(2, 1)$ and $\mathrm{Beta}(1, 2)$ distributions, respectively.
 
 {{< /markdown >}}
 {{< /notice >}}
@@ -237,7 +237,7 @@ $$
 p(\theta \mid x) &\propto \pi(\theta) \times p(x \mid \theta) \\
 &\propto \theta^{a - 1} (1 - \theta)^{b - 1} \times \theta^s (1 - \theta)^{n - s} \\
 &\propto \theta^{a + s - 1} (1 - \theta)^{n + b - s - 1} \\
-&\sim Beta(a + s, b + n - s)
+&\sim \mathrm{Beta}(a + s, b + n - s)
 \end{align*}
 $$
 

@@ -388,8 +388,8 @@ $$
     S(X_k) &= \frac{\partial}{\partial \theta} \left[ - \log{(\sqrt{2 \pi \theta})} - \frac{(x_k - 0)^2}{2 \theta} \right] \\
     &= \frac{X_k^2}{2 \theta^2} - \frac{1}{2 \theta} \\
     \implies I_{X_k}(\theta) &= - \mathbb{E} \left[ \frac{\partial}{\partial \theta} \left( \frac{X_k^2}{2 \theta^2} - \frac{1}{2 \theta} \right) \right] \\
-    &= - \mathbb{E} \left[ - \frac{\theta - 2 X_k^2}{2 \theta^3} \right] \\
-    &= \frac{1}{2 \theta^2} - \frac{1}{\theta^2} \\
+    &= - \mathbb{E} \left[ \frac{\theta - 2 X_k^2}{2 \theta^3} \right] \\
+    &= \frac{1}{\theta^2} - \frac{1}{2 \theta^2} \\
     &= \frac{1}{2 \theta^2} \\
     \implies I_X(\theta) &= n I(X_1) \\
     &= \frac{n}{2 \theta^2}
