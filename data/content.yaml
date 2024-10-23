@@ -1,0 +1,123 @@
+BasicInfo:
+  FirstName: Felipe
+  LastName: Vicentin
+  Photo: /cv/img/avatar.jpg
+  Contacts:
+    - Icon: fas fa-phone
+      Info: +33 07 69 86 65 05
+    - Icon: fas fa-envelope
+      Info: contact@a.vicentin.xyz
+    - Icon: fas fa-globe
+      Info: vicentin.xyz
+    - Icon: fas fa-map-marker-alt
+      Info: Palaiseau, France
+
+Profile: Computer Science student with six years of experience, specializing in AI/ML and Image Processing, along with a background in Data Engineering. I am a friendly and approachable individual seeking an opportunity in Research and Development. My skill set includes proficiency in Linux and Python, as well as experience in algorithmic modeling and agile methodologies.
+
+Experience:
+  - Employer: University of Campinas
+    Place: Campinas, Brazil
+    Positions:
+      - Title: Undergraduate research project
+        Date: May 2023 - Jun 2024
+        Details:
+          - "Advisor: Prof. Dr. Peter Sussner / Department of Applied Maths - Institut of Mathematics, Statistics and Scientific Computing"
+          - "Title: Investigations about the Construction and Number of Linear Extensions in the Class of Subintervals of Any Finite Chain"
+        Badges: ['Python', 'Applied Maths', 'Order theory']
+  - Employer: Dextra
+    Place: Campinas, Brazil
+    Positions:
+      - Title: Data Engineer Intern
+        Date: Jan 2021 - Dec 2021
+        Details:
+          - Data engineering internship in a big software consulting company. Worked mostly with cloud computing to treat large databases of text messages performed by bots.
+        Badges: ['Python', 'PySpark', 'Data Lakes', 'Airflow', 'GCP']
+
+  - Employer: Technical High School of Campinas
+    Place: Campinas, Brazil
+    Positions:
+      - Title: Technical final project
+        Date: Mar 2020 - Jan 2021
+        Details:
+          - "Title: Machine Learning Usage on the Identification of Patterns in Brain Waves"
+          - 2nd place in 'Earth and Math sciences' at FEBRACE (Sciences and Engineering Brazilian Faire)
+          - 1st place in 'Earth and Math sciences' at VIII Sciences and Technologies Faire of Institute 3M
+        Badges: ['Python', 'Scikit-learn', 'Kaggle']
+
+Education:
+  - Course: MSc in engineering
+    Place: Télécom Paris - Institut Polytechnique de Paris
+    Date: Sep 2024 - Jun 2026
+    Details: Focus on Data Science and Image Processing
+  - Course: BSc in Computer Science
+    Place: University of Campinas
+    Date: Jan 2021 - Dec 2026
+  - Course: Technical course in Informatics
+    Place: Unicamp's Technical High School of Campinas
+    Date: Jan 2018 - Dec 2021
+
+# References:
+#   - Name: Person One
+#     Relation: Co-worker at Super Cool Company
+#     Contacts:
+#     - Icon: fas fa-phone
+#       Info: +44 123 456 790
+#     - Icon: fas fa-envelope
+#       Info: contact@person-one.com
+#     - Icon: fas fa-map-marker-alt
+#       Info: Melbourne, Australia
+#   - Name: Person Two
+#     Relation: Boss at Super Cool Company
+#     Contacts:
+#     - Icon: fas fa-phone
+#       Info: +44 123 456 791
+#     - Icon: fas fa-envelope
+#       Info: contact@person-two.com
+#     - Icon: fas fa-map-marker-alt
+#       Info: Sydney, Australia
+
+
+Skills:
+  - Family: Programming
+    Items:
+      - Python
+      - C
+      - MySQL
+      - Bash
+      - Data lakes
+      - Numpy vectorization
+      - PySpark
+      - Hugo
+      - Flask
+  - Family: Developer Tools
+    Items:
+      - Vim
+      - Git
+      - Google Cloud Platform
+  - Family: Misc
+    Items:
+      - Linux
+      - LaTeX
+  - Family: Soft skills
+    Items:
+      - Verbal skills
+      - quick learner
+      - optimistic
+      - curious
+
+Languages:
+  - Name: Portuguese
+    Level: Native
+  - Name: English
+    Level: C1
+  - Name: French
+    Level: B2
+
+Diplomas:
+  - Gold and silver medals in the 'Olympiade Internationale Mathématiques sans Frontières' (2018 & 2019)
+
+Interests:
+  - FLOSS
+  - Online privacy
+  - Languages
+  - Astronomy

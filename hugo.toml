@@ -1,7 +1,7 @@
 baseURL = "https://vicentin.xyz/"
 title = "Felipe Vicentin"
 languageCode = "en-us"
-theme = "PaperMod"
+theme = ["PaperMod", "almeida-cv"]
 enableEmoji = true
 pygmentsCodefences = true
 pygmentsCodefencesGuessSyntax = true
@@ -18,6 +18,20 @@ ShowCodeCopyButtons = true
 ShowPostNavLinks = false
 ShowReadingTime = true
 math = true
+# CV params
+enableMetaTags = true
+colorLight = "#e1e2e7"
+colorDark = "#343b58"
+colorPageBackground = "#ddd"
+colorPrimary = "#2e7de9"
+colorSecondary = "#6c6e75"
+colorIconPrimary = "#e6e7ed"
+colorIconBackground = "#2e7de9"
+colorRightColumnBackground = "#e6e7ed"
+colorRightColumnHeadingText = "#343b58"
+colorRightColumnBodyText = "#343b58"
+colorRightColumnIconPrimary = "#e6e7ed"
+colorRightColumnIconBackground = "#2e7de9"
 
 [[params.socialIcons]]
 name = "email"
