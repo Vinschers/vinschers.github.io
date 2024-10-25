@@ -12,7 +12,37 @@ If a continuous class is required, then we should use a regression model.
 It is also worth noting that the classes have no order relation (we cannot say that class 5 is greater than class 2).
 
 ### Underfitting & overfitting
+**Underfitting**: the model is too simple to fit the data.
+It performs poorly both in the training and test sets.
+**Overfitting**: the model is too complex to fit the data.
+It performs poorly in the test set, but has a great accuracy in the train set.
 
+{{< figure src="images/under-over-fitting.png" width="400" >}}
+
+Overfitting can be caused by many things:
+- Noise in training data;
+- Insufficient data;
+
+### Model evaluation
+$$
+\text{Accuracy} = \frac{TP + TN}{TP + FP + TN + FN}
+$$
+The accuracy can be misleading in some settings.
+E.g., if the model always predicts the default class, then the accuracy approaches $100\%$ if most records are of the default class.
+$$
+\begin{align*}
+\text{Precision} = p &= \frac{TP}{TP + FP} \\
+\text{Recall} = r &= \frac{TP}{TP + FN}
+\end{align*}
+$$
+
+Usually, $p$ and $r$ balance each other out.
+If we predict everything as "Positive", $r$ gets really high, but $p$ gets really low.
+The inverse happens when we predict "Positive" when we are extremely sure.
+To consider both, we can use the F1-score.
+$$
+\text{F1-score} = \frac{2 p r}{p + r}
+$$
 
 ## Decision trees
 
@@ -170,7 +200,25 @@ There are many stopping criteria that can be used:
 - Stop when all records have very similar attribute values;
 - Early termination.
 
+### Quantify error
+
+{{< notice info "Occam's Razor" >}}
+Given two models with similar generalization errors, one should prefer the simpler model over the more complex model.
+{{< /notice >}}
+
+The generalization error is defined as follows:
+$$
+E_\text{gen} = E_\text{train} + \alpha * L
+$$
+where $E_\text{train}$ is the number of errors in the training set, $L$ is the number of leaves in the tree and $\alpha$ is usually $0.5$.
+
 ### Pruning
+
+After a tree is fitted, it can be pruned to improve the generalization error.
+To this end, we check for each subtree if it would be best to replace it by a single node.
+This is done by comparing the generalization error of the new tree with the old one.
+
+We usually compute this algorithm in a bottom-up manner.
 
 ### Conclusion
 
@@ -180,4 +228,26 @@ Advantages of using decision trees:
 - For small trees, easy to interpret;
 - Accuracy comparable to other methods.
 
+Issues of using decision trees:
+- Data fragmentation: Number of instances get smaller as you go down the tree. Then, data in leaves might be statistically irrelevant;
+- Search strategy: Finding an optimal tree is NP-hard;
+- Expressiveness: Does not model well continuous attributes;
+- Tree replication: The same subtree may appear multiple times inside the decision tree.
+
 ## Random forests
+
+Here, the idea is to use many decision trees to decrease the variance of the model (i.e., making it more precise).
+Suppose we have $N$ records, each with $M$ features.
+
+**Parameters**:
+- $k$: number of trees;
+- $t$: number of attribute (usually $\sqrt{M}$).
+
+Then, we separate the data set into $k$ subsets.
+Each tree $T_i$ will be trained on a set $S_i$ of the data.
+$S_i$ contains $N$ records randomly samples (with replacement) from the original data set.
+This means that a record $x_j$ may appear more than once in $S_i$.
+We also select $t$ random features (without replacement, to avoid repeated attributes) from the training data.
+
+Finally, we train each tree $T_i$ separately.
+To predict the class of a new data point $y$, we simply take the majority class among the predicted classes of the $k$ trees.
