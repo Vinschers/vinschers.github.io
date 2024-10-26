@@ -99,7 +99,7 @@ Usually, $\beta \in [0.8, 0.9]$.
 
 Due to performance issues, we compute $\pi^{(t + 1)}$ as following:
 $$
-\pi^{(t + 1)} = A \pi^{(t)} = \beta M \pi + \left[ \frac{1 - \beta}{n} \right]_n
+\pi^{(t + 1)} = A \pi^{(t)} = \beta M \pi^{(t)} + \left[ \frac{1 - \beta}{n} \right]_n
 $$
 
 {{< notice info "Page Rank algorithm" >}}
@@ -161,3 +161,37 @@ If a Markov chain is irreducible and aperiodic, then the Markov chain converges 
 
 With random jumps, the Markov chain of the random surfer is irreducible and aperiodic.
 Thus, the algorithm converges to the stationary distribution of the Markov chain, $\pi$.
+
+## Community detection
+
+**Problem**: Given a graph $G$, a set $S$ of *seed* nodes, an integer $k > 0$, find $k$ additional nodes belonging to the "same community" of $S$.
+
+To solve this problem, we will use a variation of the Page Rank algorithm (Page Rank with Restart).
+We will consider the following matrix $R$:
+
+$$
+R_{ij} = \begin{cases}
+\frac{1}{|S|} & \text{if $v_i \in S$} \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+Then, the Page Rank matrix $A$ will be $A_{ij} = \beta M_{ij} + (1 - \beta) R_{ij}$.
+
+{{< notice warning >}}
+Matrix $A$ is not ergodic (irreducible or aperiodic) but it converges to a unique stationary distribution.
+{{< /notice >}}
+
+With this PR algorithm,
+$$
+\text{Recall} = \frac{|P \cap C|}{|C \setminus S|}
+$$
+where $P$ is the set of nodes found by the algorithm and $C$ is the set of nodes in the community (unknown to us at first).
+
+**Advantages**:
+- It is simple to compute;
+- Converges rapidly (2-3 iterations).
+
+**Disadvantages**:
+- We do not know which $k$ to choose;
+- Other values of $\beta$ might be good.
