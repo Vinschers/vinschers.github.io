@@ -97,19 +97,17 @@ The total number of clusters is finite ($< k^n$).
 
 ### Empty cluster problem
 The problem will be solved in 1 dimension.
-Let $S = \{0, 1, 9, 10, 18, 19, 20.1\}$ and the initial centroids be $m_1 = 0, m_2 = 1, m_3 = 18, m_4 = 20.1$.
+Let $S = \{1, 9, 10, 18, 19, 20.1\}$, $k = 3$, and the initial centroids be $m_1 = 1, m_2 = 18, m_3 = 20.1$.
 
 **First iteration**:
-- $C_1 = \{0\}$ and $m_1 = 0$.
-- $C_2 = \{1, 9\}$ and $m_2 = 5$.
-- $C_3 = \{10, 18, 19\}$ and $m_3 \approx 15.7$.
-- $C_4 = \{20.1\}$ and $m_4 = 20.1$.
+- $C_1 = \{1, 9\}$ and $m_1 = 5$.
+- $C_2 = \{10, 18, 19\}$ and $m_2 \approx 15.7 $.
+- $C_3 = \{20.1\}$ and $m_3 = 20.1$.
 
 **Second iteration**:
-- $C_1 = \{0, 1\}$ and $m_1 = 0.5$.
-- $C_2 = \{9, 10\}$ and $m_2 = 9.5$.
-- $C_3 = \{\}$.
-- $C_4 = \{18, 19, 20.1\}$ and $m_4 \approx 19$.
+- $C_1 = \{1, 9, 10\}$ and $m_1 \approx 6.7 $.
+- $C_2 = \{\}$.
+- $C_3 = \{18, 19, 20.1\}$ and $m_3 \approx 19 $.
 
 There are several solutions to the problem of empty clusters:
 - Pick the points that contribute most to the SSE and assign them to the empty cluster;

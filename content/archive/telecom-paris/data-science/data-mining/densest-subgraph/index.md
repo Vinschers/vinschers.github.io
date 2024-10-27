@@ -122,7 +122,7 @@ To do so, we can use three lists:
 - A `bucket` list of degrees: $\texttt{bucket}[d] = \Delta_d = \{v_1, \dots, v_n\}$ where $\delta(v_i) = d$ (list of nodes that have degree $d$);
 - A `location` list: $\texttt{location}[v] = i$, where $i$ is the index of $v$ in the list $\texttt{bucket}[\delta(v)]$.
 
-With these three lists, one remove a node and its edges in $\mathcal{O}(1)$ time and also update each of the neighbours of $u$ in $\mathcal{O}(1)$.
+With these three lists, one can remove a node and its edges in $\mathcal{O}(1)$ time and also update each of the neighbours of $u$ in $\mathcal{O}(1)$.
 Note that the number of neighbours of $u$ is precisely $\delta(u)$.
 This means that throughout the while loop in step 2, the complexity of updating the nodes is $\mathcal{O}(E)$.
 
