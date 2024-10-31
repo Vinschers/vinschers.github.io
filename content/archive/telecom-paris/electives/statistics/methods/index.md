@@ -156,29 +156,10 @@ When $\mathbb{E}_\theta[X]$ does not depend on $\theta$ (like with $\mathcal{N}(
 {{< notice "tip" "Statistical moments" >}}
 {{< markdown >}}
 
-1. First moment (mean):
-
-    $$
-    \mu = \mathbb{E}[X] = \int_{-\infty}^{\infty} x f(x) \, \mathrm{d}x = 0
-    $$
-
-2. Second moment (variance):
-
-    $$
-    \sigma^2 = \mathbb{E}[(X - \mu)^2]
-    $$
-
-3. Third moment (Skewness):
-
-    $$
-    \frac{\mathbb{E}[(X - \mu)^3]}{\sigma^3}
-    $$
-
-4. Fourth Moment (Kurtosis):
-
-    $$
-    \frac{\mathbb{E}[(X - \mu)^4]}{\sigma^4}
-    $$
+The $p$-th moment is defined as:
+$$
+\mathbb{E}[X^p]
+$$
 
 {{< /markdown >}}
 {{< /notice >}}
