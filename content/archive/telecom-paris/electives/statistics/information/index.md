@@ -108,7 +108,7 @@ A statistic $T$ is free if the distribution of $T(X)$ is independent of $\theta$
 {{< /notice >}}
 
 {{< notice "example" "Free statistic" >}}
-Let $X_1, X_2 \sim \mathcal{N}(0, 1)$ and $T(x) = x_1 - x_2$.
+Let $X_1, X_2 \sim \mathcal{N}(\theta, 1)$ and $T(x) = x_1 - x_2$.
 Then, $T(X) = X_1 - X_2 \implies T(X) \sim \mathcal{N}(0, 2)$.
 Since $T(X)$ does not depend on $\theta$ at all, $T$ does not give any information about $\theta$.
 Hence, it is free.
