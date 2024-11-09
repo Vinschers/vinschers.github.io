@@ -22,8 +22,8 @@ Here, let $\delta$ denote the decision function used to reject or not the null h
 $$
 \delta(x) =
 \begin{cases}
-0 & \text{accept $H_0$} \\
-1 & \text{reject $H_0$ in favor of $H_0$}
+0 & \text{do not reject $H_0$} \\
+1 & \text{reject $H_0$ in favor of $H_1$}
 \end{cases}
 $$
 
@@ -65,9 +65,9 @@ The $p$-value of a sample is the probability of observing a given value under th
 {{< notice "example" >}}
 {{< markdown >}}
 
-Consider a test of level $\alpha = 5%$.
+Consider a test of level $\alpha = 5\%$.
 The null hypothesis is rejected whenever the observed sample has a $p$-value below $\alpha$.
-If the $p$-value is $1%$, there is a $1%$ (or less) probability of having observed this sample under the null hypothesis.
+If the $p$-value is $1\%$, there is a $1\%$ (or less) probability of having observed this sample under the null hypothesis.
 So, the null hypothesis is rejected with high confidence.
 
 {{< /markdown >}}
@@ -110,7 +110,7 @@ $$
 {{< /notice >}}
 
 The **existence** of an UMP test is **not guaranteed**.
-From now on, we assume $\Theta \subseteq \mathbb{R}$ and and the model is dominated, i.e., it has a density function $p_\theta(x)$.
+From now on, we assume $\Theta \subseteq \mathbb{R}$ and that the model is dominated, i.e., it has a density function $p_\theta(x)$.
 
 ## Simple hypotheses
 
@@ -209,7 +209,10 @@ Let $Z \sim \mathcal{N}(0, 1)$.
 Then,
 $$
 \begin{align*}
-\alpha &= \sup_{\theta \leq 0} \mathbb{P}_\theta(\delta(X) = 1) = \sup_{\theta \leq 0} \mathbb{P}_\theta(X > c) = \sup_{\theta \leq 0} \mathbb{P}(Z > c - \theta) = \mathbb{P}(Z > c) \\
+\alpha &= \sup_{\theta \leq 0} \mathbb{P}_\theta(\delta(X) = 1) \\
+&= \sup_{\theta \leq 0} \mathbb{P}_\theta(X > c) \\
+&= \sup_{\theta \leq 0} \mathbb{P}(Z > c - \theta) \\
+&= \mathbb{P}(Z > c) \\
 \forall \theta > 0, \quad \beta(\theta) &= \mathbb{P}_\theta(\delta(X) = 0) = \mathbb{P}_\theta(X \leq c) = \mathbb{P}(Z \leq c - \theta)
 \end{align*}
 $$
@@ -276,7 +279,7 @@ $$
 1 - \beta^\prime(\theta) = 1 - \mathbb{P}_\theta(X \leq c^\prime) = \mathbb{P}_\theta(X > c^\prime) > \mathbb{P}_\theta(|X| > c) = 1 - \mathbb{P}_0(|X| \leq c) = 1 - \beta(\theta)
 $$
 
-This example shows that there is no UMP test for the two-tailed test.
+This example shows that **there is no UMP test for the two-tailed test**.
 
 {{< notice "definition" "Unbiased test" >}}
 {{< markdown >}}
@@ -335,7 +338,7 @@ The corresponding function $\eta(\theta) = \theta$ is increasing, so there exist
 $$
 \delta(x) = \mathbb{1}_{x \not \in [c_1, c_2]}.
 $$
-By symmetry, this test has the form $\delta(x) = \mathbb{1}_{|x| > c}$, as considered previously.
+By symmetry, this test has the form $\delta(x) = \mathbb{1}_{|x| > c}$ as considered previously.
 
 {{< /markdown >}}
 {{< /notice >}}
