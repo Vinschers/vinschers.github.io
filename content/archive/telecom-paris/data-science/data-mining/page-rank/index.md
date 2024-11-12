@@ -14,7 +14,7 @@ Then we can define the matrix $M$ as follows:
 
 $$
 M_{ij} = \begin{cases}
-\frac{1}{\delta_\text{out}(v)} & \text{if $(v_j, v_i) \in E$} \\
+\frac{1}{\delta_\text{out}(v_j)} & \text{if $(v_j, v_i) \in E$} \\
 0 & \text{if $(v_j, v_i) \not \in E$}
 \end{cases}
 $$
@@ -154,7 +154,7 @@ A Markov chain is called *aperiodic* if every state is aperiodic.
 {{< notice theorem >}}
 {{< markdown >}}
 
-If a Markov chain is irreducible and aperiodic, then the Markov chain converges to its (unique) stationary distribution.
+If a Markov chain is irreducible and aperiodic (ergodic), then the Markov chain converges to its (unique) stationary distribution.
 
 {{< /markdown >}}
 {{< /notice >}}
