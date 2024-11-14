@@ -122,7 +122,7 @@ There are many ways to choose $\sigma_s^2(\omega)$.
 The most commons are:
 
 1. $\sigma_s^2(\omega) = {\vert \hat{g}(\omega) \vert}^2$;
-2. $\sigma_s^2(\omega) = \omega{-\beta}$, where $\beta$ is near $2$;
+2. $\sigma_s^2(\omega) = \omega^{-\beta}$, where $\beta$ is near $2$;
 
 ## Energy minimization
 
