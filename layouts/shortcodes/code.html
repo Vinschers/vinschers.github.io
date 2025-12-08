@@ -1,6 +1,37 @@
-{{ $language := .Get "language" }}
-{{ $source := (path.Join (path.Dir .Page.File.Path) (.Get "source")) }}
-{{ $options := .Get "options" }}
+{{- $language := .Get "language" -}}
+{{- $source := .Get "source" -}}
+{{- $fileContents := "" -}}
 
-{{- $fileContents := readFile $source | safeHTML -}}
-{{- highlight $fileContents $language $options -}}
+{{- /* CONFIG: Your Git Repository Base URL for raw files */ -}}
+{{- $repoBase := "https://raw.githubusercontent.com/Vinschers/algorithms/refs/heads/main/" -}}
+
+{{- /* 1. Determine the Remote URL */ -}}
+{{- $targetUrl := "" -}}
+{{- if or (strings.HasPrefix $source "http://") (strings.HasPrefix $source "https://") -}}
+    {{- /* If user provided a full URL, use it directly */ -}}
+    {{- $targetUrl = $source -}}
+{{- else -}}
+    {{- /* Otherwise, append the file path to the repo base */ -}}
+    {{- $targetUrl = printf "%s%s" $repoBase $source -}}
+{{- end -}}
+
+{{- /* 2. Attempt to fetch from Remote */ -}}
+{{- with resources.GetRemote $targetUrl -}}
+    {{- $fileContents = .Content -}}
+{{- end -}}
+
+{{- /* 3. Fallback: If remote failed (empty), look Locally */ -}}
+{{- if eq $fileContents "" -}}
+    {{- /* Construct local path relative to the current post */ -}}
+    {{- $localPath := path.Join (path.Dir .Page.File.Path) $source -}}
+    
+    {{- if fileExists $localPath -}}
+        {{- $fileContents = readFile $localPath -}}
+    {{- else -}}
+        {{- errorf "Code not found. \nChecked Remote: %s \nChecked Local: %s" $targetUrl $localPath -}}
+    {{- end -}}
+{{- end -}}
+
+```{{ $language }}
+{{ $fileContents | safeHTML }}
+```

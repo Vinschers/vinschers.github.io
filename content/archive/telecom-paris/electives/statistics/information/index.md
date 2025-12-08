@@ -494,16 +494,18 @@ $$
 
 3. (Statistics) Let $X = (X_1, X_2)$ where $X_1, X_2$ are independent random variables, uniformly distributed over $(0, \theta)$ some unknown parameter $\theta > 0$.
 
-    (a) Show that $T(X) = \max{(X_1, X_2)}$ is a sufficient statistic.
+    **(a)** Show that $T(X) = \max{(X_1, X_2)}$ is a sufficient statistic.
 
-    (b) Is $T(X) = X_1 + X_2$ a free statistic? A sufficient statistic?
+    **(b)** Is $T(X) = X_1 + X_2$ a free statistic? A sufficient statistic?
 
-    {{< spoiler "Show answer" >}}
-    (a) Note that the distribution of $\min{(X_1, X_2)}$ given $T(X) = t$ is uniform in the interval $(0, t)$. Then, $\mathbb{P}[X = (\min{(X_1, X_2}), t)] = \mathbb{P}[X = (t, \min{(X_1, X_2)})] = \frac{1}{2}$. Since the probability of $X$ given $T(X)$ does not depend of $\theta$, $T$ is a sufficient statistic. <br>
+{{< spoiler "Show answer" >}}
 
-    (b) Clearly, the distribution of $T(X) = X_1 + X_2$ is uniform in the interval $(0, 2 \theta)$. Since the distribution of $T$ depends on $\theta$, $T$ is not free.
-    Also, the probability distribution of $X$ given $T(X) = t$ is uniform in the interval $(t - \theta, \theta)$, which still depends of $\theta$. Thus, $T$ is not sufficient.
-    {{< /spoiler >}}
+    **(a)** Note that the distribution of $\min{(X_1, X_2)}$ given $T(X) = t$ is uniform in the interval $(0, t)$. Then, $\mathbb{P}[X = (\min{(X_1, X_2}), t)] = \mathbb{P}[X = (t, \min{(X_1, X_2)})] = \frac{1}{2}$. Since the probability of $X$ given $T(X)$ does not depend of $\theta$, $T$ is a sufficient statistic. <br>
+
+    **(b)** Clearly, the distribution of $T(X) = X_1 + X_2$ is uniform in the interval $(0, 2 \theta)$. Since the distribution of $T$ depends on $\theta$, $T$ is not free.
+Also, the probability distribution of $X$ given $T(X) = t$ is uniform in the interval $(t - \theta, \theta)$, which still depends of $\theta$. Thus, $T$ is not sufficient.
+
+{{< /spoiler >}}
 
 4. (Entropy, Fisher information) Let $X \sim \mathcal{N}(\theta, \sigma^2)$ where $\theta \in \mathbb{R}$ is some unknown parameter.
 

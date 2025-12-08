@@ -1,8 +1,18 @@
+{{- $u := urls.Parse .Destination -}}
+{{- $src := $u.String -}}
+
+{{- /* Logic: Check if the image is local to the post (Page Resource) */ -}}
+{{- if not $u.IsAbs -}}
+  {{- with .Page.Resources.GetMatch $u.Path -}}
+    {{- $src = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
 <div style="text-align: center;">
-    <img src="{{ .Destination | safeURL }}"
+    <img src="{{ $src | safeURL }}"
         {{- with .Text }} alt="{{ . }}"{{ end -}}
         {{- with .Text }} title="{{ . }}"{{ end -}}
+        {{- /* Preserving your hack: mapping Title attribute to Width */ -}}
         {{- with .Title }} width="{{ . }}"{{ end -}}
     >
 </div>
-

@@ -1,0 +1,31 @@
+{{- $content := . -}}
+
+{{- /* FIX: Anchor to the start of the string (^ without ?m).
+  This regex looks for: 
+  1. Optional newlines at the start ([\r\n]*)
+  2. One or more spaces/tabs ([ \t]+)
+  3. A non-whitespace character ([^ \t\r\n])
+  
+  If the first line has no spaces, this Match fails, and we return content as-is.
+*/ -}}
+{{- $match := findRE "^[\r\n]*[ \t]+[^ \t\r\n]" $content 1 -}}
+
+{{- if gt (len $match) 0 -}}
+    {{- /* We matched something like "\n\n    T" */ -}}
+    {{- $matchedString := index $match 0 -}}
+
+    {{- /* Clean up the match to get JUST the indentation string */ -}}
+    {{- /* 1. Remove the trailing non-space character */ -}}
+    {{- $indentWithNewlines := substr $matchedString 0 (sub (len $matchedString) 1) -}}
+    
+    {{- /* 2. Remove the leading newlines to get the pure indent (e.g., "    ") */ -}}
+    {{- $indent := replaceRE "^[\r\n]+" "" $indentWithNewlines -}}
+
+    {{- /* Apply the replacement globally */ -}}
+    {{- if gt (len $indent) 0 -}}
+        {{- $pattern := printf "(?m)^%s" $indent -}}
+        {{- $content = replaceRE $pattern "" $content -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return $content -}}

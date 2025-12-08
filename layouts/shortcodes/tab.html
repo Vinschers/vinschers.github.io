@@ -1,8 +1,8 @@
-{{ $tabName := .Get "tabName" }}
-{{ $tabID := delimit (shuffle (slice "a" "b" "c" "d" "e" "f")) "" }}
-{{ .Parent.Scratch.Add "tabName" (slice $tabName) }}
-{{ .Parent.Scratch.Add "tabID" (slice $tabID) }}
+{{- $tabName := .Get "tabName" -}}
+{{- $id := md5 $tabName -}}
+{{- .Parent.Scratch.Add "tabs" (slice (dict "Name" $tabName "ID" $id)) -}}
+{{- $isActive := eq .Ordinal 0 -}}
 
-<div class="tab-pane fade show {{ if eq .Ordinal 0 }}active {{ end }}" id="{{ $tabID }}" role="tabpanel" aria-labelledby="nav-1">
-    {{ $.Inner | markdownify }}
+<div class="tab-content {{ if $isActive }}active{{ end }}" id="tab-{{ $id }}">
+    {{- partial "dedent.html" .Inner | markdownify -}}
 </div>

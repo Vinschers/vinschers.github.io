@@ -17,7 +17,7 @@ There are three types of cones:
 - M (medium) cones: green;
 - L (large) cones: red;
 
-{{< figure src="images/cones.png" width="300" >}}
+![](images/cones.png "300")
 
 Let $s(\lambda)$, $m(\lambda)$ and $l(\lambda)$ be the spectral sensibilities of these cones.
 Then, we perceive a spectrum $S(\lambda) = I(\lambda) R(\lambda)$ as three values:
@@ -29,9 +29,9 @@ P_3 &= \langle S, l \rangle = \int_{\lambda_\text{min}}^{\lambda_\text{max}} l(\
 \end{align*}
 $$
 
-{{< notice "note" >}}
+{{< note >}}
 The triplet $(P_1, P_2, P_3)$ that we perceive can never be equal to $\mathbf{e}_i$, where $i \in \{1, 2, 3\}$.
-{{< /notice >}}
+{{< /note >}}
 
 The following figure shows all possible combinations of $(P_1, P_2, P_3)$ in $\mathbb{R}^3$.
 {{< figure src="images/perception.png" width="400" >}}

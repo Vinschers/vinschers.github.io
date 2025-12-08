@@ -30,17 +30,16 @@ Em seguida, duas operações são realizadas:
 
 {{< spoiler "Mostrar implementação" >}}
 
-{{< tabs tabTotal="2" >}}
-{{% tab tabName="C++" %}}
+{{< tabs >}}
 
+{{< tab tabName="C++" >}}
 {{< code language="cpp" source="ford-fulkerson.cpp" >}}
-
-{{% /tab %}}
-{{< tab tabName="Python" >}}
-
-{{< code language="python" source="ford-fulkerson.py" >}}
-
 {{< /tab >}}
+
+{{< tab tabName="Python" >}}
+{{< code language="python" source="ford-fulkerson.py" >}}
+{{< /tab >}}
+
 {{< /tabs >}}
 
 {{< /spoiler >}}

@@ -3,8 +3,7 @@ title = "Bayesian Statistics"
 date = 2024-10-07
 +++
 
-{{< notice "tip" "Beta distribution" >}}
-{{< markdown >}}
+{{< tip "Beta distribution" >}}
 
 The Beta distribution is a continuous probability distribution defined on the interval $[0, 1]$.
 It has two parameters: $\theta = (\alpha, \beta)$.
@@ -14,33 +13,25 @@ $$
 \begin{align*}
 p_\theta(x) &= \frac{x^{\alpha - 1} (1 - x)^{\beta - 1}}{B(\alpha, \beta)} \\
 \mathbb{E}[X] &= \frac{\alpha}{\alpha + \beta} \\
-\mathrm{Var}(X) &= \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}
+\mathrm{Var}(X) &= \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)},
 \end{align*}
 $$
-
 where $B(\alpha, \beta)$ is the Beta function, defined as:
 $$
 B(\alpha, \beta) = \frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(\alpha + \beta)}
 $$
 
-{{< /markdown >}}
-{{< /notice >}}
+{{< /tip >}}
 
 Here, we are considering $\theta \in \Theta$ as a random variable. $\DeclareMathOperator*{\argmax}{arg \,max \,} \DeclareMathOperator*{\argmin}{arg \,min \,}$
 
 ## Prior and posterior distributions
 
-{{< notice "definition" "Prior" >}}
-{{< markdown >}}
-
+{{< definition "Prior" >}}
 The *prior* $\pi$ is the distribution of $\theta$ before any observation.
+{{< /definition >}}
 
-{{< /markdown >}}
-{{< /notice >}}
-
-{{< notice "example" >}}
-{{< markdown >}}
-
+{{< example >}}
 For the Bernoulli model with an uniform prior, we get:
 $$
 \pi(\theta) = \mathbb{1}_{[0, 1]}(\theta)
@@ -49,9 +40,7 @@ and
 $$
 \mathbb{P}_\theta(X) = \mathbb{P}(x \mid \theta) \sim \mathcal{B}(\theta).
 $$
-
-{{< /markdown >}}
-{{< /notice >}}
+{{< /example >}}
 
 We can compute the distribution of $\theta$ after observation $x$ using Bayes's theorem:
 $$

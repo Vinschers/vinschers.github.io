@@ -1,13 +1,9 @@
 :root {
-    --main-width: 840px;
+    --main-width: 55%;
 }
 
 .fade {
     transition: opacity 0.1s linear;
-}
-
-a:hover {
-    color: inherit;
 }
 
 body:not(.dark) {
@@ -34,4 +30,19 @@ table {
 
 .center {
     text-align: center;
+}
+
+/* Fix Title Boldness */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 500 !important; /* Default is often 700 or bold. 600 is semi-bold. */
+}
+
+/* Optional: Make the specific post title slightly lighter if needed */
+.post-title {
+    font-weight: 600 !important;
 }

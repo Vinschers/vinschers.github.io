@@ -1,6 +1,6 @@
 <div class="spoiler">
     <details {{ if (eq (.Get 1) true) }} open="true" {{ end }}>
-        <summary markdown="span">{{ .Get 0 }}</summary>
-        {{ .Inner }}
+        <summary>{{ .Get 0 }}</summary>
+        {{- partial "dedent.html" .Inner | markdownify -}}
     </details>
 </div>

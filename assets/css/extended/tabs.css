@@ -1,40 +1,96 @@
-.nav-tabs {
-	margin-top: 2rem;
-    justify-content: left;
-    line-height: 1rem;
-    border: 0;
+.tabs-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-left: 0;
+    margin-bottom: 0; /* Important: No gap between nav and content */
+    list-style: none;
+    
+    /* We remove the full-width bottom border to achieve the isolated "card" look. 
+       If you prefer a line extending to the right, uncomment the next line. */
+    /* border-bottom: 1px solid var(--primary); */
+
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
 }
 
-.nav-tabs .nav-link {
-    color: var(--secondary);
-    border: 0;
+.tabs-nav::-webkit-scrollbar {
+    display: none;
 }
 
-.nav-tabs .nav-link.active {
-    background-color: var(--entry) !important;
-    color: var(--primary) !important;
-    border: 1px solid var(--primary);
-    border-bottom: 0;
-    font-weight: bold;
-}
+.tab-btn {
+    display: block;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    
+    /* Border logic */
+    border: 1px solid transparent; 
+    border-bottom: none; /* Never have a bottom border on the button itself */
+    
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+    
+    /* Positioning to sit ON TOP of the panel border */
+    position: relative;
+    margin-bottom: -1px; /* Pulls the button down 1px to overlap the panel */
+    z-index: 0;
 
-.nav-tabs .nav-link:hover {
-    font-weight: bold;
+    font-size: 1rem;
     color: var(--primary);
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
-nav:has(.nav-link.active:first-child) ~ .tab-content {
-    border-radius: 0 var(--radius) var(--radius) var(--radius) !important;
+
+.tab-btn:hover {
+    background-color: rgba(128, 128, 128, 0.05);
+}
+
+.tab-btn.active {
+    color: var(--content);
+    background-color: var(--entry); /* Must match the panel background */
+    font-weight: bold;
+    cursor: default;
+    z-index: 2; /* Lift above the panel */
+    
+    /* The Magic: Continuous Border */
+    border: 1px solid var(--primary); /* Same color as panel */
+    border-bottom: 1px solid var(--entry); /* Same color as BACKGROUND (erases the line) */
+}
+
+.tabs-panels {
+    background: transparent;
+    width: 100%;
 }
 
 .tab-content {
-    background-color: var(--entry) !important;
-    margin-bottom: 1rem;
-    border-radius: var(--radius) !important;
-    border: 1px solid var(--primary) !important;
-    overflow: hidden;
+    display: none;
+    border: 1px solid var(--primary);
+    margin-top: 0;
+    overflow-x: auto;
+    max-width: 100%;
+
+    /* DEFAULT: Fully rounded corners (Good for Tab 2, 3, etc.) */
+    border-radius: var(--radius);
 }
 
+/* OVERRIDE: Square top-left corner ONLY for the first tab */
+.tab-content:first-of-type {
+    border-radius: 0 var(--radius) var(--radius) var(--radius);
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Remove default highlight margins so it fits flush inside the border */
 .tab-content .highlight {
     margin: 0 !important;
-    border-radius: 0 !important;
+    border-radius: 0 0 var(--radius) var(--radius) !important; /* Round only bottom corners */
+    border: none !important; /* Remove internal code block borders */
+}
+
+@keyframes fadeEffect {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
