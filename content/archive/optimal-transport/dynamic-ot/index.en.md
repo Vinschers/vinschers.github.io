@@ -24,7 +24,7 @@ $$
 and (CE) is a PDE known as Continuity Equation.
 
 This will in turn lead to an algorithm (Flow Matching) that creates pushforwards from $\alpha$ to $\beta$ that are not necessarily optimal.
-Since in generative models we usually don't care about optimality of the generative transport, this will be very useful.
+Since in generative models we usually don't care about optimality of the generation transport, this will be very useful.
 
 ## Dynamical Formulation
 
@@ -216,7 +216,7 @@ In fact, the following $v_t$ does satisfy the PDE:
 $$
 v_t(x) = \mathbb{E}_{X_0 \sim \alpha, X_1 \sim \beta}[X_1 - X_0 \mid X_t = x].
 $$
-Intuitively, what this says is that the velocity at the point $x$, $v_t(x)$, is simply the average of the velocities of all particles that are in $x$ at time $t$.
+Intuitively, what this says is that the velocity at the point $x$, $v_t(x)$, is just the average of the velocities of all particles that are in $x$ at time $t$.
 The figure below illustrates the principle.
 
 ![diagram v_t](images/diagram_vt.jpeg)
@@ -251,3 +251,79 @@ In this particular case, the loss function becomes
 $$
 \mathcal{L}(\theta) = \mathbb{E}\left[\left\| v_\theta(X_t) - \frac{\mathrm{d} X_t}{\mathrm{d} t} \right\|^2\right] = \mathbb{E}\left[\left\| v_\theta(X_t) - \left(\underbrace{\cos{\left(\frac{\pi t}{2}\right)} X_1 - \sin{\left(\frac{\pi t}{2}\right)} X_0}_{\text{velocity of $X_t$}}\right) \right\|^2\right].
 $$
+
+
+## Exercises
+
+1. Starting from a coupling $(X_0, X_1)$, we define the linear interpolation $X_t = t X_1 + (1 - t) X_0$. We remind that the velocity field defined in flow matching writes
+$$
+v_t(x) = \mathbb{E}[X_1 - X_0 | X_t = x] = \frac{1}{1-t}\mathbb{E}[X_1 - X_t | X_t = x] = \frac{1}{1-t} (\mathbb{E}[X_1 | X_t = x] - x). 
+$$
+Let $A \in \mathbb{R}^{d \times d}$ be invertible, $b \in \mathbb{R}^d$ and $c \in \mathbb{R}^*_+$. Show the following properties:
+
+    **(a)** The velocity $v_t^{A,b}$ defined from the coupling $(AX_0 + b, AX_1 + b)$ is given by
+    $$
+    v_t^{A,b}(x) = Av_t(A^{-1}(x-b)).
+    $$
+
+    **(b)** The velocity $v_t^b$ from the coupling $(X_0, X_1 + b)$ is given by $v_t^b(x) = v_t(x - tb) + b$.
+
+    **(c)** The velocity $v_t^c$ defined from the coupling $(X_0, cX_1)$ is given by
+    $$
+        v_t^c = \frac{c}{1-t+tc} v_r \left( \frac{x}{1-t+tc} \right) + \frac{c-1}{1-t+tc}x, \quad \text{with} \quad r = \frac{tc}{1-t+tc}.
+    $$
+
+{{< spoiler "Solution" >}}
+**(a)** ...
+
+**(b)** ...
+
+**(c)** ...
+{{< /spoiler >}}
+
+2. Assume that $\alpha$ is an absolutely continuous probability measure with respect to the Lebesgue measure, and $\beta$ is a probability measure on $\mathbb{R}^d$.
+Write $T^*$ the optimal transport map between $\alpha$ and $\beta$ for the squared Euclidean cost.
+Can we say something on what $T^*$ becomes in the cases considered in Exercise 1?
+
+{{< spoiler "Solution" >}}
+...
+{{< /spoiler >}}
+
+3. Assume that $\alpha$ and $\beta$ are probability measures on $\mathbb{R}$.
+Let $(X_0, X_1)$ be a coupling between $\alpha$ and $\beta$ such that the velocity field $v_t(x) = \mathbb{E}[X_1 - X_0 | X_t = x]$ has a unique flow on $[0, 1]$.
+Show that the flow $\varphi_t$ associated to $v_t$ is such that $\varphi_1$ is an optimal transport map between $\alpha$ and $\beta$.
+
+{{< spoiler "Solution" >}}
+...
+{{< /spoiler >}}
+
+4. Assume that $(X_0, X_1) \sim \mathcal{N}(0, \Sigma)$ with $\Sigma = \begin{pmatrix} \Sigma_0 & \Sigma_{10} \\ \Sigma_{01} & \Sigma_1 \end{pmatrix}$, for positive definite $\Sigma_0$ and $\Sigma_1$.
+Remind that if $(Z, T)$ is a Gaussian vector, then $\mathbb{E}[Z|T] = \mathbb{E}[Z] + \text{Cov}(Z, T)\text{Cov}(T, T)^{-1}(T - \mathbb{E}[T])$.
+
+    **(a)** Show that the velocity field $v_t(x) := \mathbb{E}[X_1 - X_0 | X_t = x]$ is given by
+    $$
+    v_t(x) = \frac{1}{1-t} \left(((1-t)\Sigma_{01} + t\Sigma_1)\Sigma_t^{-1} - \text{Id}\right) x,
+    $$
+    where $\Sigma_t = \text{Cov}(X_t) = (1-t)^2\Sigma_0 + (1-t)t(\Sigma_{01} + \Sigma_{10}) + t^2\Sigma_1$.
+
+    **(b)** Let $\Sigma_{01} = \Sigma_{10} = 0$ and assume that $\Sigma_0$ and $\Sigma_1$ can be jointly diagonalized.
+    Show that the flow $\varphi_t$ associated to $v_t$ is such that $\varphi_1$ is an optimal transport map between $\alpha$ and $\beta$.
+
+{{< spoiler "Solution" >}}
+**(a)** ...
+
+**(b)** ...
+{{< /spoiler >}}
+
+5. Assume that $(X_0, X_1) \sim \sum_{k=1}^K \pi_k \mathcal{N}(m^k, \Sigma^k)$ with $m^k = \begin{pmatrix} m_0^k \\ m_1^k \end{pmatrix}$ and $\Sigma^k = \begin{pmatrix} \Sigma_0^k & \Sigma_{10}^k \\ \Sigma_{01}^k & \Sigma_1^k \end{pmatrix}$ for positive definite $\Sigma_0^k$ and $\Sigma_1^k$.
+Write $v_t^k$ the velocity field (2) for the covariance matrix $\Sigma^k$ and write $w_t^k(x) = v_t^k(x - tm_1^k - (1-t)m_0^k) + m_1^k - m_0^k$.
+Show that the velocity field $v_t(x) := \mathbb{E}[X_1 - X_0 | X_t = x]$ is given by
+$$
+v_t(x) = \sum_{k=1}^K \alpha^k(x)w_t^k(x),
+$$
+where $\alpha^k(x) = \frac{\pi_k p_t^k(x)}{\sum_{j=1}^K \pi_j p_t^j(x)}$, with $p_t^j$ is the Gaussian density of $\mathcal{N}(m_t^j, \Sigma_t^j)$ with $m_t^j = tm_1^j + (1-t)m_0^j$ and $\Sigma_t^j = t^2\Sigma_1^j + (1-t)^2\Sigma_0^j + t(1-t)(\Sigma_{10}^j + \Sigma_{01}^j)$.
+What happens if $X_0$ is a standard centered Gaussian and $X_1$ follows a discrete distribution of $K$ equal Dirac masses?
+
+{{< spoiler "Solution" >}}
+...
+{{< /spoiler >}}

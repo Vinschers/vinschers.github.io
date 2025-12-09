@@ -2,6 +2,12 @@
     --main-width: 55%;
 }
 
+@media screen and (max-width: 768px) {
+    :root {
+        --main-width: 95%;
+    }
+}
+
 .fade {
     transition: opacity 0.1s linear;
 }
