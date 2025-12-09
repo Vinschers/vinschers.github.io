@@ -1,4 +1,4 @@
 +++
-title = "Sliced Optimal Transport"
+title = "Wasserstein Metric"
 date = 2025-10-15
 +++

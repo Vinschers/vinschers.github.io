@@ -7,7 +7,7 @@ date = 2025-11-05
 Up to this point we have studied
 - Monge and [Kantorovich]({{< ref "archive/optimal-transport/kantorovich" >}}) problems.
 - Duality of Kantorovich and the Wasserstein metric.
-- Slicing OT as a way to lower bound $\mathbb{W}_p$.
+- Slicing OT as a way to lower bound $\W_p$.
 
 Now, we are interested in solving the Kantorovich problem in an alternative way.
 The goal here is to find a condition that is sufficient to retrieve a map from $\mathcal{X}$ to $\mathcal{Y}$.
@@ -15,7 +15,7 @@ Then, the optimal transport will be given by the objects that minimize a certain
 
 More precisely, we will show that
 $$
-\mathbb{W}_2^2 (\alpha, \beta) = \inf_{(\mu_t, v_t) \in \mathcal{V}(\alpha, \beta)} \int_0^1 \int \| v_t(x) \|^2 \, \mathrm{d} \mu_t \, \mathrm{d} t,
+\W_2^2 (\alpha, \beta) = \inf_{(\mu_t, v_t) \in \mathcal{V}(\alpha, \beta)} \int_0^1 \int \| v_t(x) \|^2 \, \mathrm{d} \mu_t \, \mathrm{d} t,
 $$
 where $\mu_t$ is a path between $\alpha$ and $\beta$, $v_t : [0, 1] \times \mathbb{R}^d \to \mathbb{R}^d$ is a velocity field,
 $$
@@ -35,7 +35,7 @@ $$
 T_t(x) = t T(x) + (1 - t) x.
 $$
 The associated metric is $\mu_t = (T_t)_\# \alpha$.
-In this sense, $\gamma(t) = \mu_t$ is a geodesic between $\alpha$ and $\beta$ in $(\mathcal{P}_2 (\mathbb{R}^d), \mathbb{W}_2)$.
+In this sense, $\gamma(t) = \mu_t$ is a geodesic between $\alpha$ and $\beta$ in $(\mathcal{P}_2 (\mathbb{R}^d), \W_2)$.
 
 {{< definition "Geodesic space" >}}
 $(\mathcal{X}, d)$ is a geodesic space if for any $x, y \in \mathcal{X}$, there exists a shortest path (geodesic) $\gamma \colon [0, 1] \to \mathcal{X}$ joining them, i.e.,
@@ -72,7 +72,7 @@ $$
 \int_0^1 \int \| v_t (x) \|^2 \mathrm{d} \mu_t \, \mathrm{d} t &= \int_0^1 \int \| v_t \circ T_t \|^2 \mathrm{d} \alpha \, \mathrm{d} t &&\qquad \because \mu_t = (T_t)_\# \alpha \\
 &= \int_0^1 \int \| T(x) - x \|^2 \mathrm{d} \alpha \, \mathrm{d} t \\
 &= \int \| T(x) - x \|^2 \mathrm{d} \alpha &&\qquad \because \text{Integral of a constant over $[0, 1]$} \\
-&= \mathbb{W}_2^2(\alpha, \beta).
+&= \W_2^2(\alpha, \beta).
 \end{aligned}
 $$
 
@@ -109,13 +109,13 @@ Let's go back to our immediate goal, i.e., prove that $((T_t)_\# \alpha, (T - \m
 ...
 {{< /spoiler >}}
 
-So, $\mathbb{W}_2^2 (\alpha, \beta) = \int_0^1 \int \| v_t (x) \|^2 \, \mathrm{d} \mu_t \, \mathrm{d} t$ and $(\mu_t, v_t) \in \mathcal{V}(\alpha, \beta)$.
+So, $\W_2^2 (\alpha, \beta) = \int_0^1 \int \| v_t (x) \|^2 \, \mathrm{d} \mu_t \, \mathrm{d} t$ and $(\mu_t, v_t) \in \mathcal{V}(\alpha, \beta)$.
 Thus,
 $$
-\mathbb{W}_2^2 (\alpha, \beta) \geq \inf_{(\mu_t, v_t) \in \mathcal{V}(\alpha, \beta)} \int_0^1 \int \| v_t(x) \|^2 \, \mathrm{d} \mu_t \, \mathrm{d} t.
+\W_2^2 (\alpha, \beta) \geq \inf_{(\mu_t, v_t) \in \mathcal{V}(\alpha, \beta)} \int_0^1 \int \| v_t(x) \|^2 \, \mathrm{d} \mu_t \, \mathrm{d} t.
 $$
 
-The next step is to prove that $\mathbb{W}_2^2(\alpha, \beta)$ is indeed the Infimum.
+The next step is to prove that $\W_2^2(\alpha, \beta)$ is indeed the Infimum.
 
 ### Flow of a vector field
 
@@ -157,7 +157,7 @@ Then, $\rho_t = (\varphi_t)_\# \alpha$, $\rho_t \ll \lambda^d$, is the **unique*
 
 {{< theorem >}}
 $$
-\mathbb{W}_2^2 (\alpha, \beta) = \inf_{(\mu_t, v_t) \in \mathcal{V}(\alpha, \beta)} \int_0^1 \int \| v_t(x) \|^2 \, \mathrm{d} \mu_t \, \mathrm{d} t,
+\W_2^2 (\alpha, \beta) = \inf_{(\mu_t, v_t) \in \mathcal{V}(\alpha, \beta)} \int_0^1 \int \| v_t(x) \|^2 \, \mathrm{d} \mu_t \, \mathrm{d} t,
 $$
 and the solution is the McCann interpolation.
 {{< /theorem >}}
@@ -174,7 +174,7 @@ $$
     &\ge \int \bigg\| \int_0^1 \underbrace{v_t \circ \varphi_t}_{\partial_t \varphi_t} \, dt \bigg\|^2 \, d\alpha &&\qquad \because \text{Jensen} \\
     &= \int \|\varphi_1(x) - \varphi_0(x)\|^2 \, d\alpha \\
     &= \int \| \varphi_1(x) - x \|^2 \, d\alpha \\
-    &\geq \mathbb{W}_2^2(\alpha, \beta) &&\qquad \because \varphi_1 \# \alpha = \beta
+    &\geq \W_2^2(\alpha, \beta) &&\qquad \because \varphi_1 \# \alpha = \beta
 \end{aligned}
 $$
 {{< /spoiler >}}
@@ -274,11 +274,56 @@ Let $A \in \mathbb{R}^{d \times d}$ be invertible, $b \in \mathbb{R}^d$ and $c \
     $$
 
 {{< spoiler "Solution" >}}
-**(a)** ...
+**(a)** Using the coupling, we have
+$$
+X_t^{A, b} = t A X_0 + tb + (1 - t) A X_1 + (1 - t)b = A X_t + b.
+$$
+Let us find the velocity of $X_t^{A, b}$.
+$$
+v^{A, b}(X_t^{A, b}) = \frac{\d X_t^{A, b}}{\d t} = A \frac{\d X_t}{\d t} = A v_t (X_t).
+$$
+Using the first equation, we can find $X_t$ in function of $X_t^{A, b}$:
+$$
+X_t = A^{-1} (X_t^{A, b} - b).
+$$
+Thus,
+$$
+v_t^{A, b} (x) = A v_t (A^{-1} (x - b)).
+$$
 
-**(b)** ...
+**(b)** Following the same logic as item (a), we have
+$$
+X_t^b = t (X_1 + b) + (1 - t) X_0 = X_t + tb \implies \frac{\d X_t^b}{\d t} = b + \frac{\d X_t}{\d t}.
+$$
+We also have that $X_t = X_t^b - tb$.
+Thus,
+$$
+v_t^b (x) = v_t (x - tb) + b.
+$$
 
-**(c)** ...
+**(c)** As before, we have $X_t^c = t c X_1 + (1 - t) X_0$.
+Let's divide both sides by $1 - t + tc$.
+$$
+\begin{aligned}
+\frac{1}{1 - t + tc} X_t^c &= \underbrace{\frac{tc}{1 - t + tc}}_r X_1 + \frac{1 - t}{1 - t + tc} X_0 \\
+&= r X_1 + \frac{1 - t + \overbrace{tc - tc}^{\text{add $0$}}}{1 - t + tc} X_0 \\
+&= r X_1 + (1 - r) X_0 = X_r.
+\end{aligned}
+$$
+So, $X_t^c = (1 - t + tc) X_r$.
+To find the velocity, we differentiate w.r.t. $t$.
+$$
+\begin{aligned}
+v^c(X_t^c) = \frac{\d X_t^c}{\d t} &= (c - 1) X_r + (1 - t + tc) \frac{\d X_r}{\d t} \\
+&= (c - 1) X_r + (1 - t + tc) \frac{\d X_r}{\d r} \frac{\d r}{\d t} \\
+&= (c - 1) X_r + (1 - t + tc) \frac{\d X_r}{\d r} \frac{\overbrace{c (1 - t + tc) - (c - 1) tc}^c}{(1 - t + tc)^2} \\
+&= (c - 1) X_r + \frac{c}{1 - t + tc} \frac{\d X_r}{\d r}.
+\end{aligned}
+$$
+Thus, we have the desired velocity.
+$$
+v_t^c(x) = \frac{c - 1}{1 - t + tc} x + \frac{c}{1 - t + tc} v_r \left( \frac{x}{1 - t + tc} \right).
+$$
 {{< /spoiler >}}
 
 2. Assume that $\alpha$ is an absolutely continuous probability measure with respect to the Lebesgue measure, and $\beta$ is a probability measure on $\mathbb{R}^d$.
@@ -286,7 +331,30 @@ Write $T^*$ the optimal transport map between $\alpha$ and $\beta$ for the squar
 Can we say something on what $T^*$ becomes in the cases considered in Exercise 1?
 
 {{< spoiler "Solution" >}}
-...
+**(a)** We apply the mapping $\xi \mapsto A \xi + b$ for sampled points from both $\alpha$ and $\beta$.
+Since $A$ is invertible, this is a bijection.
+Thus, our new transport should be $T_{A, b} (x) = A T^* (A^{-1} (x - b)) + b$.
+According to Brenier's theorem, $T_{A, b}$ is optimal if it is the gradient of a convex function $\phi$.
+Let's compute the Hessian of $T_{A, b}$ using the chain rule.
+$$
+\nabla T_{A, b} = A \nabla T^* (A^{-1} (x - b)) A^{-1}.
+$$
+In general, we can't say that $H \succeq 0 \implies A H A^{-1} \succeq 0$.
+So, although $T_{A, b}$ is a valid pushforward, we can't say it is optimal.
+
+**(b)** We are simply adding $b$ to the sampled point from $\beta$, so our new optimal map is $T_b (x) = T^* (x) + b$.
+Using Brenier again,
+$$
+\nabla T_b = \nabla T^*.
+$$
+Because $T^*$ is optimal, we conclude that $T_b$ also is.
+
+**(c)** Similarly, we are simply multiplying $c$ to the sampled point from $\beta$, so our new optimal transport is $T_c (x) = c T^* (x)$.
+$$
+\nabla T_c = c \nabla T^*.
+$$
+Thus, $T_c$ is optimal because $c \in \R_+^*$.
+
 {{< /spoiler >}}
 
 3. Assume that $\alpha$ and $\beta$ are probability measures on $\mathbb{R}$.
@@ -294,7 +362,12 @@ Let $(X_0, X_1)$ be a coupling between $\alpha$ and $\beta$ such that the veloci
 Show that the flow $\varphi_t$ associated to $v_t$ is such that $\varphi_1$ is an optimal transport map between $\alpha$ and $\beta$.
 
 {{< spoiler "Solution" >}}
-...
+We are in 1D, so recall that $\varphi_1$ is OT if, and only if, $x < y \implies \varphi_1(x) < \varphi_1(y)$.
+Assume, for the purpose of a contradiction that there are $x < y$ such that $\varphi_1(x) > \varphi_1(y)$.
+Then, there must be a time $t$ and a point $z$ such that $z = \varphi_t(x) = \varphi_t(y)$.
+This crossing point creates an ambiguity in the flow, making it non-unique.
+However, one of the assumptions in the exercise is that the flow is unique.
+Thus, there are no crossings and $\varphi_1$ is indeed an optimal transport map.
 {{< /spoiler >}}
 
 4. Assume that $(X_0, X_1) \sim \mathcal{N}(0, \Sigma)$ with $\Sigma = \begin{pmatrix} \Sigma_0 & \Sigma_{10} \\ \Sigma_{01} & \Sigma_1 \end{pmatrix}$, for positive definite $\Sigma_0$ and $\Sigma_1$.
@@ -310,9 +383,42 @@ Remind that if $(Z, T)$ is a Gaussian vector, then $\mathbb{E}[Z|T] = \mathbb{E}
     Show that the flow $\varphi_t$ associated to $v_t$ is such that $\varphi_1$ is an optimal transport map between $\alpha$ and $\beta$.
 
 {{< spoiler "Solution" >}}
-**(a)** ...
+**(a)**
+$$
+\begin{aligned}
+v_t (x) &= \E [X_1 - X_0 \mid X_t = x] \\
+&= \underbrace{\E[X_1 - X_0]}_0 + \Cov(X_1 - X_0, X_t) \Cov(X_t, X_t)^{-1} (\underbrace{X_t}_x - \underbrace{\E[X_t]}_0) \\
+&= [\Cov(X_1, X_t) - \Cov(X_0, X_t)] \Sigma_t^{-1} x.
+\end{aligned}
+$$
+At this point, note that
+$$
+\begin{aligned}
+\Sigma_t &= \Cov(X_t, X_t) = \Cov(t X_1 + (1-t) X_0, X_t) = t \Cov(X_1, X_t) + (1 - t) \Cov(X_0, X_t) \\
+&\implies \Cov(X_0, X_t) = \frac{1}{1 - t} \left(\Sigma_t - t \Cov(X_1, X_t)\right).
+\end{aligned}
+$$
+Substituting that in the original $v_t(x)$ expression, we obtain
+$$
+\begin{aligned}
+v_t (x) &= [\Cov(X_1, X_t) - \Cov(X_0, X_t)] \Sigma_t^{-1} x \\
+&= \left[ \Cov(X_1, X_t) - \frac{1}{1 - t}(\Sigma_t - t \Cov(X_1, X_t)) \right] \Sigma_t^{-1} x \\
+&= \left( \frac{1}{1 - t} \Cov(X_1, X_t) \Sigma_t^{-1} - \frac{1}{1 - t}\Sigma_t \Sigma_t^{-1} \right) x \\
+&= \frac{1}{1 - t} \left( \Cov(X_1, t X_1 + (1 - t) X_0) \Sigma_t^{-1} - \mathrm{Id} \right) x \\
+&= \frac{1}{1 - t} \left( (t \Sigma_1 + (1 - t) \Sigma_{01}) \Sigma_t^{-1} - \mathrm{Id} \right) x.
+\end{aligned}
+$$
 
-**(b)** ...
+**(b)** If $\Sigma_{01} = \Sigma_{10} = 0$, then $v_t(x) = \frac{1}{1 - t} (t \Sigma_1 \Sigma_t^{-1} - \mathrm{Id}) x$ and $\Sigma_t = t^2 \Sigma_1 + (1 - t)^2 \Sigma_0$.
+Because $\Sigma_0$ and $\Sigma_1$ can be jointly diagonalized, there exists an orthogonal matrix $P$ such that
+$$
+\left\{
+\begin{aligned}
+\Sigma_0 &= P D_0 P^\top \implies D_0 = P^\top \Sigma_0 P \\
+\Sigma_1 &= P D_1 P^\top \implies D_1 = P^\top \Sigma_1 P
+\end{aligned}
+\right.
+$$
 {{< /spoiler >}}
 
 5. Assume that $(X_0, X_1) \sim \sum_{k=1}^K \pi_k \mathcal{N}(m^k, \Sigma^k)$ with $m^k = \begin{pmatrix} m_0^k \\ m_1^k \end{pmatrix}$ and $\Sigma^k = \begin{pmatrix} \Sigma_0^k & \Sigma_{10}^k \\ \Sigma_{01}^k & \Sigma_1^k \end{pmatrix}$ for positive definite $\Sigma_0^k$ and $\Sigma_1^k$.
