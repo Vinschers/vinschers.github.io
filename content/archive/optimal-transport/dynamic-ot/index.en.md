@@ -10,7 +10,7 @@ Up to this point we have studied
 - Slicing OT as a way to lower bound $\mathbb{W}_p$.
 
 Now, we are interested in solving the Kantorovich problem in an alternative way.
-The goal here is to find a condition that is sufficient to find a map from $\mathcal{X}$ to $\mathcal{Y}$.
+The goal here is to find a condition that is sufficient to retrieve a map from $\mathcal{X}$ to $\mathcal{Y}$.
 Then, the optimal transport will be given by the objects that minimize a certain criterion over this condition.
 
 More precisely, we will show that
@@ -22,6 +22,9 @@ $$
 \mathcal{V}(\alpha, \beta) = \{ (\mu_t, v_t) \sim (\text{CE}) \mid \mu_0 = \alpha \; \mu_1 = \beta \},
 $$
 and (CE) is a PDE known as Continuity Equation.
+
+This will in turn lead to an algorithm (Flow Matching) that creates pushforwards from $\alpha$ to $\beta$ that are not necessarily optimal.
+Since in generative models we usually don't care about optimality of the generative transport, this will be very useful.
 
 ## Dynamical Formulation
 
