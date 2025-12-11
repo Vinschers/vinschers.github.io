@@ -14,19 +14,26 @@
                 ["\\(", "\\)"],
                 ["$", "$"],
             ], // inline
+            processEscapes: true,
+            processEnvironments: true,
         },
     };
 </script>
 
 <div style="display: none;">
 $$
+    \newcommand{\st}{\text{ s.t. }}
+    \newcommand{\and}{\text{ and }}
+
     \newcommand{\R}{\mathbb{R}}
     \newcommand{\N}{\mathbb{N}}
     \newcommand{\O}{\mathcal{O}}
     \newcommand{\dist}{\text{dist}}
     \newcommand{\vec}[1]{\mathbf{#1}}
+    \newcommand{\diag}{\mathrm{diag}}
 
     \newcommand{\d}{\mathrm{d}}
+    \newcommand{\L}{\mathcal{L}}
 
     \newcommand{\Tr}[1]{\mathrm{Tr}\left(#1\right)}
 

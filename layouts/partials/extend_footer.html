@@ -1,0 +1,62 @@
+{{ if .HasShortcode "algorithm" }}
+<script>
+    (function () {
+        function renderAllAlgorithms() {
+            // 1. Find all algorithm blocks on the page
+            const algos = document.querySelectorAll(".pseudocode-container");
+            if (algos.length === 0) return;
+
+            // 2. Define the "text-only" renderer to trick Pseudocode.js
+            const textRenderer = {
+                backend: "mathjax",
+                render: function (input, baseNode) {
+                    baseNode.textContent = "\\(" + input + "\\)";
+                },
+            };
+
+            // 3. Render each block
+            algos.forEach(function (container) {
+                const rawCode = container.querySelector(".pseudocode-raw");
+                const target = container.querySelector(".pseudocode-render");
+
+                if (rawCode && target) {
+                    try {
+                        pseudocode.render(rawCode.textContent, target, {
+                            lineNumber: false,
+                            noEnd: true,
+                            mathRenderer: textRenderer,
+                            commentDelimiter: "$\\qquad \\rhd$ ",
+                        });
+                    } catch (err) {
+                        console.error("Pseudocode error:", err);
+                        target.innerHTML =
+                            "<div style='color:red;'>Error parsing algorithm</div>";
+                    }
+                }
+            });
+
+            // 4. One final pass to Typeset all the math we just injected
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise(algos).catch((err) =>
+                    console.log("MathJax error:", err),
+                );
+            }
+        }
+
+        // Wait for MathJax to be ready
+        function waitForMathJax() {
+            if (
+                window.MathJax &&
+                window.MathJax.startup &&
+                window.MathJax.startup.promise
+            ) {
+                window.MathJax.startup.promise.then(renderAllAlgorithms);
+            } else {
+                setTimeout(waitForMathJax, 100);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", waitForMathJax);
+    })();
+</script>
+{{ end }}

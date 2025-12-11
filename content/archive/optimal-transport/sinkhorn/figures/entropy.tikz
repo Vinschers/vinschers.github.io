@@ -1,0 +1,17 @@
+\tikzset{>=stealth, line width=1.5pt}
+
+% Axes
+\draw[->, line width=2pt] (0,-2) -- (0,5);
+\draw[->, line width=2pt] (0,0) -- (6,0);
+
+% Black Curve
+\draw[black, samples=100, smooth, domain=0.05:2, line width=1.2pt] 
+    plot (\x, {-1.5*ln(\x)}) node[right, shift={(0.2,0.5)}, scale=2] {$\log(s)$};
+
+% Red Curve
+\draw[red, samples=100, smooth, domain=0.01:2.5, line width=2pt] 
+    plot (\x, {2*\x*ln(\x)}) node[right, scale=2] {$s\log(s)$};
+
+% Gradient Arrow
+\draw[->, blue, line width=2pt] (0.0, 0.0) -- (0.0, -1.5) 
+    node[right, pos=0.9, align=left, scale=1] {$\frac{\mathrm{d}}{\mathrm{d} s} s\log(s) \xrightarrow{s \to 0} -\infty$};

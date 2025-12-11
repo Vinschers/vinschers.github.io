@@ -1,0 +1,21 @@
+{{- $content := "" -}}
+{{- $src := .Get 0 -}}
+{{- if $src -}}
+  {{- $file := .Page.Resources.GetMatch $src -}}
+  {{- if not $file -}}{{- $file = resources.Get $src -}}{{- end -}}
+  {{- if $file -}}{{- $content = $file.Content -}}{{- else -}}{{- errorf "TikZ file not found" -}}{{- end -}}
+{{- else -}}
+  {{- $content = .Inner -}}
+{{- end -}}
+
+<div class="tikz-wrapper" style="display: flex; justify-content: center; margin: 2rem 0; overflow-x: auto;">
+  <script type="text/tikz">
+    {{- if or (findRE "\\\\begin\\{tikzpicture\\}" $content) (findRE "\\\\begin\\{document\\}" $content) -}}
+      {{ $content | safeHTML }}
+    {{- else -}}
+      \begin{tikzpicture}
+        {{ $content | safeHTML }}
+      \end{tikzpicture}
+    {{- end -}}
+  </script>
+</div>
