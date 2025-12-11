@@ -130,7 +130,7 @@ $$
 $$
 {{< /theorem >}}
 
-{{< spoiler "Proof" >}}
+{{< spoiler "Proof" true >}}
 We can see the algorithm as consecutive steps of the form
 $$
 v \gets \mathcal{I}(v) \quad \st \quad \mathcal{I}(v) = \frac{b}{K^\top \left(\frac{a}{K v}\right)}
