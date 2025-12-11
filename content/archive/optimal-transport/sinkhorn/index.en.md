@@ -146,7 +146,7 @@ Intuitively, $\sim$ defines a class of equivalence of directions.
 
 We also have the following relation:
 $$
-d_\mathcal{H} (u, u') = \| \log{u} - \log{u'} \|_V = \| \log{\left(\frac{u}{u'}\right)} \|_V,
+d_\mathcal{H} (u, u') = \| \log{u} - \log{u'} \|_V = \left\| \log{\left(\frac{u}{u'}\right)} \right\|_V,
 $$
 where $\| z \|_V = \max_i z_i - \min_i z_i$.
 {{< /definition >}}
@@ -162,7 +162,7 @@ Let $K : \mathcal{K} \to \mathcal{K}$ be linear.
 This map creates a "narrowing" effect in the clone, because it has only positive entries.
 The effect can be seen in the following figure.
 
-<!-- {{< tikz "figures/cone_contraction.tikz" />}} -->
+{{< tikz "figures/cone_contraction.tikz" />}}
 
 With that, we can say that there exists $\eta \in [0, 1)$ such that $d_\mathcal{H}(K u, K u') \leq \eta d_\mathcal{H}(u, u')$.
 If we use the optimal $u^*$, we get the following relation:
@@ -178,5 +178,3 @@ $$
 which proves the linear convergence rate.
 *Small remark*: in this case, $\eta \approx 1 - e^{-\frac{\| C \|_\infty}{\varepsilon}}$.
 {{< /spoiler >}}
-
-kjnkh;kjhkj

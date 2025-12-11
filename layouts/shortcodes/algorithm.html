@@ -1,15 +1,6 @@
-{{- $title := .Get 0 -}}
-
 <div class="pseudocode-container" style="margin: 2rem auto; max-width: 800px;">
-    {{- with $title -}}
-        <div class="algorithm-caption" style="text-align: center; font-weight: bold; margin-bottom: 0.5rem;">
-            {{ . }}
-        </div>
-    {{- end -}}
-    
     <script type="text/plain" class="pseudocode-raw" style="display:none;">
         {{- .Inner | safeHTML -}}
     </script>
-    
     <div class="pseudocode-render"></div>
 </div>
