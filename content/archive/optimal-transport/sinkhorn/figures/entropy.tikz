@@ -5,10 +5,6 @@
 
 \begin{document}
   \begin{tikzpicture}
-    % Force Sans Serif for text and math
-    \sffamily
-    \sansmath
-    
     \tikzset{>=stealth, line width=1.5pt}
 
     % Axes

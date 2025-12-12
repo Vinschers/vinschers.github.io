@@ -1,13 +1,8 @@
 \documentclass[tikz, border=10pt]{standalone}
 \usepackage{amsmath, amssymb}
-\usepackage{sansmath} % Required for sans-serif math
 
 \begin{document}
   \begin{tikzpicture}
-    % Force Sans Serif for text and math
-    \sffamily
-    \sansmath
-
     % Global Style Settings
     \tikzset{>=stealth, line width=1pt}
 
