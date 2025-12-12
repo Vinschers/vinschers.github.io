@@ -219,8 +219,6 @@ $$
 Intuitively, what this says is that the velocity at the point $x$, $v_t(x)$, is just the average of the velocities of all particles that are in $x$ at time $t$.
 The figure below illustrates the principle.
 
-![diagram v_t](images/diagram_vt.jpeg)
-
 {{< tikz "figures/vt.tikz" >}}
 
 The problem is that we don't have the density of $\beta$, so we can't compute this expectation directly.

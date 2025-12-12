@@ -177,35 +177,150 @@ d_\mathcal{H}(\mathcal{I}(u), \mathcal{I}(u')) \leq \eta^2 d_\mathcal{H}(u, u'),
 $$
 which proves the linear convergence rate.
 *Small remark*: in this case, $\eta \sim 1 - e^{-\frac{\| C \|_\infty}{\varepsilon}}$.
-
-{{< algorithm >}}
-\begin{algorithm}
-
-\caption{Sinkhorn Algorithm}
-
-\begin{algorithmic}
-\INPUT Discrete measures $a \in \R^n$ and $b \in \R^m$, $K \in \R^{n \times m}$, number of iterations $T \in \N^*$.
-\REQUIRE $a_i, b_j > 0$.
-\OUTPUT $u \in \R^n_+$ and $v \in \R^m_+$ that solve the Sinkhorn problem.
-
-\STATE $v \gets \mathbf{1}_m$
-\STATE \\
-
-\For{$t \gets 1 \textbf{ to } T$}
-    \STATE $u \gets \frac{a}{K v}$ \COMMENT{Perform element-wise division (Kronecker division)}
-    \STATE $v \gets \frac{b}{K^\top u}$
-\EndFor
-
-\STATE \\
-
-\RETURN $u, v$
-
-\end{algorithmic}
-\end{algorithm}
-{{< /algorithm >}}
-
 {{< /spoiler >}}
 
 ## Continuous Measures
 
 The first thing we have to do to move to continuous measures is adapt our regularization function.
+Instead of the Shannon-Boltzmann entropy, we are now going to use the **Kullback-Leibnitz divergence**.
+
+For discrete couplings $P, Q$ we have
+$$
+\mathrm{KL}(K \parallel Q) = \sum_{i j} P_{ij} \log{\left(\frac{P_{ij}}{Q_{ij}}\right)}.
+$$
+For continuous coupling measures $\pi, \xi \in \mathcal{P}(\mathcal{X} \times \mathcal{Y})$, we have
+$$
+\mathrm{KL}(\pi \parallel \xi) = \iint \log{\left(\frac{\d \pi}{\d \xi}\right)} \, \d \pi,
+$$
+if $\frac{\d \pi}{\d \xi}$ exists.
+Otherwise, $\mathrm{KL}(\pi \parallel \xi) = \infty$.
+
+The main idea is to compare $P$ (or $\pi$) to a distribution that represents "perfect entropy", i.e., to $\alpha \otimes \beta$.
+
+{{< note >}}
+Using $Q = a \otimes b$ yields the same solution for the previous problem.
+{{< /note >}}
+
+This yields the so called "General Schrödinger problem":
+$$
+\inf_{\pi \in \mathcal{U}(\alpha, \beta)} \underbrace{\iint c \, \d \pi}_{\text{Kantorovich}} + \varepsilon KL (\pi \parallel \alpha \otimes \beta).
+$$
+Probabilistically, if we see $\pi$ as the law of $(X, Y)$, then we can define the mutual information of $X$ and $Y$ as $\mathcal{I}(X, Y) = \mathrm{KL}(\pi \parallel \pi_1 \otimes \pi_2)$.
+One can check that $\mathcal{I}(X, Y) = 0 \iff X \indep Y$.
+Thus, the Sinkhorn problem is equivalent to
+$$
+\inf_{\substack{X \sim \alpha \\ Y \sim \beta}} \E[c(X, Y)] + \varepsilon \mathcal{I}(X, Y).
+$$
+
+## Duality
+
+### Discrete measures
+
+We can start by writing the Lagrangian.
+$$
+\begin{aligned}
+\min_P \max_{f, g} \L(P, C, f, g) &= \min_P \max_{f, g} \langle C, P \rangle_F + \varepsilon \KL{P}{a \otimes b} + \langle f, a - P \mathbf{1} \rangle + \langle g, b - P^\top \mathbf{1} \rangle \\
+&= \max_{f, g} \langle a, f \rangle + \langle b, g \rangle + \min_P \langle \underbrace{C - f \mathbf{1}^\top - \mathbf{1} g^\top}_{\text{Let $Z = \frac{\cdot}{\varepsilon}$}}, P \rangle + \varepsilon \KL{P}{a \otimes b} \\
+&= \max_{f, g} \langle a, f \rangle + \langle b, g \rangle - \varepsilon \underbrace{\max_P \langle P, Z \rangle - \KL{P}{a \otimes b}}_{\mathrm{KL}^*} \qquad \because \min z = - \max - z
+\end{aligned}
+$$
+Where $\mathrm{KL}^*$ is the conjugate (Legendre-Fenchel transform) of the Kullback-Leibnitz divergence.
+So, we are left with
+$$
+\max_{f, g} \langle a, f \rangle + \langle b, g \rangle - \varepsilon \mathrm{KL}^*(Z \parallel a b^\top).
+$$
+
+{{< lemma >}}
+$$
+\mathrm{KL}^* (Z \parallel Q) = \sum_{ij} Q_{ij} e^{Z_{ij}} - 1.
+$$
+{{< /lemma >}}
+
+In conclusion, we end up with
+$$
+\max_{f, g} \langle f, a \rangle + \langle g, b \rangle - \varepsilon \sum_{i, j} e^{\frac{f_i + g_j - C_{ij}}{\varepsilon}} + \varepsilon.
+$$
+Then, the primal / dual relationship is
+$$
+P_{ij} = e^{\frac{f_i}{\varepsilon}} e^{- \frac{C_{ij}}{\varepsilon}} e^{\frac{g_j}{\varepsilon}} a_i b_j.
+$$
+If we call $u_i = a_i e^{\frac{f_i}{\varepsilon}}$ and $v_j = b_j e^{\frac{g_j}{\varepsilon}}$, then we retrieve our previous result:
+$$
+P = \diag(u) K \diag(v).
+$$
+
+### General case
+
+Let $\alpha, \beta$ be general measures.
+Then, we have the following problem.
+$$
+\inf_{\substack{f \in \mathcal{C}(\mathcal{X}) \\ g \in \mathcal{C}(\mathcal{Y})}} \underbrace{\int f(x) \, \d \alpha + \int g(y) \, \d \beta - \varepsilon \iint e^{\frac{f(x) + g(y) - c(x, y)}{\varepsilon}} \, \d \alpha \, \d \beta}_{\mathcal{D}(f, g)}
+$$
+
+From this generalization, one can define a new $c$-transform.
+{{< definition "Soft $c$-transform" >}}
+$$
+\begin{aligned}
+f^{c, \varepsilon}(y) &= - \varepsilon \log{\left(\int e^{\frac{f(x) - c(x, y)}{\varepsilon}} \, \d \alpha \right)} \\
+g^{c, \varepsilon}(x) &= - \varepsilon \log{\left(\int e^{\frac{g(y) - c(x, y)}{\varepsilon}} \, \d \beta \right)}
+\end{aligned}
+$$
+{{< /definition >}}
+In the definition above, we made use of a "soft-min" function:
+$$
+\mathrm{smin}_\varepsilon^\xi [h] = - \varepsilon \log{\left(\int e^{- \frac{h(x)}{\varepsilon}} \, \d \xi\right)}.
+$$
+Using this notation, $f^{c, \varepsilon}(y) = \mathrm{smin}_\varepsilon^\alpha [c(\cdot, y) - f]$ and $g^{c, \varepsilon}(x) = \mathrm{smin}_\varepsilon^\beta [c(x, \cdot) - g]$.
+
+The above generalizations and definitions yield a natural generalization of the Sinkhorn Algorithm.
+{{< algorithm >}}
+\begin{algorithm}
+
+\caption{Generalized Sinkhorn Algorithm}
+
+\begin{algorithmic}
+\INPUT General measures $\alpha$ and $\beta$, number of iterations $T \in \N^*$.
+\OUTPUT $f \in \mathcal{C}(\mathcal{X})$ and $g \in \mathcal{C}(\mathcal{Y})$ that solve the general Sinkhorn problem.
+
+\STATE $g \gets$ initial guess
+\STATE \\
+
+\For{$t \gets 1 \textbf{ to } T$}
+    \STATE $f \gets g^{c, \varepsilon} := \argmin \mathcal{D}(f, g)$ \COMMENT{$g$ is fixed}
+    \STATE $g \gets f^{c, \varepsilon} := \argmin \mathcal{D}(f, g)$ \COMMENT{$f$ is fixed}
+\EndFor
+
+\STATE \\
+
+\RETURN $f, g$
+
+\end{algorithmic}
+\end{algorithm}
+{{< /algorithm >}}
+
+Lastly, it is interesting to note that for discrete measures $\alpha$ and $\beta$, the soft $c$-transform is equivalent to the Kronecker division in the original Sinkhorn algorithm.
+If we let $u = e^{\frac{f}{\varepsilon}}$ and $v = e^{\frac{g}{\varepsilon}}$, then
+\[
+\textcolor{blue}{\underbrace{
+  \begin{aligned}
+    f &\leftarrow g^{c, \varepsilon} \\
+    g &\leftarrow f^{c, \varepsilon}
+  \end{aligned}
+}_{\text{alternate}}}
+\iff
+\textcolor{red}{\underbrace{
+  \begin{aligned}
+    u &\leftarrow \frac{a}{K v} \\
+    v &\leftarrow \frac{b}{K^T u}
+  \end{aligned}
+}_{\text{Sinkhorn}}}
+\]
+Even though they are equivalent, the soft $c$-transform implementation is numerically more stable when $\varepsilon$ is small, so it is preferred.
+
+{{< warning "Implementation detail" >}}
+When computing the log of the sum of exponentials, directly computing $\log{(\sum e^{z_i})}$ is numerically unstable.
+Instead, one must use this alternative equation:
+$$
+\underbrace{\log{\left(\sum_i e^{z_i}\right)}}_\text{unstable} = \underbrace{\log{\left(\sum_i e^{z_i - \max_k z_k}\right)} + \max_k z_k}_\text{stable}.
+$$
+{{< /warning >}}
