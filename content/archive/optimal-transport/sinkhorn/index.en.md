@@ -1,9 +1,9 @@
 +++
-title = "Sinkhorn"
+title = "Sinkhorn - Entropic Regularization"
 date = 2025-11-12
 +++
 
-## Entropic Regularization for Discrete Measures
+## Discrete Measures
 
 {{< definition "Shannon-Boltzmann entropy" >}}
 Let $P \in U(a, b)$ be a coupling matrix for discrete measures with vectors $a$ and $b$.
@@ -82,7 +82,7 @@ C + \varepsilon (\log{P} + 1) - \mathbf{1}^\top \mu - \mathbf{1}^\top \nu &= 0 \
 $$
 {{< /spoiler >}}
 
-## Algorithm
+### Algorithm
 
 Given that $P^* = \diag(u) K \diag(v)$, we can transform our constraints:
 $$
@@ -108,7 +108,7 @@ With this new set of constraints, we can create an iterative algorithm to find $
 \STATE \\
 
 \For{$t \gets 1 \textbf{ to } T$}
-    \STATE $u \gets \frac{a}{K v}$ \COMMENT{Perform element-wise division updates}
+    \STATE $u \gets \frac{a}{K v}$ \COMMENT{Perform element-wise division (Kronecker division)}
     \STATE $v \gets \frac{b}{K^\top u}$
 \EndFor
 
@@ -176,7 +176,9 @@ $$
 d_\mathcal{H}(\mathcal{I}(u), \mathcal{I}(u')) \leq \eta^2 d_\mathcal{H}(u, u'),
 $$
 which proves the linear convergence rate.
-*Small remark*: in this case, $\eta \approx 1 - e^{-\frac{\| C \|_\infty}{\varepsilon}}$.
+*Small remark*: in this case, $\eta \sim 1 - e^{-\frac{\| C \|_\infty}{\varepsilon}}$.
 {{< /spoiler >}}
 
+## Continuous Measures
 
+The first thing we have to do to move to continuous measures is adapt our regularization function.

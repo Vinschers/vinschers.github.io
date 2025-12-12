@@ -2,7 +2,7 @@
 
 % Axes
 \draw[->, line width=2pt] (0,-2) -- (0,5);
-\draw[->, line width=2pt] (0,0) -- (6,0);
+\draw[->, line width=2pt] (0,0) -- (6,0) node[below] {$s$};
 
 % Black Curve
 \draw[black, samples=100, smooth, domain=0.05:2, line width=1.2pt] 
