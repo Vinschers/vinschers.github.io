@@ -52,3 +52,12 @@ h6 {
 .post-title {
     font-weight: 600 !important;
 }
+
+// /* Fix for TikZ/MathJax inside hidden details elements */
+// .spoiler details:not([open]) .inner {
+//     display: block !important; /* Force layout calculation */
+//     visibility: hidden !important; /* Keep it invisible to user */
+//     height: 0 !important; /* Don't take up space */
+//     overflow: hidden !important; /* Hide content */
+//     position: relative; 
+// }

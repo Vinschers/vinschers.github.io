@@ -1,6 +1,22 @@
 <div class="spoiler">
     <details {{ if (eq (.Get 1) true) }} open="true" {{ end }}>
         <summary>{{ .Get 0 }}</summary>
-        {{- partial "dedent.html" .Inner | markdownify -}}
+        <div class="inner">
+            {{- /* 1. Dedent content */ -}}
+            {{- $fullContent := partial "dedent.html" .Inner -}}
+
+            {{- /* 2. Split by delimiter */ -}}
+            {{- $delimiter := "<!-- %%%%TIKZ_SEPARATOR%%%% -->" -}}
+            {{- $chunks := split $fullContent $delimiter -}}
+
+            {{- /* 3. Render chunks based on position */ -}}
+            {{- range $index, $chunk := $chunks -}}
+                {{- if eq (mod $index 2) 0 -}}
+                    {{- $chunk | markdownify -}}
+                {{- else -}}
+                    {{- $chunk | safeHTML -}}
+                {{- end -}}
+            {{- end -}}
+        </div>
     </details>
 </div>

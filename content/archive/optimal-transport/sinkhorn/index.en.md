@@ -130,7 +130,7 @@ $$
 $$
 {{< /theorem >}}
 
-{{< spoiler "Proof" true >}}
+{{< spoiler "Proof" >}}
 We can see the algorithm as consecutive steps of the form
 $$
 v \gets \mathcal{I}(v) \quad \st \quad \mathcal{I}(v) = \frac{b}{K^\top \left(\frac{a}{K v}\right)}
@@ -178,3 +178,5 @@ $$
 which proves the linear convergence rate.
 *Small remark*: in this case, $\eta \approx 1 - e^{-\frac{\| C \|_\infty}{\varepsilon}}$.
 {{< /spoiler >}}
+
+
