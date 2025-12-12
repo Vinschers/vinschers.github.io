@@ -3,10 +3,10 @@
         <summary>{{ .Get 0 }}</summary>
         <div class="inner">
             {{- /* 1. Dedent content */ -}}
-            {{- $fullContent := partial "dedent.html" .Inner -}}
+            {{- $fullContent := .InnerDeindent -}}
 
             {{- /* 2. Split by delimiter */ -}}
-            {{- $delimiter := "<!-- %%%%TIKZ_SEPARATOR%%%% -->" -}}
+            {{- $delimiter := "<!-- %%%%RAW_SEPARATOR%%%% -->" -}}
             {{- $chunks := split $fullContent $delimiter -}}
 
             {{- /* 3. Render chunks based on position */ -}}

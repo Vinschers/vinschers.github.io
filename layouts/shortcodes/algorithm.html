@@ -1,6 +1,12 @@
+{{- $delimiter := "<!-- %%%%RAW_SEPARATOR%%%% -->" -}}
+
+{{- $delimiter | safeHTML -}}
+
 <div class="pseudocode-container" style="margin: 2rem auto; max-width: 800px;">
     <script type="text/plain" class="pseudocode-raw" style="display:none;">
         {{- .Inner | safeHTML -}}
     </script>
     <div class="pseudocode-render"></div>
 </div>
+
+{{- $delimiter | safeHTML -}}

@@ -30,7 +30,7 @@ This means that it has an unique optimal solution.
 ### Intuition
 $H(P)$ works as a kind of *barrier function* for $P_{i, j} \geq 0$.
 Recall the graph of $s \mapsto s \log{(s)}$ and particularly its derivative at $0$.
-{{< tikz "figures/entropy.tikz" />}}
+{{< tikz "figures/entropy.tikz" >}}
 Clearly, the minimum is never at $0$, because the derivative the to $-\infty$.
 As a result, the optimal coupling $P^*$ has **mass everywhere**, i.e., $P^*_{i, j} \neq 0$ for all $i, j$.
 
@@ -162,7 +162,7 @@ Let $K : \mathcal{K} \to \mathcal{K}$ be linear.
 This map creates a "narrowing" effect in the clone, because it has only positive entries.
 The effect can be seen in the following figure.
 
-{{< tikz "figures/cone_contraction.tikz" />}}
+{{< tikz "figures/cone_contraction.tikz" >}}
 
 With that, we can say that there exists $\eta \in [0, 1)$ such that $d_\mathcal{H}(K u, K u') \leq \eta d_\mathcal{H}(u, u')$.
 If we use the optimal $u^*$, we get the following relation:
@@ -177,6 +177,33 @@ d_\mathcal{H}(\mathcal{I}(u), \mathcal{I}(u')) \leq \eta^2 d_\mathcal{H}(u, u'),
 $$
 which proves the linear convergence rate.
 *Small remark*: in this case, $\eta \sim 1 - e^{-\frac{\| C \|_\infty}{\varepsilon}}$.
+
+{{< algorithm >}}
+\begin{algorithm}
+
+\caption{Sinkhorn Algorithm}
+
+\begin{algorithmic}
+\INPUT Discrete measures $a \in \R^n$ and $b \in \R^m$, $K \in \R^{n \times m}$, number of iterations $T \in \N^*$.
+\REQUIRE $a_i, b_j > 0$.
+\OUTPUT $u \in \R^n_+$ and $v \in \R^m_+$ that solve the Sinkhorn problem.
+
+\STATE $v \gets \mathbf{1}_m$
+\STATE \\
+
+\For{$t \gets 1 \textbf{ to } T$}
+    \STATE $u \gets \frac{a}{K v}$ \COMMENT{Perform element-wise division (Kronecker division)}
+    \STATE $v \gets \frac{b}{K^\top u}$
+\EndFor
+
+\STATE \\
+
+\RETURN $u, v$
+
+\end{algorithmic}
+\end{algorithm}
+{{< /algorithm >}}
+
 {{< /spoiler >}}
 
 ## Continuous Measures

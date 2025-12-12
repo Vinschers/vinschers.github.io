@@ -221,6 +221,8 @@ The figure below illustrates the principle.
 
 ![diagram v_t](images/diagram_vt.jpeg)
 
+{{< tikz "figures/vt.tikz" >}}
+
 The problem is that we don't have the density of $\beta$, so we can't compute this expectation directly.
 So, we approximate the solution using simple regression:
 $$

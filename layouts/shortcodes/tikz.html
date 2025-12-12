@@ -1,26 +1,37 @@
-{{- $content := "" -}}
 {{- $src := .Get 0 -}}
-{{- if $src -}}
-  {{- $file := .Page.Resources.GetMatch $src -}}
-  {{- if not $file -}}{{- $file = resources.Get $src -}}{{- end -}}
-  {{- if $file -}}{{- $content = $file.Content -}}{{- else -}}{{- errorf "TikZ file not found" -}}{{- end -}}
-{{- else -}}
-  {{- $content = .Inner -}}
+
+{{- /* ERROR CHECK */ -}}
+{{- if not $src -}}
+  {{- errorf "The 'tikz' shortcode requires a file path (e.g. 'diagrams/my-figure')." -}}
 {{- end -}}
 
-{{- /* Unique Separator */ -}}
-{{- $delimiter := "<!-- %%%%TIKZ_SEPARATOR%%%% -->" -}}
+{{- /* NORMALIZE PATH: Ensure it ends in .svg */ -}}
+{{- $svgPath := "" -}}
+{{- if strings.HasSuffix $src ".tikz" -}}
+    {{- /* Case 1: User explicitly added .tikz -> Replace it */ -}}
+    {{- $svgPath = replace $src ".tikz" ".svg" -}}
+{{- else if strings.HasSuffix $src ".svg" -}}
+    {{- /* Case 2: User explicitly added .svg -> Keep it */ -}}
+    {{- $svgPath = $src -}}
+{{- else -}}
+    {{- /* Case 3: No extension -> Append .svg */ -}}
+    {{- $svgPath = printf "%s.svg" $src -}}
+{{- end -}}
 
-{{- $delimiter | safeHTML -}}
+{{- /* SEARCH 1: Check Page Resources (Leaf Bundles) */ -}}
+{{- $svgResource := .Page.Resources.GetMatch $svgPath -}}
+
+{{- /* SEARCH 2: Check Global Resources (assets/ folder) */ -}}
+{{- if not $svgResource -}}
+    {{- $svgResource = resources.Get $svgPath -}}
+{{- end -}}
+
 <div class="tikz-wrapper" style="display: flex; justify-content: center; margin: 2rem 0; overflow-x: auto;">
-<script type="text/tikz" data-tex-packages='{"amsmath": "", "amssymb": ""}'>
-{{- if or (findRE "\\\\begin\\{tikzpicture\\}" $content) (findRE "\\\\begin\\{document\\}" $content) -}}
-{{ $content | safeHTML }}
-{{- else -}}
-\begin{tikzpicture}
-{{ $content | safeHTML }}
-\end{tikzpicture}
-{{- end -}}
-</script>
+    {{- if $svgResource -}}
+        {{- /* PREFERRED: Inline the SVG for best styling control */ -}}
+        {{ $svgResource.Content | safeHTML }}
+    {{- else -}}
+        {{- /* FALLBACK: Assume it's a static file (in static/ folder) */ -}}
+        <img src="{{ $svgPath | relURL }}" alt="TikZ Diagram" style="max-width: 100%; height: auto;" />
+    {{- end -}}
 </div>
-{{- $delimiter | safeHTML -}}

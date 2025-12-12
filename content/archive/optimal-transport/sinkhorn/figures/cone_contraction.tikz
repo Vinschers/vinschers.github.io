@@ -1,60 +1,69 @@
-\tikzset{>=stealth, line width=1pt}
+\documentclass[tikz, border=10pt]{standalone}
+\usepackage{amsmath, amssymb}
+\usepackage{sansmath} % Required for sans-serif math
 
-% --- Color Definitions ---
-\definecolor{shaded1}{RGB}{220, 20, 20}    % Red
-\definecolor{shaded2}{RGB}{20, 20, 220}    % Blue
-\definecolor{eigenpurple}{RGB}{140, 0, 210} % Purple for u*
+\begin{document}
+  \begin{tikzpicture}
+    % Force Sans Serif for text and math
+    \sffamily
+    \sansmath
 
-% 1. Axes (Scaled up to 10 for more space)
-\draw[->, line width=1.5pt] (0,0) -- (10,0) node[below] {$x$};
-\draw[->, line width=1.5pt] (0,0) -- (0,10) node[left] {$y$};
-\node at (85:9.5) {\Huge $\mathcal{K}$};
+    % Global Style Settings
+    \tikzset{>=stealth, line width=1pt}
 
-% 2. Outer Vectors (u and u')
-% Length: 9.5 (Longest layer)
-\draw[->, black, line width=1.2pt] (0,0) -- (10:9.5) node[right] {\large $u$};
-\draw[->, black, line width=1.2pt] (0,0) -- (80:9.5) node[above] {\large $u'$};
+    % --- Color Definitions ---
+    \definecolor{shaded1}{RGB}{220, 20, 20}    % Red
+    \definecolor{shaded2}{RGB}{20, 20, 220}    % Blue
+    \definecolor{eigenpurple}{RGB}{140, 0, 210} % Purple for u*
 
+    % 1. Axes (Scaled up to 10 for more space)
+    \draw[->, line width=1.5pt] (0,0) -- (10,0) node[below] {$x$};
+    \draw[->, line width=1.5pt] (0,0) -- (0,10) node[left] {$y$};
+    \node at (85:9.5) {\Huge $\mathcal{K}$};
 
-% 3. First Image Cone (K(K)) - Red Area
-% Radius: 8.5
-\fill[color=shaded1, opacity=0.15] (0,0) -- (20:8.5) arc (20:70:8.5) -- cycle;
-\draw[dashed, color=shaded1, line width=1pt] (0,0) -- (20:8.5);
-\draw[dashed, color=shaded1, line width=1pt] (0,0) -- (70:8.5);
-\node[color=shaded1, anchor=south west] at (70:8.5) {\Large $K\mathcal{K}$};
+    % 2. Outer Vectors (u and u')
+    % Length: 9.5 (Longest layer)
+    \draw[->, black, line width=1.2pt] (0,0) -- (10:9.5) node[right] {\large $u$};
+    \draw[->, black, line width=1.2pt] (0,0) -- (80:9.5) node[above] {\large $u'$};
 
-% Transformed Vectors (Ku and Ku')
-% Length: 8.0 (Slightly shorter than the cone boundary to separate labels)
-\draw[->, color=shaded1, line width=1pt] (0,0) -- (28:8.0) node[right, xshift=2pt] {\large $Ku$};
-\draw[->, color=shaded1, line width=1pt] (0,0) -- (62:8.0) node[above right, xshift=2pt] {\large $Ku'$};
+    % 3. First Image Cone (K(K)) - Red Area
+    % Radius: 8.5
+    \fill[color=shaded1, opacity=0.15] (0,0) -- (20:8.5) arc (20:70:8.5) -- cycle;
+    \draw[dashed, color=shaded1, line width=1pt] (0,0) -- (20:8.5);
+    \draw[dashed, color=shaded1, line width=1pt] (0,0) -- (70:8.5);
+    \node[color=shaded1, anchor=south west] at (70:8.5) {\Large $K\mathcal{K}$};
 
+    % Transformed Vectors (Ku and Ku')
+    % Length: 8.0
+    \draw[->, color=shaded1, line width=1pt] (0,0) -- (28:8.0) node[right, xshift=2pt] {\large $Ku$};
+    \draw[->, color=shaded1, line width=1pt] (0,0) -- (62:8.0) node[above right, xshift=2pt] {\large $Ku'$};
 
-% 4. Second Image Cone (K^2(K)) - Blue Area
-% Radius: 7.0
-\fill[color=shaded2, opacity=0.2] (0,0) -- (35:7) arc (35:55:7) -- cycle;
-\draw[dashed, color=shaded2, line width=1pt] (0,0) -- (35:7);
-\draw[dashed, color=shaded2, line width=1pt] (0,0) -- (55:7);
-\node[color=shaded2, anchor=south west] at (55:7) {\Large $K^2\mathcal{K}$};
+    % 4. Second Image Cone (K^2(K)) - Blue Area
+    % Radius: 7.0
+    \fill[color=shaded2, opacity=0.2] (0,0) -- (35:7) arc (35:55:7) -- cycle;
+    \draw[dashed, color=shaded2, line width=1pt] (0,0) -- (35:7);
+    \draw[dashed, color=shaded2, line width=1pt] (0,0) -- (55:7);
+    \node[color=shaded2, anchor=south west] at (55:7) {\Large $K^2\mathcal{K}$};
 
-% Transformed Vectors (K^2u and K^2u')
-% Length: 6.0 (Shortest layer, keeps labels inside the "clean" zone)
-\draw[->, color=shaded2, line width=1pt] (0,0) -- (40:6) node[right, xshift=4pt, yshift=-2pt] {\large $K^2u$};
-\draw[->, color=shaded2, line width=1pt] (0,0) -- (50:6) node[above, xshift=2pt, yshift=2pt] {\large $K^2u'$};
+    % Transformed Vectors (K^2u and K^2u')
+    % Length: 6.0
+    \draw[->, color=shaded2, line width=1pt] (0,0) -- (40:6) node[right, xshift=4pt, yshift=-2pt] {\large $K^2u$};
+    \draw[->, color=shaded2, line width=1pt] (0,0) -- (50:6) node[above, xshift=2pt, yshift=2pt] {\large $K^2u'$};
 
+    % 5. The Eigenvector (u^*) - Purple
+    % Length: 10.0
+    \draw[->, color=eigenpurple, line width=2pt] (0,0) -- (45:10.0) node[above right] {\large $u^* = K u^*$};
 
-% 5. The Eigenvector (u^*) - Purple
-% Length: 10.0 (Extending fully to stand out)
-\draw[->, color=eigenpurple, line width=2pt] (0,0) -- (45:10.0) node[above right] {\large $u^* = K u^*$};
+    % 6. Transformation Arrows
+    \draw[->, dashed, shorten >=4pt, shorten <=4pt] (10:5) to[bend right=20] (28:5);
+    \draw[->, dashed, shorten >=4pt, shorten <=4pt] (28:5) to[bend right=15] (40:5);
 
+    \draw[->, dashed, shorten >=4pt, shorten <=4pt] (80:5) to[bend left=20] (62:5);
+    \draw[->, dashed, shorten >=4pt, shorten <=4pt] (62:5) to[bend left=15] (50:5);
 
-% 6. Transformation Arrows
-% Arcs drawn at radius 5.0 to be clear of the dense vector heads
-\draw[->, dashed, shorten >=4pt, shorten <=4pt] (10:5) to[bend right=20] (28:5);
-\draw[->, dashed, shorten >=4pt, shorten <=4pt] (28:5) to[bend right=15] (40:5);
+    % Labels for K
+    \node at (18:5.5) {\large $K$};
+    \node at (72:5.5) {\large $K$};
 
-\draw[->, dashed, shorten >=4pt, shorten <=4pt] (80:5) to[bend left=20] (62:5);
-\draw[->, dashed, shorten >=4pt, shorten <=4pt] (62:5) to[bend left=15] (50:5);
-
-% Labels for K
-\node at (18:5.5) {\large $K$};
-\node at (72:5.5) {\large $K$};
+  \end{tikzpicture}
+\end{document}

@@ -4,5 +4,5 @@
 {{- $isActive := eq .Ordinal 0 -}}
 
 <div class="tab-content {{ if $isActive }}active{{ end }}" id="tab-{{ $id }}">
-    {{- partial "dedent.html" .Inner | markdownify -}}
+    {{- .InnerDeindent | markdownify -}}
 </div>
