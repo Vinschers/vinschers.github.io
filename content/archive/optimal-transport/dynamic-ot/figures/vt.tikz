@@ -101,13 +101,5 @@
     % The Average Velocity v_t
     \coordinate (V_avg) at ($(X) + (1.2, 0)$); 
     \draw[avg_velocity] (X) -- (V_avg) node[right, black] {$v_t(x)$};
-
-    % --- Test Nodes (Optional: You can remove these if not needed) ---
-    % Using sansmath, \beta automatically becomes sans-serif, no need for \mathsf
-    \node [at={(0,0)}] {This mathsf $\beta$};
-    
-    % To show "default" serif in a sans document, you must force \rmfamily and \mathnormal
-    \node [at={(0,-1)}, font=\rmfamily] {This default \mathnormal{\beta}};
-
   \end{tikzpicture}
 \end{document}
