@@ -1,5 +1,5 @@
 +++
-title = "Sinkhorn - Entropic Regularization"
+title = "Sinkhorn: Entropic Regularization"
 date = 2025-11-12
 +++
 
@@ -324,3 +324,7 @@ $$
 \underbrace{\log{\left(\sum_i e^{z_i}\right)}}_\text{unstable} = \underbrace{\log{\left(\sum_i e^{z_i - \max_k z_k}\right)} + \max_k z_k}_\text{stable}.
 $$
 {{< /warning >}}
+
+## Exercises
+
+

@@ -1,0 +1,25 @@
+@media print {
+    /* 1. Control the physical paper margins (the white space at the very edge) */
+    @page {
+        margin: 1cm; /* Sets a standard document margin around the paper */
+    }
+
+    /* 2. Force the content to stretch to full width */
+    html, body, .print-container, .article-content, article, main, .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 3. Hide web-only elements that might be causing spacing issues */
+    header, footer, nav, aside, .sidebar {
+        display: none !important;
+    }
+
+    /* 4. Fix images or math blocks escaping or shrinking */
+    img, svg, .katex-display {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}

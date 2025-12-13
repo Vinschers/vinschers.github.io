@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div class="print-container">
+    <div class="print-title">
+        <h1>Optimal Transport Archive</h1>
+        <p>Generated on {{ now.Format "January 2, 2006" }}</p>
+    </div>
+
+    {{/* Range over ALL pages, sorted by Newest First (Reverse Date) */}}
+    {{ range .Site.RegularPages.ByDate }}
+        
+        {{/* Only include pages from the specific folder */}}
+        {{ if in .File.Dir "archive/optimal-transport/" }}
+        
+        <article class="print-page">
+            {{/* Page break logic: Start new page for every article */}}
+            <div class="page-break"></div>
+            
+            <h1 class="article-title">{{ .Title }}</h1>
+            <p class="meta-date">Published: {{ .Date.Format "2006-01-02" }}</p>
+
+            <div class="article-content">
+                {{ .Content }} 
+            </div>
+        </article>
+        
+        <hr class="section-divider">
+        
+        {{ end }} 
+    {{ end }}
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Find all <details> tags on the page
+        const allDetails = document.querySelectorAll('details');
+        
+        // Force them to open
+        allDetails.forEach(el => {
+            el.open = true;
+        });
+    });
+</script>
+{{ end }}

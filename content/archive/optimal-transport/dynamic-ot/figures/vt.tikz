@@ -95,7 +95,7 @@
     % --- 4. Draw Average Velocity Vector (v_t) ---
     \coordinate (AvgStart) at (barycentric cs:X0_1=1,X0_2=1,X0_3=1,X0_4=1);
     \coordinate (AvgEnd) at ($(AvgStart)!2.4!(X)$);
-    \draw[avg_velocity] (AvgStart) -- (AvgEnd) node[midway, above, sloped, velocityColor, font=\bfseries] {$\bar{v}_t(x)$};
+    \draw[avg_velocity] (AvgStart) -- (AvgEnd) node[midway, above, sloped, velocityColor, font=\bfseries] {$v_t(x)$};
 
     % --- 5. Draw Expectation Points & Labels ---
     \node[exp_dot] (E_Start) at (AvgStart) {};
