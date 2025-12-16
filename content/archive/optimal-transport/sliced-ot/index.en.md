@@ -51,7 +51,7 @@ $$
 
 **(b)** Recall the expression of 2-Wasserstein for centered Gaussians:
 $$
-\W_2^2 (\alpha, \beta) = \mathrm{Tr}(\Sigma_\alpha) + \mathrm{Tr}(\Sigma_\beta) - 2 \Tr{\left(\Sigma_\alpha^\frac{1}{2} \Sigma_\beta \Sigma_\alpha^\frac{1}{2}\right)^{\frac{1}{2}}}.
+\W_2^2 (\alpha, \beta) = \mathrm{Tr}(\Sigma_\alpha) + \mathrm{Tr}(\Sigma_\beta) - 2 \Tr[\left(\Sigma_\alpha^\frac{1}{2} \Sigma_\beta \Sigma_\alpha^\frac{1}{2}\right)^{\frac{1}{2}}].
 $$
 Substituting the above with the given covariances, we have
 $$

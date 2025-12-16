@@ -153,6 +153,11 @@ Write $\varphi_t$ be the flow of $v_t$.
 Then, $\rho_t = (\varphi_t)_\# \alpha$, $\rho_t \ll \lambda^d$, is the **unique** solution of (CE) such that $\rho_0 = \alpha$.
 {{< /theorem >}}
 
+{{< warning >}}
+If $v_t$ is Lipschitz, then there is an **unique** $\mu_t$ that is solution.
+However, going from $\mu_t$ to $v_t$ yields **many** solutions.
+{{< /warning >}}
+
 ### Benamou-Brenier
 
 {{< theorem >}}

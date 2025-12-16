@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{/* 1. Get the path defined in the content file's frontmatter */}}
-{{ $targetPath := .Params.target_path | default "archive/optimal-transport" }}
+{{ $targetPath := .Params.target_path | default "archive/" }}
 
 {{/* 2. Try to find that section in the site */}}
 {{ $section := .Site.GetPage $targetPath }}
@@ -21,9 +21,9 @@
             {{ $pages = $section.RegularPages }}
         {{ end }}
 
-        {{ range $pages.ByDate.Reverse }}
+        {{ range $pages.ByDate }}
             <article class="print-page">
-                <div class="page-break"></div>
+                <!-- <div class="page-break"></div> -->
                 <h1>{{ .Title }}</h1>
                 <p class="meta">Published: {{ .Date.Format "2006-01-02" }}</p>
                 <div class="content">

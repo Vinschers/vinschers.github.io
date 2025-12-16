@@ -1,0 +1,27 @@
+\documentclass[tikz,border=3.14mm]{standalone}
+\begin{document}
+\begin{tikzpicture}
+    % Axes
+    \draw[->] (-0.2, 0) -- (2.5, 0) node[right] {$y$};
+    \draw[->] (0, -0.2) -- (0, 4) node[above] {$\beta(y)$};
+    
+    % Ticks
+    \draw (1, 0.1) -- (1, -0.1) node[below] {$1$};
+    \draw (2, 0.1) -- (2, -0.1) node[below] {$2$};
+    \draw (0.1, 0.5) -- (-0.1, 0.5) node[left] {$0.5$};
+    
+    % Density Plot: 1/(2*sqrt(x))
+    % Domain starts at 0.02 to avoid division by zero error in rendering
+    \draw[domain=0.02:1, samples=100, smooth, thick, blue] plot (\x, {0.5/sqrt(\x)});
+    
+    % Zero outside [0,1]
+    \draw[thick, blue] (1, 0) -- (2.4, 0);
+    \draw[thick, blue] (-0.2, 0) -- (0, 0);
+    
+    % Dashed lines for reference
+    \draw[dashed] (1, 0) -- (1, 0.5) -- (0, 0.5);
+    
+    % Labels
+    \node[blue, right] at (0.2, 2.5) {$\frac{1}{2\sqrt{y}}$};
+\end{tikzpicture}
+\end{document}
