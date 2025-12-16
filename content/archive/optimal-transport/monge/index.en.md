@@ -3,6 +3,167 @@ title = "Monge Problem"
 date = 2025-10-01
 +++
 
+## Summary
+
+In this chapter, we explore the **Monge Problem**, the original formulation of Optimal Transport.
+The fundamental goal is to find a deterministic map $T$ that moves mass from a source distribution $\alpha$ to a target distribution $\beta$ with minimal effort.
+While intuitively appealing, this formulation suffers from existence issues (e.g., splitting mass), which necessitates the relaxation to the Kantorovich problem (covered in later chapters).
+
+## The Monge Formulation
+
+Let $\alpha$ and $\beta$ be two probability measures on spaces $\mathcal{X}$ and $\mathcal{Y}$.
+We seek a transport map $T: \mathcal{X} \to \mathcal{Y}$ that pushes $\alpha$ onto $\beta$ ($T_\# \alpha = \beta$) while minimizing the total transport cost.
+
+{{< definition "Monge Problem" >}}
+Given a cost function $c(x, y)$, the Monge problem is to find:
+$$
+\inf_{T} \left\{ \int_{\mathcal{X}} c(x, T(x)) \, \mathrm{d}\alpha(x) \mid T_\# \alpha = \beta \right\}.
+$$
+
+{{< /definition >}}
+
+{{< warning "Existence Issues" >}}
+A Monge map $T$ **may not exist**.
+Since $T$ is a function, it cannot split mass.
+If $\alpha = \delta_{x_0}$ (a single Dirac) and $\beta = 0.5\delta_{y_1} + 0.5\delta_{y_2}$ (two Diracs), no single map can satisfy $T_\# \alpha = \beta$ because $T(x_0)$ must be a single point, but the mass must land on two distinct points.
+{{< /warning >}}
+
+## Discrete Optimal Transport
+
+When $\alpha$ and $\beta$ are discrete measures with the same number of atoms $n$ and uniform weights, the problem becomes a combinatorial assignment problem.
+Let $\alpha = \sum_{i=1}^n \frac{1}{n} \delta_{x_i}$ and $\beta = \sum_{j=1}^n \frac{1}{n} \delta_{y_j}$.
+
+{{< definition "Assignment Problem" >}}
+We seek a permutation $\sigma \in \Sigma_n$ that minimizes:
+$$
+\min_{\sigma \in \Sigma_n} \sum_{i=1}^n c(x_i, y_{\sigma(i)}).
+$$
+
+{{< /definition >}}
+
+While the general solution requires $O(n^3)$ operations (e.g., using the Hungarian algorithm), the 1D case is significantly simpler.
+
+### 1D Case: Monotonic Rearrangement
+If $\mathcal{X}, \mathcal{Y} \subseteq \mathbb{R}$ and the cost function is convex (e.g., $c(x,y) = |x-y|^p, p \ge 1$), the optimal strategy is to **never cross paths**.
+The leftmost point in $\alpha$ must go to the leftmost point in $\beta$.
+
+{{< algorithm >}}
+\begin{algorithm}
+\caption{1D Discrete Monge Solver}
+\begin{algorithmic}
+\INPUT Source atoms $X = \{x_1, \dots, x_n\}$, Target atoms $Y = \{y_1, \dots, y_n\}$, Cost $c(x,y)$ convex.
+\OUTPUT Optimal map $T$ defined on $X$.
+
+\STATE Sort $X$ such that $x_{(1)} \le x_{(2)} \le \dots \le x_{(n)}$
+\STATE Sort $Y$ such that $y_{(1)} \le y_{(2)} \le \dots \le y_{(n)}$
+
+\For{$i \gets 1 \textbf{ to } n$}
+    \STATE $T(x_{(i)}) \gets y_{(i)}$
+\EndFor
+
+\RETURN $T$
+\end{algorithmic}
+\end{algorithm}
+{{< /algorithm >}}
+
+This reduces the complexity from $O(n^3)$ to **$O(n \log n)$** (dominated by sorting).
+
+## Continuous 1D Transport
+
+This sorting intuition generalizes to continuous probability measures using Cumulative Distribution Functions (CDFs).
+Let $F_\alpha(x) = \alpha((-\infty, x])$ and $F_\beta(y) = \beta((-\infty, y])$.
+
+{{< theorem "1D Optimal Map" >}}
+For convex costs on $\mathbb{R}$, the unique optimal transport map $T$ is the increasing function:
+$$
+T(x) = F_\beta^{-1}(F_\alpha(x))
+$$
+where $F_\beta^{-1}$ is the generalized inverse (quantile function).
+
+{{< /theorem >}}
+
+{{< example "General 1D Uniform Transport" >}}
+Let $\alpha \sim \mathcal{U}([a, b])$ and $\beta \sim \mathcal{U}([c, d])$.
+The CDFs are $F_\alpha(x) = \frac{x-a}{b-a}$ and $F_\beta(y) = \frac{y-c}{d-c}$.
+Solving $F_\alpha(x) = F_\beta(T(x))$ yields the affine scaling map:
+$$
+T(x) = \frac{d-c}{b-a}(x - a) + c.
+$$
+{{< /example >}}
+
+## Brenier's Theorem (Multivariate)
+
+In higher dimensions ($\mathbb{R}^d$), "sorting" is no longer well-defined.
+However, for the quadratic cost $c(x,y) = \|x-y\|^2$, the concept of "monotonicity" is generalized by the **gradient of a convex function**.
+
+{{< theorem "Brenier's Theorem" >}}
+If $c(x,y) = \|x-y\|^2$ and $\alpha$ is absolutely continuous w.r.t. Lebesgue measure (has a density):
+1. There exists a **unique** optimal Monge map $T$.
+2. $T$ is the gradient of a convex function $\varphi$:
+   $$
+   T(x) = \nabla \varphi(x).
+   $$
+3. The map is determined by the Monge-Ampère equation:
+   $$
+   \det(\nabla^2 \varphi(x)) \rho_\beta(\nabla \varphi(x)) = \rho_\alpha(x).
+   $$
+
+{{< /theorem >}}
+
+{{< example "Multidimensional Uniform" >}}
+Let $\alpha$ be uniform on the square $[0,1]^2$ and $\beta$ be uniform on the rectangle $[0,2] \times [0,3]$.
+The optimal map is the gradient of the convex potential $\varphi(x_1, x_2) = x_1^2 + \frac{3}{2}x_2^2$:
+$$
+T(x_1, x_2) = \nabla \varphi(x_1, x_2) = (2x_1, 3x_2).
+$$
+This map stretches the square independently along each axis to match the target rectangle.
+{{< /example >}}
+
+## Exam Preparation
+
+The following questions cover standard computations and existence checks you might face.
+
+{{< question "1. Bernoulli Transport (Existence)" >}}
+**Problem:** Let $\alpha \sim \text{Bern}(p)$ and $\beta \sim \text{Bern}(q)$ with $p, q \in (0, 1)$ and $p \neq q$. Does a Monge map $T$ exist?
+
+**Solution:**
+No. $\alpha$ has mass $1-p$ at $0$ and $p$ at $1$. $\beta$ has mass $1-q$ at $0$ and $q$ at $1$.
+Since $T$ must map atoms to atoms deterministically, $T(1)$ must be either $0$ or $1$.
+* If $T(1) = 1$, we transport mass $p$ to $1$, but $\beta$ requires mass $q$. Since $p \neq q$, this violates $T_\# \alpha = \beta$.
+* If $T(1) = 0$, we transport mass $p$ to $0$.
+Thus, no map exists without splitting mass.
+{{< /question >}}
+
+{{< question "2. Atomic Mismatch" >}}
+**Problem:** Let $\alpha = \delta_0$ and $\beta = \frac{1}{2}\delta_{-1} + \frac{1}{2}\delta_1$. Compute the Monge map $T$.
+
+**Solution:**
+**Impossible.** $\alpha$ consists of a single atom. Any function $T$ maps $0$ to a single value $y = T(0)$. The pushforward measure $T_\# \alpha$ would be $\delta_y$.
+However, $\beta$ is supported on two points $\{-1, 1\}$. There is no $y$ such that $\delta_y = 0.5\delta_{-1} + 0.5\delta_1$.
+Therefore, the **Monge problem admits no solution**. (Note: The Kantorovich relaxation would split the mass).
+{{< /question >}}
+
+{{< question "3. Gaussian W2" >}}
+**Problem:** Compute $\mathcal{W}_2^2$ between $\alpha \sim \mathcal{N}(m_\alpha, \Sigma_\alpha)$ and $\beta \sim \mathcal{N}(m_\beta, \Sigma_\beta)$.
+
+**Solution:**
+Use the Bures metric formula. The optimal map is affine $T(x) = m_\beta + A(x-m_\alpha)$.
+$$
+\mathcal{W}_2^2(\alpha, \beta) = \|m_\alpha - m_\beta\|^2 + \mathrm{Tr}\left(\Sigma_\alpha + \Sigma_\beta - 2(\Sigma_\alpha^{1/2} \Sigma_\beta \Sigma_\alpha^{1/2})^{1/2}\right).
+$$
+If the matrices commute (e.g., are diagonal), the trace term simplifies to $\|\Sigma_\alpha^{1/2} - \Sigma_\beta^{1/2}\|_F^2$.
+{{< /question >}}
+
+### Summary Table of Optimal Maps
+
+| Source $\alpha$ | Target $\beta$ | Optimal Map $T(x)$ | Condition |
+| :--- | :--- | :--- | :--- |
+| **Uniform** $\mathcal{U}[a,b]$ | **Uniform** $\mathcal{U}[c,d]$ | $T(x) = \frac{d-c}{b-a}(x-a) + c$ | 1D Affine Scaling |
+| **Gaussian** $\mathcal{N}(m_1, \Sigma_1)$ | **Gaussian** $\mathcal{N}(m_2, \Sigma_2)$ | $T(x) = m_2 + A(x-m_1)$ | $A = \Sigma_1^{-1/2}(\Sigma_1^{1/2}\Sigma_2\Sigma_1^{1/2})^{1/2}\Sigma_1^{-1/2}$ |
+| **Discrete** uniform $\{x_i\}$ | **Discrete** uniform $\{y_i\}$ | $T(x_{(i)}) = y_{(i)}$ | 1D, sorted indices |
+| **One Atom** $\delta_{x}$ | **Two Atoms** $w_1 \delta_{y_1} + w_2 \delta_{y_2}$ | **Does Not Exist** | Mass splitting required |
+| **Bernoulli** $(p)$ | **Bernoulli** $(q)$ | **Exists iff** $p=q$ | Discrete weight mismatch |
+
 ## Exercises
 
 1. *(Warm-up (discrete assignment)).* Let $n = 3$ and
