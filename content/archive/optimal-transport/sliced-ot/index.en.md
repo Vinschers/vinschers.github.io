@@ -1,6 +1,7 @@
 +++
 title = "Sliced Optimal Transport"
 date = 2025-10-29
+draft = true
 +++
 
 ## The Slicing Operator

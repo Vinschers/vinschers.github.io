@@ -1,6 +1,7 @@
 +++
 title = "Duality"
 date = 2025-10-15
+draft = true
 +++
 
 ## Summary
