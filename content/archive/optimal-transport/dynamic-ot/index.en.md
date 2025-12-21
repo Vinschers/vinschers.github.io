@@ -5,7 +5,7 @@ date = 2025-11-05
 
 ## Summary
 Up to this point we have studied
-- Monge and [Kantorovich]({{< ref "archive/optimal-transport/kantorovich" >}}) problems.
+- Monge and Kantorovich problems.
 - Duality of Kantorovich and the Wasserstein metric.
 - Slicing OT as a way to lower bound $\W_p$.
 
