@@ -1,0 +1,35 @@
+\documentclass[tikz, border=10pt]{standalone}
+\usepackage{pgfplots}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = $x$,
+        ylabel = {$y = x^4 - 2x^2$},
+        ymin = -1.5, ymax = 2.5,
+        xmin = -2, xmax = 2,
+        domain = -1.65:1.65,
+        samples = 100,
+        width=10cm,
+        height=8cm,
+        every axis x label/.style={at={(ticklabel* cs:1)}, anchor=west},
+        every axis y label/.style={at={(ticklabel* cs:1)}, anchor=south},
+    ]
+        % Plot the function
+        \addplot [blue, thick, smooth] {x^4 - 2*x^2};
+        
+        % Highlight the minimizers
+        \addplot[only marks, mark=*, red, mark size=2.5pt] coordinates {(-1,-1) (1,-1)};
+        
+        % Add labels to the minimizers
+        \node[anchor=north east, color=red] at (axis cs:-1,-1) {$(-1, -1)$};
+        \node[anchor=north west, color=red] at (axis cs:1,-1) {$(1, -1)$};
+        
+        % Optional: label the local maximum
+        \node[anchor=south west] at (axis cs:0,0) {$(0, 0)$};
+        \filldraw[black] (axis cs:0,0) circle (1.5pt);
+        
+    \end{axis}
+\end{tikzpicture}
+\end{document}
